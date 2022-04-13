@@ -1,24 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import './public/App.scss';
+import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
+import Agencies from './components/agency/Agencies';
+import Booking from "./components/booking/Booking";
+import PageNoMatch from "./PageNoMatch";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router>
+          <div className="App">
+              <div className="container-fluid">
+                  <Routes>
+                      <Route path="/" element={<Agencies />} />
+                      <Route path="/book-call/:ids" element={<Booking />} />
+                      <Route path="*" element={<PageNoMatch><h1 className="text-center page-title top-50">404 Page Not Found.</h1></PageNoMatch>} />
+                  </Routes>
+              </div>
+          </div>
+      </Router>
   );
 }
 

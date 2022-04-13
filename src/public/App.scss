@@ -1,0 +1,92 @@
+@import "~bootstrap/scss/bootstrap";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --booking-highlight-color: #10B981;
+  --booking-lightest-color: #E1E1E1;
+  --booking-lighter-color: #ACACAC;
+  --booking-light-color: #888888;
+  --booking-median-color: #494949;
+  --booking-dark-color: #313131;
+  --booking-darker-color: #292929;
+  --brand-color: #292929;
+  --brand-text-color: #ffffff;
+  --brand-color-dark-mode: #fafafa;
+  --brand-text-color-dark-mode: #292929;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 245 245/var(--tw-bg-opacity));
+}
+
+.App {
+  .page-details {
+    margin-top: 30px;
+  }
+
+  .page-title {
+    font-size: 25px;
+  }
+
+  .info-text {
+    color: #9f8f8f;
+    font-weight: 400;
+  }
+
+  .book-call-btn {
+    width: 100%;
+    margin: 30px auto;
+  }
+
+  .text-bookinglight {
+    color: var(--booking-light-color);
+  }
+
+  .top-50 {
+    margin-top: 50px;
+  }
+}
+
+.main-container {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.bg-brand {
+  background-color: var(--brand-color);
+}
+
+.border-brand {
+  border-color: var(--brand-color);
+}
+
+.text-brandcontrast {
+  color: var(--brand-text-color);
+}
+
+.text-bookingdarker {
+  color: var(--booking-darker-color);
+}
+
+.hover\:border-brand:hover {
+  border-color: var(--brand-color) !important;
+}
+
+.hover\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255/var(--tw-text-opacity)) !important;
+}
+
+.hover\:bg-brand:hover {
+  background-color: var(--brand-color) !important;
+}
+
+.booking-calendar {
+  margin: 50px;
+}
