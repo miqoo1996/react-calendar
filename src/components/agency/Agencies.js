@@ -107,10 +107,10 @@ const Agencies = () => {
             </div>
 
             <section className="agencies top-50">
-                {items.map((item) => {
+                {items.map((item, key) => {
                     return (
                         <Agency
-                            key={item.id}
+                            key={key}
                             id={item.id}
                             name={item.name}
                             description={item.description}

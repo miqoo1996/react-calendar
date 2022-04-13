@@ -1,12 +1,20 @@
 import {useParams} from "react-router";
 import {Link} from "react-router-dom";
 import Calendar from "./Calendar";
+import {useCallback, useLayoutEffect, useState} from "react";
 
 const Booking = () => {
     let { ids } = useParams();
     ids = ids.split(',');
 
-    console.log(ids);
+    const [items, setItems] = useState([]);
+
+    useCallback(() => {
+        // TODO call to API for fetching agencies
+        setItems([]);
+    }, []);
+
+    console.log(ids, items);
 
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
