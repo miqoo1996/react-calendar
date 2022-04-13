@@ -101,7 +101,7 @@ const Agencies = () => {
 
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
-            <div className="page-details">
+            <div className="page-details" style={{ marginLeft: "6%" }}>
                 <h1 className="page-title">Better Help Therapy</h1>
                 <p className="info-text">Book a time with one of our licensed professional therapists online today!</p>
             </div>
