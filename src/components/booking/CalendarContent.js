@@ -60,12 +60,7 @@ const CalendarContent = () => {
                 <CalendarCel disabled={1}>11</CalendarCel>
                 <CalendarCel disabled={1}>12</CalendarCel>
                 <CalendarCel disabled={1}>13</CalendarCel>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium bg-brand text-brandcontrast dark:bg-darkmodebrand dark:text-darkmodebrandcontrast"
-                        data-testid="day" data-disabled="false">14
-                    </button>
-                </div>
+                <CalendarCel active={1}>14</CalendarCel>
                 <CalendarCel>15</CalendarCel>
                 <CalendarCel>16</CalendarCel>
                 <CalendarCel>17</CalendarCel>

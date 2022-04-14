@@ -1,4 +1,4 @@
-const CalendarCel = ({disabled, children}) => {
+const CalendarCel = ({disabled, active, children}) => {
     if (disabled) {
         return (
             <div className="relative w-full" style={{paddingTop: "100%"}}>
@@ -8,6 +8,17 @@ const CalendarCel = ({disabled, children}) => {
                         data-testid="day" data-disabled="true" disabled="">{children}
                     </button>
                     : <div></div>}
+            </div>
+        );
+    }
+
+    if (active) {
+        return (
+            <div className="relative w-full" style={{paddingTop: "100%"}}>
+                <button
+                    className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium bg-brand text-brandcontrast dark:bg-darkmodebrand dark:text-darkmodebrandcontrast"
+                    data-testid="day" data-disabled="false">{children}
+                </button>
             </div>
         );
     }
