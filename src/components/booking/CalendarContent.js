@@ -2,6 +2,30 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
 
 const CalendarContent = () => {
+    let [
+        emptyItems,
+        disabledItems,
+        activeItem,
+        availableItems,
+    ] = [
+        [],
+        [],
+        <CalendarCel active={1}>{GlobalHelper.getDayFromDate()}</CalendarCel>,
+        []
+    ];
+
+    for (let i = 0; i < GlobalHelper.getFirsEmptyDaysCount();  i++) {
+        emptyItems.push(<CalendarCel key={i+888888} disabled={1} />);
+    }
+
+    for (let i = 1; i < GlobalHelper.getDayFromDate(); i++) {
+        disabledItems.push(<CalendarCel key={i+77777} disabled={1}>{i}</CalendarCel>);
+    }
+
+    for (let i = GlobalHelper.getDayFromDate() + 1; i <= GlobalHelper.getLastDayOfMonth(); i++) {
+        availableItems.push(<CalendarCel key={i+66666}>{i}</CalendarCel>);
+    }
+
     return (
         <div className="mt-8 sm:mt-0 sm:min-w-[455px] w-full sm:w-1/2 sm:border-r sm:pl-4 sm:pr-6 sm:dark:border-gray-700 md:w-1/3">
             <div className="mb-4 flex text-xl font-light">
@@ -42,41 +66,10 @@ const CalendarContent = () => {
             </div>
 
             <div className="grid grid-cols-7 gap-2 text-center">
-                <CalendarCel disabled={1} />
-                <CalendarCel disabled={1} />
-                <CalendarCel disabled={1} />
-                <CalendarCel disabled={1} />
-                <CalendarCel disabled={1} />
-                <CalendarCel disabled={1}>1</CalendarCel>
-                <CalendarCel disabled={1}>2</CalendarCel>
-                <CalendarCel disabled={1}>3</CalendarCel>
-                <CalendarCel disabled={1}>4</CalendarCel>
-                <CalendarCel disabled={1}>5</CalendarCel>
-                <CalendarCel disabled={1}>6</CalendarCel>
-                <CalendarCel disabled={1}>7</CalendarCel>
-                <CalendarCel disabled={1}>8</CalendarCel>
-                <CalendarCel disabled={1}>9</CalendarCel>
-                <CalendarCel disabled={1}>10</CalendarCel>
-                <CalendarCel disabled={1}>11</CalendarCel>
-                <CalendarCel disabled={1}>12</CalendarCel>
-                <CalendarCel disabled={1}>13</CalendarCel>
-                <CalendarCel active={1}>14</CalendarCel>
-                <CalendarCel>15</CalendarCel>
-                <CalendarCel>16</CalendarCel>
-                <CalendarCel>17</CalendarCel>
-                <CalendarCel>18</CalendarCel>
-                <CalendarCel>19</CalendarCel>
-                <CalendarCel>20</CalendarCel>
-                <CalendarCel>21</CalendarCel>
-                <CalendarCel>22</CalendarCel>
-                <CalendarCel>23</CalendarCel>
-                <CalendarCel>24</CalendarCel>
-                <CalendarCel>25</CalendarCel>
-                <CalendarCel>26</CalendarCel>
-                <CalendarCel>27</CalendarCel>
-                <CalendarCel>28</CalendarCel>
-                <CalendarCel>29</CalendarCel>
-                <CalendarCel>30</CalendarCel>
+                {emptyItems}
+                {disabledItems}
+                {activeItem}
+                {availableItems}
             </div>
         </div>
     );
