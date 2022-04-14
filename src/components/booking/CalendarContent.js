@@ -48,176 +48,40 @@ const CalendarContent = () => {
                 <CalendarCel disabled={1} />
                 <CalendarCel disabled={1} />
                 <CalendarCel disabled={1}>1</CalendarCel>
-                <CalendarCel>2</CalendarCel>
-
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">3
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">4
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">5
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">6
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">7
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">8
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">9
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">10
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">11
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">12
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">13
-                    </button>
-                </div>
+                <CalendarCel disabled={1}>2</CalendarCel>
+                <CalendarCel disabled={1}>3</CalendarCel>
+                <CalendarCel disabled={1}>4</CalendarCel>
+                <CalendarCel disabled={1}>5</CalendarCel>
+                <CalendarCel disabled={1}>6</CalendarCel>
+                <CalendarCel disabled={1}>7</CalendarCel>
+                <CalendarCel disabled={1}>8</CalendarCel>
+                <CalendarCel disabled={1}>9</CalendarCel>
+                <CalendarCel disabled={1}>10</CalendarCel>
+                <CalendarCel disabled={1}>11</CalendarCel>
+                <CalendarCel disabled={1}>12</CalendarCel>
+                <CalendarCel disabled={1}>13</CalendarCel>
                 <div className="relative w-full" style={{paddingTop: "100%"}}>
                     <button
                         className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium bg-brand text-brandcontrast dark:bg-darkmodebrand dark:text-darkmodebrandcontrast"
                         data-testid="day" data-disabled="false">14
                     </button>
                 </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">15
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">16
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">17
-                    </button>
-                </div>
-                <div className="relative w-full"  style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">18
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">19
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">20
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">21
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">22
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">23
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">24
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">25
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">26
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">27
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">28
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">29
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white font-medium  bg-gray-100 dark:bg-gray-600 dark:text-white"
-                        data-testid="day" data-disabled="false">30
-                    </button>
-                </div>
+                <CalendarCel>15</CalendarCel>
+                <CalendarCel>16</CalendarCel>
+                <CalendarCel>17</CalendarCel>
+                <CalendarCel>18</CalendarCel>
+                <CalendarCel>19</CalendarCel>
+                <CalendarCel>20</CalendarCel>
+                <CalendarCel>21</CalendarCel>
+                <CalendarCel>22</CalendarCel>
+                <CalendarCel>23</CalendarCel>
+                <CalendarCel>24</CalendarCel>
+                <CalendarCel>25</CalendarCel>
+                <CalendarCel>26</CalendarCel>
+                <CalendarCel>27</CalendarCel>
+                <CalendarCel>28</CalendarCel>
+                <CalendarCel>29</CalendarCel>
+                <CalendarCel>30</CalendarCel>
             </div>
         </div>
     );
