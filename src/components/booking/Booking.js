@@ -14,7 +14,7 @@ const Booking = () => {
         setItems([]);
     }, []);
 
-    console.log(ids, items);
+    // console.log(ids, items);
 
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
@@ -24,7 +24,7 @@ const Booking = () => {
             </div>
 
             <div className="top-50 booking-calendar">
-                <Calendar />
+                <Calendar users={items} />
             </div>
 
             <p>

@@ -1,4 +1,4 @@
-const CalendarLeftSide = () => {
+const CalendarLeftSide = ({users}) => {
     return (
         <div className="pr-8 sm:border-r sm:dark:border-gray-700 md:flex md:flex-col sm:w-1/3">
             <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">Cal.com, Inc.</h2>

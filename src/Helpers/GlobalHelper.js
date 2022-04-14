@@ -3,9 +3,36 @@ const weekDayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "
 const shortWeekDayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
 
 const GlobalHelper = {
+    date: new Date(),
+
     monthNames,
     weekDayNames,
     shortWeekDayNames,
+
+    changeDay: (number = 1) => {
+        return GlobalHelper.date = new Date(GlobalHelper.date.setUTCDate(number));
+    },
+
+    changeMonth: (number = 1) => {
+        const now = new Date();
+
+        const newDate = new Date(GlobalHelper.date.setUTCMonth(GlobalHelper.date.getUTCMonth() + number));
+
+        if (newDate.getUTCMonth() <= now.getUTCMonth()) {
+            GlobalHelper.date = now;
+        } else {
+            GlobalHelper.date = newDate;
+            GlobalHelper.changeDay(1);
+        }
+
+        return GlobalHelper.date;
+    },
+
+    isCurrentMonthActive: () => {
+        const now = new Date();
+
+        return GlobalHelper.date.getUTCMonth() === now.getUTCMonth();
+    },
 
     /**
      * Use for Localized time zone.
@@ -40,49 +67,56 @@ const GlobalHelper = {
         return days;
     },
 
-    getMonthFromDate: (date = new Date()) => {
+    getMonthFromDate: (date) => {
+        date = date || GlobalHelper.date;
         return date.toLocaleString('default', { month: 'long'}); // eg. April
     },
 
-    getWeekdayFromDate: (date = new Date()) => {
+    getWeekdayFromDate: (date) => {
+        date = date || GlobalHelper.date;
         return date.toLocaleString('default', { weekday:'long'}); // eg. Saturday
     },
 
-    getDayFromDate: (date = new Date()) => {
+    getDayFromDate: (date) => {
+        date = date || GlobalHelper.date;
         return parseInt(date.toLocaleString('default', {day:'numeric'})); // eg. 11
     },
 
-    getYearFromDate: (date = new Date()) => {
+    getYearFromDate: (date) => {
+        date = date || GlobalHelper.date;
         return date.toLocaleString('default', {year:'numeric'}); // eg. 2022
     },
 
-    getFirsEmptyDaysCount: (date = new Date()) => {
+    getFirsEmptyDaysCount: (date) => {
+        date = date || GlobalHelper.date;
         return weekDayNames.indexOf(GlobalHelper.getMonthDaysData(date)[0].name);
     },
 
-    getFirstDayOfMonth: (date = new Date()) => {
-        return GlobalHelper.getMonthDaysData(date)[0].day;
+    getFirstDayOfMonth: () => {
+        return GlobalHelper.getMonthDaysData(GlobalHelper.date)[0].day;
     },
 
-    getLastDayOfMonth: (date = new Date()) => {
-        return GlobalHelper.getMonthDaysData(date)[GlobalHelper.getMonthDaysData(date).length - 1].day;
+    getLastDayOfMonth: () => {
+        const days = GlobalHelper.getMonthDaysData(GlobalHelper.date);
+
+        return days[days.length - 1].day;
     },
 
-    getShortDate: (date = new Date()) => {
+    getShortDate: () => {
         return <span
             className="w-1/2 dark:text-white"><strong
-            className="text-bookingdarker dark:text-white">{monthNames[date.getUTCMonth()]}</strong> <span
-            className="text-bookinglight">{date.getUTCFullYear()}</span></span>
+            className="text-bookingdarker dark:text-white">{monthNames[GlobalHelper.date.getUTCMonth()]}</strong> <span
+            className="text-bookinglight">{GlobalHelper.date.getUTCFullYear()}</span></span>
     },
 
-    getCalendarWeekText: (date = new Date()) => {
+    getCalendarWeekText: () => {
         return <div className="mb-4 text-left text-lg font-light text-gray-600"><span
             className="text-bookingdarker w-1/2 dark:text-white"><strong>{GlobalHelper.getWeekdayFromDate()}</strong><span
-            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {monthNames[date.getUTCMonth()]}</span></span></div>;
+            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {monthNames[GlobalHelper.date.getUTCMonth()]}</span></span></div>;
     },
 
-    getMonthDaysData: (date = new Date()) => {
-        return  GlobalHelper.getDaysInMonthUTC(date.getUTCMonth(), date.getUTCFullYear()).map(date => {
+    getMonthDaysData: () => {
+        return  GlobalHelper.getDaysInMonthUTC(GlobalHelper.date.getUTCMonth(), GlobalHelper.date.getUTCFullYear()).map(date => {
             return {
                 day: GlobalHelper.getDayFromDate(date),
                 name: GlobalHelper.getWeekdayFromDate(date),

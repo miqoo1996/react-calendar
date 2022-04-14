@@ -1,6 +1,6 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 
-const CalendarRightSide = () => {
+const CalendarRightSide = ({users}) => {
     return (
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
             {GlobalHelper.getCalendarWeekText()}

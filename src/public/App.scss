@@ -18,6 +18,10 @@
   --brand-text-color-dark-mode: #292929;
 }
 
+button:disabled {
+  color: #b2b9b2;
+}
+
 body {
   margin: 0;
   padding: 0;

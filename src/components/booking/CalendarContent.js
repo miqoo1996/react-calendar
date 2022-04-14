@@ -1,29 +1,42 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
+import {useState} from "react";
 
-const CalendarContent = () => {
+const CalendarContent = ({users}) => {
+    const [date, setDate] = useState(GlobalHelper.date);
+
+    const now = new Date();
+
+    const onChangeDayHandler = (i) => {
+        setDate(GlobalHelper.changeDay(i));
+    }
+
     let [
         emptyItems,
         disabledItems,
-        activeItem,
         availableItems,
     ] = [
         [],
         [],
-        <CalendarCel active={1}>{GlobalHelper.getDayFromDate()}</CalendarCel>,
         []
     ];
 
-    for (let i = 0; i < GlobalHelper.getFirsEmptyDaysCount();  i++) {
-        emptyItems.push(<CalendarCel key={i+888888} disabled={1} />);
+    const activeItem = <CalendarCel active={1}>
+        {GlobalHelper.getDayFromDate(GlobalHelper.isCurrentMonthActive() ? now : null)}
+    </CalendarCel>
+
+    for (let i = 0; i < GlobalHelper.getFirsEmptyDaysCount(); i++) {
+        emptyItems.push(<CalendarCel key={i+1111} disabled={1} />);
     }
 
     for (let i = 1; i < GlobalHelper.getDayFromDate(); i++) {
-        disabledItems.push(<CalendarCel key={i+77777} disabled={1}>{i}</CalendarCel>);
+        disabledItems.push(<CalendarCel key={i+2222}
+                                        onClick={e => !GlobalHelper.isCurrentMonthActive() && onChangeDayHandler(i)}
+                                        disabled={GlobalHelper.isCurrentMonthActive()}>{i}</CalendarCel>);
     }
 
     for (let i = GlobalHelper.getDayFromDate() + 1; i <= GlobalHelper.getLastDayOfMonth(); i++) {
-        availableItems.push(<CalendarCel key={i+66666}>{i}</CalendarCel>);
+        availableItems.push(<CalendarCel key={i+3333} onClick={e => onChangeDayHandler(i)}>{i}</CalendarCel>);
     }
 
     return (
@@ -32,8 +45,9 @@ const CalendarContent = () => {
                 {GlobalHelper.getShortDate()}
                 <div className="w-1/2 text-right dark:text-gray-400">
                     <button
+                        onClick={e => !GlobalHelper.isCurrentMonthActive() && setDate(GlobalHelper.changeMonth(-1))}
                         className="group p-1 ltr:mr-2 rtl:ml-2 text-bookinglighter dark:text-gray-600"
-                        data-testid="decrementMonth" disabled="">
+                        data-testid="decrementMonth" disabled={GlobalHelper.isCurrentMonthActive()}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true"
                              className="h-5 w-5 group-hover:text-black dark:group-hover:text-white">
@@ -42,7 +56,9 @@ const CalendarContent = () => {
                                   clipRule="evenodd" />
                         </svg>
                     </button>
-                    <button className="group p-1" data-testid="incrementMonth">
+                    <button
+                        onClick={e => setDate(GlobalHelper.changeMonth(1))}
+                        className="group p-1" data-testid="incrementMonth">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true"
                              className="h-5 w-5 group-hover:text-black dark:group-hover:text-white">
