@@ -7,7 +7,7 @@ import {AgencyReducer} from '../../reducers/AgencyReducer';
 const Agencies = () => {
     const [items, setItems] = useState([]);
 
-    const [context, dispatch] = useReducer(AgencyReducer, {selectedAgencies: []})
+    const [context, dispatch] = useReducer(AgencyReducer, {selectedAgencies: []});
 
     useLayoutEffect(() => {
         // TODO should come from API.

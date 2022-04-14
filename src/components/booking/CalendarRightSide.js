@@ -1,6 +1,11 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
+import {CalendarContext} from "../../AppContext";
+import {useContext} from "react";
 
 const CalendarRightSide = ({users}) => {
+    const {context, dispatch} = useContext(CalendarContext);
+    GlobalHelper.date = context.activeDate;
+
     return (
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
             {GlobalHelper.getCalendarWeekText()}

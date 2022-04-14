@@ -1,6 +1,7 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
-import {useState} from "react";
+import {useContext, useState} from "react";
+import {CalendarContext} from "../../AppContext";
 
 const now = new Date();
 
@@ -9,10 +10,13 @@ const currentMonthActiveDay = GlobalHelper.getDayFromDate(now);
 const CalendarContent = ({users}) => {
     let [emptyItems, disabledItems, availableItems] = [[], [], []];
 
+    const {context, dispatch} = useContext(CalendarContext);
+
     const [date, setDate] = useState(GlobalHelper.date);
 
     const onChangeDayHandler = (i) => {
         setDate(GlobalHelper.changeDay(i));
+        dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.date}});
     }
 
     const [
