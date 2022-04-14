@@ -1,9 +1,9 @@
+import GlobalHelper from "../../Helpers/GlobalHelper";
+
 const CalendarRightSide = () => {
     return (
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
-            <div className="mb-4 text-left text-lg font-light text-gray-600"><span
-                className="text-bookingdarker w-1/2 dark:text-white"><strong>Thursday</strong><span
-                className="text-bookinglight">, 14 April</span></span></div>
+            {GlobalHelper.getCalendarWeekText()}
 
             <div className="flex-grow overflow-y-auto md:h-[364px]">
                 <div>

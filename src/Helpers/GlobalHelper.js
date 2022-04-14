@@ -1,7 +1,7 @@
 const monthNames = [ "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December" ];
 
-export default {
+const GlobalHelper = {
     monthNames,
 
     /**
@@ -61,6 +61,10 @@ export default {
     },
 
     getCalendarWeekText: (date = new Date()) => {
-
+        return <div className="mb-4 text-left text-lg font-light text-gray-600"><span
+            className="text-bookingdarker w-1/2 dark:text-white"><strong>{GlobalHelper.getWeekdayFromDate()}</strong><span
+            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {monthNames[date.getUTCMonth()]}</span></span></div>;
     },
 };
+
+export default GlobalHelper;
