@@ -1,0 +1,46 @@
+.booking-calendar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .page-details {
+    margin-bottom: 30px;
+  }
+
+  .calendar-top-button {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.calendar-agency-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+
+  .calendar-agency-item-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .agency-image {
+    margin-bottom: 8px;
+    max-width: 50px;
+  }
+
+  .agency-image img {
+    border-radius: 100%;
+  }
+
+  .selected-book-user {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

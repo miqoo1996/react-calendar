@@ -1,8 +1,8 @@
-const CalendarLeftSide = ({users}) => {
+const CalendarLeftSide = () => {
     return (
         <div className="pr-8 sm:border-r sm:dark:border-gray-700 md:flex md:flex-col sm:w-1/3">
-            <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">Cal.com, Inc.</h2>
-            <h1 className="font-cal text-bookingdark mb-4 text-3xl font-semibold dark:text-white">Hiring
+            <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">Outbound Consulting, Inc.</h2>
+            <h1 className="font-cal text-bookingdark mb-4 text-3xl font-semibold dark:text-white">Consulting
                 Call</h1>
 
             <p className="text-bookinglight mb-1 -ml-2 px-2 py-1">
@@ -12,7 +12,7 @@ const CalendarLeftSide = ({users}) => {
                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                           clipRule="evenodd" />
                 </svg>
-                20 Minutes
+                60 Minutes
             </p>
 
             <div data-state="closed">

@@ -10,8 +10,6 @@ const CalendarContent = ({dispatch}) => {
     let [emptyItems, disabledItems, availableItems] = [[], [], []];
 
     const onChangeDayHandler = (i) => {
-        // setDate(GlobalHelper.changeDay(i));
-        console.log(777);
         dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeDay(i)}});
     }
 
