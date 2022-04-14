@@ -7,7 +7,7 @@ import {useReducer} from "react";
 import {CalendarContext} from "../../AppContext";
 
 const Calendar = ({users}) => {
-    const [context, dispatch] = useReducer(CalendarReducer, {activeDate: GlobalHelper.getDayFromDate()})
+    const [context, dispatch] = useReducer(CalendarReducer, {activeDate: GlobalHelper.date})
 
     return (
         <CalendarContext.Provider value={{context, dispatch}}>

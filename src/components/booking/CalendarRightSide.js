@@ -4,6 +4,7 @@ import {useContext} from "react";
 
 const CalendarRightSide = ({users}) => {
     const {context, dispatch} = useContext(CalendarContext);
+    console.log(context);
     GlobalHelper.date = context.activeDate;
 
     return (
