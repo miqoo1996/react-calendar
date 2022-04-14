@@ -1,10 +1,10 @@
+import GlobalHelper from "../../Helpers/GlobalHelper";
+
 const CalendarContent = () => {
     return (
         <div className="mt-8 sm:mt-0 sm:min-w-[455px] w-full sm:w-1/2 sm:border-r sm:pl-4 sm:pr-6 sm:dark:border-gray-700 md:w-1/3">
-            <div className="mb-4 flex text-xl font-light"><span
-                className="w-1/2 dark:text-white"><strong
-                className="text-bookingdarker dark:text-white">April</strong> <span
-                className="text-bookinglight">2022</span></span>
+            <div className="mb-4 flex text-xl font-light">
+                {GlobalHelper.getShortDate()}
                 <div className="w-1/2 text-right dark:text-gray-400">
                     <button
                         className="group p-1 ltr:mr-2 rtl:ml-2 text-bookinglighter dark:text-gray-600"

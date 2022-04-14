@@ -1,6 +1,8 @@
+const monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
+
 export default {
-    monthNames: [ "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December" ],
+    monthNames,
 
     /**
      * Use for Localized time zone.
@@ -49,5 +51,16 @@ export default {
 
     getYearFromDate: (date = new Date()) => {
         return date.toLocaleString('default', {year:'numeric'}); // eg. 2022
+    },
+
+    getShortDate: (date = new Date()) => {
+        return <span
+            className="w-1/2 dark:text-white"><strong
+            className="text-bookingdarker dark:text-white">{monthNames[date.getUTCMonth()]}</strong> <span
+            className="text-bookinglight">{date.getUTCFullYear()}</span></span>
+    },
+
+    getCalendarWeekText: (date = new Date()) => {
+
     },
 };
