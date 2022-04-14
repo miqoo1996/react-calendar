@@ -2,37 +2,36 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
 import {useState} from "react";
 
-const CalendarContent = ({users}) => {
-    const [date, setDate] = useState(GlobalHelper.date);
+const now = new Date();
 
-    const now = new Date();
+const currentMonthActiveDay = GlobalHelper.getDayFromDate(now);
+
+const CalendarContent = ({users}) => {
+    let [emptyItems, disabledItems, availableItems] = [[], [], []];
+
+    const [date, setDate] = useState(GlobalHelper.date);
 
     const onChangeDayHandler = (i) => {
         setDate(GlobalHelper.changeDay(i));
     }
 
-    let [
-        emptyItems,
-        disabledItems,
-        availableItems,
+    const [
+        activeItem,
+        isUnAvailableDay
     ] = [
-        [],
-        [],
-        []
+        <CalendarCel active={1}>{GlobalHelper.getDayFromDate()}</CalendarCel>,
+        day => GlobalHelper.isCurrentMonthActive() && day < currentMonthActiveDay
     ];
-
-    const activeItem = <CalendarCel active={1}>
-        {GlobalHelper.getDayFromDate(GlobalHelper.isCurrentMonthActive() ? now : null)}
-    </CalendarCel>
 
     for (let i = 0; i < GlobalHelper.getFirsEmptyDaysCount(); i++) {
         emptyItems.push(<CalendarCel key={i+1111} disabled={1} />);
     }
 
     for (let i = 1; i < GlobalHelper.getDayFromDate(); i++) {
-        disabledItems.push(<CalendarCel key={i+2222}
-                                        onClick={e => !GlobalHelper.isCurrentMonthActive() && onChangeDayHandler(i)}
-                                        disabled={GlobalHelper.isCurrentMonthActive()}>{i}</CalendarCel>);
+        disabledItems.push(<CalendarCel
+            key={i+2222}
+            onClick={e => !isUnAvailableDay(i) && onChangeDayHandler(i)}
+            disabled={isUnAvailableDay(i)}>{i}</CalendarCel>);
     }
 
     for (let i = GlobalHelper.getDayFromDate() + 1; i <= GlobalHelper.getLastDayOfMonth(); i++) {
