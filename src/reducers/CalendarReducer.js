@@ -7,7 +7,9 @@ const CalendarReducer = (state = initialState, action) => {
         state.activeDate = action.payload.activeDate;
     }
 
-    return state;
+    return {
+        ...state,
+    };
 };
 
 export {

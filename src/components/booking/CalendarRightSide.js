@@ -1,11 +1,8 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
-import {CalendarContext} from "../../AppContext";
-import {useContext} from "react";
+import {connect} from "react-redux";
 
-const CalendarRightSide = ({users}) => {
-    const {context, dispatch} = useContext(CalendarContext);
-    console.log(context);
-    GlobalHelper.date = context.activeDate;
+const CalendarRightSide = ({users, calendar}) => {
+    GlobalHelper.date = calendar.activeDate;
 
     return (
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
@@ -30,4 +27,10 @@ const CalendarRightSide = ({users}) => {
     );
 }
 
-export default CalendarRightSide;
+const mapStateToProps = (state) => {
+    return {
+        calendar: state.calendar,
+    };
+}
+
+export default connect(mapStateToProps)(CalendarRightSide);

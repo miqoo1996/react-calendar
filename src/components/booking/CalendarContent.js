@@ -1,22 +1,19 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
-import {useContext, useState} from "react";
-import {CalendarContext} from "../../AppContext";
+import {useState} from "react";
+import {connect} from "react-redux";
 
 const now = new Date();
 
 const currentMonthActiveDay = GlobalHelper.getDayFromDate(now);
 
-const CalendarContent = ({users}) => {
+const CalendarContent = ({dispatch}) => {
     let [emptyItems, disabledItems, availableItems] = [[], [], []];
 
-    const {context, dispatch} = useContext(CalendarContext);
-
-    const [date, setDate] = useState(GlobalHelper.date);
-
     const onChangeDayHandler = (i) => {
-        setDate(GlobalHelper.changeDay(i));
-        dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.date}});
+        // setDate(GlobalHelper.changeDay(i));
+        console.log(777);
+        dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeDay(i)}});
     }
 
     const [
@@ -48,7 +45,7 @@ const CalendarContent = ({users}) => {
                 {GlobalHelper.getShortDate()}
                 <div className="w-1/2 text-right dark:text-gray-400">
                     <button
-                        onClick={e => !GlobalHelper.isCurrentMonthActive() && setDate(GlobalHelper.changeMonth(-1))}
+                        onClick={e => !GlobalHelper.isCurrentMonthActive() && dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(-1)}})}
                         className="group p-1 ltr:mr-2 rtl:ml-2 text-bookinglighter dark:text-gray-600"
                         data-testid="decrementMonth" disabled={GlobalHelper.isCurrentMonthActive()}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -60,7 +57,7 @@ const CalendarContent = ({users}) => {
                         </svg>
                     </button>
                     <button
-                        onClick={e => setDate(GlobalHelper.changeMonth(1))}
+                        onClick={e => dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(1)}})}
                         className="group p-1" data-testid="incrementMonth">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true"
@@ -94,4 +91,10 @@ const CalendarContent = ({users}) => {
     );
 }
 
-export default CalendarContent;
+const mapStateToProps = (state) => {
+  return {
+      calendar: state.calendar,
+  };
+}
+
+export default connect(mapStateToProps)(CalendarContent);
