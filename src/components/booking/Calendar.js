@@ -3,10 +3,13 @@ import CalendarContent from "./CalendarContent";
 import CalendarRightSide from "./CalendarRightSide";
 import {CalendarContext} from "../../AppContext";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
 
-const Calendar = ({users}) => {
+const Calendar = ({agencies, selectedAgencies}) => {
+    const users = agencies?.items || [];
+
     return (
-        <CalendarContext.Provider value={{users}}>
+        <CalendarContext.Provider value={{users, selectedAgencies}}>
             <section className="calendar-wrapper">
                 <div className="page-details">
                     <h1 className="page-title">Book a call</h1>
@@ -35,4 +38,11 @@ const Calendar = ({users}) => {
     );
 }
 
-export default Calendar;
+const mapStateToProps = (state) => {
+    return {
+        calendar: state.calendar,
+        agencies: state.agencies,
+    };
+}
+
+export default connect(mapStateToProps)(Calendar);

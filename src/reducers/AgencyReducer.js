@@ -1,7 +1,9 @@
-const AgencyReducer = (state, action) => {
-    let selectedAgencies  = state.selectedAgencies || [];
+const initialState = {selectedAgencies: [], items: []};
 
-    selectedAgencies = selectedAgencies.filter(id => id !== action.payload.id);
+const AgencyReducer = (state = initialState, action) => {
+    let {selectedAgencies, items}  = state;
+
+    selectedAgencies = selectedAgencies.filter(id => id != action.payload.id);
 
     if (action.type === 'remove') {
         // removes on top, ...
@@ -11,8 +13,19 @@ const AgencyReducer = (state, action) => {
         selectedAgencies.push(action.payload.id);
     }
 
+    if (action.type === 'update-items') {
+        if (action.payload?.items) {
+            items = action.payload.items;
+        }
+        if (action.payload?.selectedAgencies) {
+            selectedAgencies = action.payload?.selectedAgencies;
+        }
+    }
+
     return {
-        selectedAgencies
+        ...state,
+        selectedAgencies,
+        items,
     };
 };
 

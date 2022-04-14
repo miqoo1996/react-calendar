@@ -1,7 +1,8 @@
 import {useState} from "react";
+import {connect} from "react-redux";
 
-const Agency = ({id, name, description, image, dispatch}) => {
-  const [selected, setSelected] = useState(false);
+const Agency = ({id, name, description, image, dispatch, selectedAgencies}) => {
+  const [selected, setSelected] = useState(selectedAgencies.indexOf(id.toString()) !== -1);
 
   const onAgencyClickHandle = (id) => {
     setSelected(!selected);
@@ -30,4 +31,11 @@ const Agency = ({id, name, description, image, dispatch}) => {
   );
 }
 
-export default Agency;
+const mapStateToProps = (state) => {
+    return {
+        agencies: state.agencies,
+        selectedAgencies: state.agencies?.selectedAgencies || [],
+    };
+}
+
+export default connect(mapStateToProps)(Agency);

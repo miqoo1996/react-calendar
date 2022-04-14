@@ -5,7 +5,7 @@ import {CalendarContext} from "../../AppContext";
 import {useContext} from "react";
 
 const CalendarRightSide = ({calendar}) => {
-    const {users} = useContext(CalendarContext);
+    const {selectedAgencies} = useContext(CalendarContext);
 
     GlobalHelper.date = calendar.activeDate;
 
@@ -14,14 +14,14 @@ const CalendarRightSide = ({calendar}) => {
             {GlobalHelper.getCalendarWeekText()}
 
             <div className="flex-grow overflow-y-auto md:h-[364px]">
-                {users.map((user, key) => {
+                {selectedAgencies?.map((user, key) => {
                     return (
                         <div key={key} className="calendar-agency-item">
                             <div className="calendar-agency-item-content">
                                 <div className="agency-image">
-                                    <img src="https://cxl.com/wp-content/uploads/2016/03/aurora_bedford.jpg" alt="user" />
+                                    <img src={user.image} alt="user" />
                                 </div>
-                                <p style={{marginBottom: "10px"}}><strong>Jilian Erics, MD</strong></p>
+                                <p style={{marginBottom: "10px"}}><strong>{user.name}</strong></p>
                             </div>
 
                             <div style={{ width: "80%", marginTop: '10px', marginBottom: "30px" }}>

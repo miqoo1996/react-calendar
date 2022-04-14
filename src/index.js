@@ -6,12 +6,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {combineReducers, createStore} from "redux";
 import {CalendarReducer} from "./reducers/CalendarReducer";
+import {AgencyReducer} from "./reducers/AgencyReducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
       <Provider store={createStore(combineReducers({
-          calendar: CalendarReducer
+          calendar: CalendarReducer,
+          agencies: AgencyReducer,
       }))}>
           <App />
       </Provider>

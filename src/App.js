@@ -4,6 +4,7 @@ import Agencies from './components/agency/Agencies';
 import Booking from "./components/booking/Booking";
 import PageNoMatch from "./PageNoMatch";
 import {AppContext} from "./AppContext";
+import {connect} from "react-redux";
 
 function App() {
     return (
@@ -23,4 +24,10 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+    return {
+        agencies: state.agencies,
+    };
+}
+
+export default connect(mapStateToProps)(App);
