@@ -1,4 +1,5 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
+import CalendarCel from "./CalendarCel";
 
 const CalendarContent = () => {
     return (
@@ -41,33 +42,14 @@ const CalendarContent = () => {
             </div>
 
             <div className="grid grid-cols-7 gap-2 text-center">
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <div></div>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <div></div>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <div></div>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <div></div>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <div></div>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">1
-                    </button>
-                </div>
-                <div className="relative w-full" style={{paddingTop: "100%"}}>
-                    <button
-                        className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
-                        data-testid="day" data-disabled="true" disabled="">2
-                    </button>
-                </div>
+                <CalendarCel disabled={1} />
+                <CalendarCel disabled={1} />
+                <CalendarCel disabled={1} />
+                <CalendarCel disabled={1} />
+                <CalendarCel disabled={1} />
+                <CalendarCel disabled={1}>1</CalendarCel>
+                <CalendarCel>2</CalendarCel>
+
                 <div className="relative w-full" style={{paddingTop: "100%"}}>
                     <button
                         className="absolute top-0 left-0 right-0 bottom-0 mx-auto w-full rounded-sm text-center hover:border-brand hover:border dark:hover:border-white text-bookinglighter cursor-default font-light hover:border-0"
