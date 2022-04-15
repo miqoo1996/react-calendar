@@ -44,4 +44,23 @@
     flex-wrap: wrap;
     gap: 10px;
   }
+
+  .calendar-available-slots {
+    width: 80%;
+    margin-top: 10px;
+    margin-bottom: 30px;
+
+    .available-slot {
+      &.active {
+        .hover\:text-white {
+          --tw-text-opacity: 1;
+          color: rgb(255 255 255 / var(--tw-text-opacity));
+        }
+
+        .hover\:bg-brand {
+          background-color: var(--brand-color) !important;
+        }
+      }
+    }
+  }
 }
