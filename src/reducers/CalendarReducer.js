@@ -12,7 +12,7 @@ const CalendarReducer = (state = initialState, action) => {
     }
 
     if (action.type === 'update-selected-slots') {
-        state.selectedSlots[action.payload.userId] = action.payload.slotId;
+        state.selectedSlots[action.payload.userId] = action.payload.slot;
     }
 
     return {

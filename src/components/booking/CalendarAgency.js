@@ -18,16 +18,16 @@ const CalendarAgency = ({calendar, user, dispatch}) => {
             </div>
 
             <div className="calendar-available-slots">
-                <div className={"available-slot " + (selectedSlots?.[user.id] === user.id + 111 ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 111}}) && setSlotSectionStyles({})}>
+                <div className={"available-slot " + (selectedSlots?.[user.id] === "7:00pm" ? 'active' : '')}
+                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: "7:00pm"}}) && setSlotSectionStyles({})}>
                     <a
                         className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
                         data-testid="time"
                         href="#">7:00pm</a>
                 </div>
 
-                <div className={"available-slot " + (selectedSlots?.[user.id] === user.id + 222 ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 222}}) && setSlotSectionStyles({})}>
+                <div className={"available-slot " + (selectedSlots?.[user.id] === "8:00pm" ? 'active' : '')}
+                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: "8:00pm"}}) && setSlotSectionStyles({})}>
                     <a
                         className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
                         data-testid="time"

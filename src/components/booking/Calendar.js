@@ -5,9 +5,14 @@ import {CalendarContext} from "../../AppContext";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {useState} from "react";
+import GlobalHelper from "../../Helpers/GlobalHelper";
 
 const Calendar = ({agencies, calendar, selectedAgencies}) => {
     const users = agencies?.items || [];
+
+    const { selectedSlots, activeDate, timeZoneName } = calendar;
+
+    GlobalHelper.date = new Date(activeDate);
 
     const [switchToForm, setSwitchToForm] = useState(false);
 
@@ -33,7 +38,8 @@ const Calendar = ({agencies, calendar, selectedAgencies}) => {
 
         const formData = new FormData(e.currentTarget);
 
-        console.log(formData.get('name'));
+        // TODO send this data to API and store calendar events.
+        console.log(formData.get('name'), 'slots=', { selectedSlots, activeDate, timeZoneName });
 
         return false;
     };
@@ -87,7 +93,7 @@ const Calendar = ({agencies, calendar, selectedAgencies}) => {
                                               d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                                               clipRule="evenodd" />
                                     </svg>
-                                    5:30pm, Friday, April 22, 2022
+                                    {Object.values(selectedSlots).join(", ") }, {GlobalHelper.getWeekdayFromDate()}, {GlobalHelper.getMonthFromDate()} {GlobalHelper.getDayFromDate()}, {GlobalHelper.getYearFromDate()}
                                 </p>
                             </div>
                             <div className="sm:w-1/2 sm:pl-8 sm:pr-4">
