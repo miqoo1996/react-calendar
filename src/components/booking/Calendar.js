@@ -25,6 +25,28 @@ const Calendar = ({agencies, selectedAgencies}) => {
 
                 {switchToForm ? (
                     <>
+                    <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl">
+                        <div className="px-4 sm:flex sm:p-4 sm:py-5">
+                            <div className="sm:w-1/2 sm:border-r sm:dark:border-gray-700">
+                                <h2 className="font-cal text-bookinglight mt-2 font-medium dark:text-gray-300">
+                                    Outbound Consulting, Inc.
+                                </h2>
+                                <h1 className="text-bookingdark mb-4 text-xl font-semibold dark:text-white">
+                                    Consulting Call
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="calendar-top-button clearfix">
+                            <button onClick={e => setSwitchToForm(false)} className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                Back to calendar
+                            </button>
+
+                            <button className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+                                Submit Form to Book
+                            </button>
+                        </div>
                     </>
                 ) : (
                     <>

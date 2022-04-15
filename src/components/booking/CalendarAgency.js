@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 const CalendarAgency = ({calendar, user, dispatch}) => {
     const { selectedSlots } = calendar;
 
+    console.log(selectedSlots);
     return (
         <div className="calendar-agency-item">
             <div className="calendar-agency-item-content">
