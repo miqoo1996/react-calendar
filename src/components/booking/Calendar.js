@@ -6,13 +6,26 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {useState} from "react";
 
-const Calendar = ({agencies, selectedAgencies}) => {
+const Calendar = ({agencies, calendar, selectedAgencies}) => {
     const users = agencies?.items || [];
 
     const [switchToForm, setSwitchToForm] = useState(false);
 
+    const [slotSectionStyles, setSlotSectionStyles] = useState({});
+
+    const slotsWarningStyle = {
+        border: "dashed red 3px",
+        padding: "5px",
+    };
+
     const onSwitchToFormHandler = () => {
-        setSwitchToForm(true);
+        const hasSelectedSlots = Object.values(calendar.selectedSlots).length > 0;
+
+        if (!hasSelectedSlots) {
+            setSlotSectionStyles(slotsWarningStyle);
+        } else {
+            setSwitchToForm(true);
+        }
     };
 
     const onFormSubmitHandler = (e) => {
@@ -26,7 +39,7 @@ const Calendar = ({agencies, selectedAgencies}) => {
     };
 
     return (
-        <CalendarContext.Provider value={{users, selectedAgencies}}>
+        <CalendarContext.Provider value={{users, selectedAgencies, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles}}>
             <section className="calendar-wrapper">
                 <div className="page-details">
                     <h1 className="page-title">Book a call</h1>

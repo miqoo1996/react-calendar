@@ -1,10 +1,13 @@
 import '../../public/Calendar.scss';
 import {connect} from "react-redux";
+import {useContext} from "react";
+import {CalendarContext} from "../../AppContext";
 
 const CalendarAgency = ({calendar, user, dispatch}) => {
     const { selectedSlots } = calendar;
 
-    console.log(selectedSlots);
+    const {setSlotSectionStyles} = useContext(CalendarContext);
+
     return (
         <div className="calendar-agency-item">
             <div className="calendar-agency-item-content">
@@ -16,7 +19,7 @@ const CalendarAgency = ({calendar, user, dispatch}) => {
 
             <div className="calendar-available-slots">
                 <div className={"available-slot " + (selectedSlots?.[user.id] === user.id + 111 ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 111}})}>
+                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 111}}) && setSlotSectionStyles({})}>
                     <a
                         className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
                         data-testid="time"
@@ -24,7 +27,7 @@ const CalendarAgency = ({calendar, user, dispatch}) => {
                 </div>
 
                 <div className={"available-slot " + (selectedSlots?.[user.id] === user.id + 222 ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 222}})}>
+                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slotId: user.id + 222}}) && setSlotSectionStyles({})}>
                     <a
                         className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
                         data-testid="time"
