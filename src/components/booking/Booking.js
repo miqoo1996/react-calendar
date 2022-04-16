@@ -10,7 +10,7 @@ const Booking = () => {
 
     const dispatch = useDispatch();
 
-    const { agencies, selectedAgencies } = useSelector(state => {
+    const { agencies, selectedAgencies, calendar} = useSelector(state => {
         return {
             calendar: state.calendar,
             agencies: state.agencies?.items || [],
@@ -24,7 +24,7 @@ const Booking = () => {
 
     useLayoutEffect(() => {
         if (!agencies.length) {
-            axios.get(`${apiUrl}/agencies?ids=${ids.join(',')}`).then((response) => {
+            axios.get(`${apiUrl}/agencies?ids=${ids.join(',')}&timezone=${calendar.timeZoneName}`).then((response) => {
                 const {users, event, pagination} = response.data;
 
                 dispatch({type: "update-items", payload: {items: users, event, pagination, selectedAgencies: ids}});

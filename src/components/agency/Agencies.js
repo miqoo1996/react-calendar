@@ -9,8 +9,9 @@ import {AppContext} from "../../AppContext";
 const Agencies = () => {
     const dispatch = useDispatch();
 
-    const { agencies } = useSelector(state => {
+    const { agencies, calendar } = useSelector(state => {
         return {
+            calendar: state.calendar,
             agencies: state.agencies,
         };
     });
@@ -18,7 +19,7 @@ const Agencies = () => {
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
-        axios.get(`${apiUrl}/agencies`).then((response) => {
+        axios.get(`${apiUrl}/agencies?timezone=${calendar.timeZoneName}`).then((response) => {
             const {users, event, pagination} = response.data;
 
             dispatch({type: "update-items", payload: {items: users, event, pagination}});
