@@ -3,6 +3,10 @@
   align-items: center;
   justify-content: center;
 
+  &, .calendar-wrapper {
+    min-width: 80%;
+  }
+
   .page-details {
     margin-top: 0;
     margin-bottom: 30px;

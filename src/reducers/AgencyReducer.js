@@ -3,11 +3,13 @@ const initialState = {selectedAgencies: [], items: [], event: {}, pagination: {}
 const AgencyReducer = (state = initialState, action) => {
     let {selectedAgencies, items, event, pagination}  = state;
 
-    selectedAgencies = selectedAgencies.filter(id => id != action.payload.id);
-
-    if (action.type === 'remove') {
-        // removes on top, ...
+    if (action.type === 'remove-agencies') {
+        return {
+            ...initialState,
+        };
     }
+
+    selectedAgencies = selectedAgencies.filter(id => id != action.payload.id);
 
     if (action.type === 'add') {
         selectedAgencies.push(action.payload.id);

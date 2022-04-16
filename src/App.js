@@ -4,6 +4,7 @@ import Agencies from './components/agency/Agencies';
 import Booking from "./components/booking/Booking";
 import PageNoMatch from "./PageNoMatch";
 import {AppContext, AppContextDefaultValue} from "./AppContext";
+import {ToastContainer} from "react-toastify";
 
 function App() {
     return (
@@ -17,6 +18,8 @@ function App() {
                           <Route path="*" element={<PageNoMatch><h1 className="text-center page-title top-50">404 Page Not Found.</h1></PageNoMatch>} />
                       </Routes>
                   </div>
+
+                  <ToastContainer />
               </div>
           </AppContext.Provider>
       </Router>

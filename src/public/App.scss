@@ -1,4 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
+@import 'react-toastify/dist/ReactToastify.css';
 
 @tailwind base;
 @tailwind components;
@@ -93,4 +94,12 @@ body {
 
 .booking-calendar {
   margin: 50px;
+}
+
+.success-message-text {
+  text-align: center;
+  font-weight: bold;
+  color: blueviolet;
+  width: 100%;
+  padding: 20px;
 }

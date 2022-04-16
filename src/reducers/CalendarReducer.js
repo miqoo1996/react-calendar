@@ -7,6 +7,12 @@ const initialState = {
 };
 
 const CalendarReducer = (state = initialState, action) => {
+    if (action.type === 'remove-calendar') {
+        return {
+            ...initialState,
+        };
+    }
+
     if (action.type === 'change-active-date') {
         state.activeDate = action.payload.activeDate;
     }
