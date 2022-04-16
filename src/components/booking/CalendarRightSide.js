@@ -1,12 +1,11 @@
 import '../../public/Calendar.scss';
 import GlobalHelper from "../../Helpers/GlobalHelper";
-import {connect} from "react-redux";
 import {CalendarContext} from "../../AppContext";
 import {useContext} from "react";
 import CalendarAgency from "./CalendarAgency";
 
-const CalendarRightSide = ({calendar}) => {
-    const {selectedAgencies, slotSectionStyles} = useContext(CalendarContext);
+const CalendarRightSide = () => {
+    const {calendar, selectedAgencies, slotSectionStyles} = useContext(CalendarContext);
 
     GlobalHelper.date = calendar.activeDate;
 
@@ -25,10 +24,4 @@ const CalendarRightSide = ({calendar}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        calendar: state.calendar,
-    };
-}
-
-export default connect(mapStateToProps)(CalendarRightSide);
+export default CalendarRightSide;

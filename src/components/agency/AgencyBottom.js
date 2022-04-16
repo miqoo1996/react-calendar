@@ -1,7 +1,13 @@
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
-const AgencyBottom = ({agencies}) => {
+const AgencyBottom = () => {
+  const { agencies } = useSelector(state => {
+    return {
+      agencies: state.agencies,
+    };
+  });
+
   return (
     <>
       {agencies?.selectedAgencies?.length > 0 ? (
@@ -15,10 +21,4 @@ const AgencyBottom = ({agencies}) => {
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    agencies: state.agencies,
-  };
-}
-
-export default connect(mapStateToProps)(AgencyBottom);
+export default AgencyBottom;

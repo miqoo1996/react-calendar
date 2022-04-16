@@ -1,6 +1,13 @@
-import {connect} from "react-redux";
+import {useSelector} from "react-redux";
 
-const CalendarLeftSide = ({calendar}) => {
+const CalendarLeftSide = () => {
+    const { calendar } = useSelector(state => {
+        return {
+            calendar: state.calendar,
+            agencies: state.agencies,
+        };
+    });
+
     return (
         <div className="pr-8 sm:border-r sm:dark:border-gray-700 md:flex md:flex-col sm:w-1/3">
             <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">Outbound Consulting, Inc.</h2>
@@ -45,10 +52,4 @@ const CalendarLeftSide = ({calendar}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        calendar: state.calendar,
-    };
-}
-
-export default connect(mapStateToProps)(CalendarLeftSide);
+export default CalendarLeftSide;

@@ -3,10 +3,18 @@ import axios from "axios";
 import '../../public/Agencies.scss';
 import Agency from './Agency';
 import AgencyBottom from './AgencyBottom';
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppContext} from "../../AppContext";
 
-const Agencies = ({dispatch, agencies}) => {
+const Agencies = () => {
+    const dispatch = useDispatch();
+
+    const { agencies } = useSelector(state => {
+        return {
+            agencies: state.agencies,
+        };
+    });
+
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
@@ -125,10 +133,4 @@ const Agencies = ({dispatch, agencies}) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        agencies: state.agencies,
-    };
-}
-
-export default connect(mapStateToProps)(Agencies);
+export default Agencies;

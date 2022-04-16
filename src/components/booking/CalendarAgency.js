@@ -1,9 +1,17 @@
 import '../../public/Calendar.scss';
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useContext} from "react";
 import {CalendarContext} from "../../AppContext";
 
-const CalendarAgency = ({calendar, user, dispatch}) => {
+const CalendarAgency = ({user}) => {
+    const dispatch = useDispatch();
+
+    const { calendar } = useSelector(state => {
+        return {
+            calendar: state.calendar,
+        };
+    });
+
     const { selectedSlots } = calendar;
 
     const {setSlotSectionStyles} = useContext(CalendarContext);
@@ -38,10 +46,4 @@ const CalendarAgency = ({calendar, user, dispatch}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        calendar: state.calendar,
-    };
-}
-
-export default connect(mapStateToProps)(CalendarAgency);
+export default CalendarAgency;

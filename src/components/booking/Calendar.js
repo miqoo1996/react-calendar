@@ -3,11 +3,20 @@ import CalendarContent from "./CalendarContent";
 import CalendarRightSide from "./CalendarRightSide";
 import {CalendarContext} from "../../AppContext";
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 
-const Calendar = ({agencies, calendar, selectedAgencies}) => {
+const Calendar = ({selectedAgencies}) => {
+    const dispatch = useDispatch();
+
+    const { calendar, agencies } = useSelector(state => {
+        return {
+            calendar: state.calendar,
+            agencies: state.agencies,
+        };
+    });
+
     const users = agencies?.items || [];
 
     const { selectedSlots, activeDate, timeZoneName } = calendar;
@@ -45,7 +54,7 @@ const Calendar = ({agencies, calendar, selectedAgencies}) => {
     };
 
     return (
-        <CalendarContext.Provider value={{users, selectedAgencies, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles}}>
+        <CalendarContext.Provider value={{users, selectedAgencies, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles, calendar}}>
             <section className="calendar-wrapper">
                 <div className="page-details">
                     <h1 className="page-title">Book a call</h1>
@@ -167,11 +176,4 @@ const Calendar = ({agencies, calendar, selectedAgencies}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        calendar: state.calendar,
-        agencies: state.agencies,
-    };
-}
-
-export default connect(mapStateToProps)(Calendar);
+export default Calendar;

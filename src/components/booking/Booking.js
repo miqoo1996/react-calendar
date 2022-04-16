@@ -1,6 +1,6 @@
 import {useParams} from "react-router";
 import Calendar from "./Calendar";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useLayoutEffect} from "react";
 
 // TODO fetch items from API
@@ -91,7 +91,16 @@ const data = [
     },
 ];
 
-const Booking = ({dispatch, selectedAgencies}) => {
+const Booking = () => {
+    const dispatch = useDispatch();
+
+    const { selectedAgencies } = useSelector(state => {
+        return {
+            calendar: state.calendar,
+            selectedAgencies: state.agencies.selectedAgencies,
+        };
+    });
+
     let { ids } = useParams();
 
     ids = ids.split(',');
@@ -109,11 +118,4 @@ const Booking = ({dispatch, selectedAgencies}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        calendar: state.calendar,
-        selectedAgencies: state.agencies.selectedAgencies,
-    };
-}
-
-export default connect(mapStateToProps)(Booking);
+export default Booking;

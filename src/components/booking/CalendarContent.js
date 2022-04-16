@@ -1,12 +1,20 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const now = new Date();
 
 const currentMonthActiveDay = GlobalHelper.getDayFromDate(now);
 
-const CalendarContent = ({dispatch}) => {
+const CalendarContent = () => {
+    const dispatch = useDispatch();
+
+    const { calendar } = useSelector(state => {
+        return {
+            calendar: state.calendar,
+        };
+    });
+
     let [emptyItems, disabledItems, availableItems] = [[], [], []];
 
     const onChangeDayHandler = (i) => {
@@ -88,10 +96,4 @@ const CalendarContent = ({dispatch}) => {
     );
 }
 
-const mapStateToProps = (state) => {
-  return {
-      calendar: state.calendar,
-  };
-}
-
-export default connect(mapStateToProps)(CalendarContent);
+export default CalendarContent;
