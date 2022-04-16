@@ -2,6 +2,7 @@ import '../../public/Calendar.scss';
 import {useDispatch, useSelector} from "react-redux";
 import {useContext} from "react";
 import {CalendarContext} from "../../AppContext";
+import GlobalHelper from "../../Helpers/GlobalHelper";
 
 const CalendarAgency = ({user}) => {
     const dispatch = useDispatch();
@@ -12,13 +13,17 @@ const CalendarAgency = ({user}) => {
         };
     });
 
+    GlobalHelper.date = new Date(calendar.activeDate);
+
     const { selectedSlots } = calendar;
 
     const {setSlotSectionStyles} = useContext(CalendarContext);
 
     const { availability } = user;
 
-    console.log(availability); // TODO work on this part.
+    const weekdaysAvailable = availability.weekdaysAvailable.indexOf(GlobalHelper.getWeekdayFromDate().toLowerCase()) !== -1 ? availability.weekdaysAvailable : [];
+
+    const hoursData = weekdaysAvailable.length ? availability.working_time_diff.hoursData : [];
 
     return (
         <div className="calendar-agency-item">
@@ -30,21 +35,22 @@ const CalendarAgency = ({user}) => {
             </div>
 
             <div className="calendar-available-slots">
-                <div className={"available-slot " + (selectedSlots?.[user.id] === "7:00pm" ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: "7:00pm"}}) && setSlotSectionStyles({})}>
-                    <a
-                        className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
-                        data-testid="time"
-                        href="#">7:00pm</a>
-                </div>
-
-                <div className={"available-slot " + (selectedSlots?.[user.id] === "8:00pm" ? 'active' : '')}
-                     onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: "8:00pm"}}) && setSlotSectionStyles({})}>
-                    <a
-                        className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
-                        data-testid="time"
-                        href="#">8:00pm</a>
-                </div>
+                {hoursData.length ? hoursData.map((time, key) => {
+                    return (
+                        <div key={key} className={"available-slot " + (selectedSlots?.[user.id] === time ? 'active' : '')}
+                             onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: time}}) && setSlotSectionStyles({})}>
+                            <a
+                                className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
+                                data-testid="time"
+                                href="#">{time}</a>
+                        </div>
+                    );
+                }) : (
+                    <div>
+                        <small><i>no available slots</i></small>
+                        <hr />
+                    </div>
+                )}
             </div>
         </div>
     );
