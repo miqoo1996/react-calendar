@@ -16,6 +16,10 @@ const CalendarAgency = ({user}) => {
 
     const {setSlotSectionStyles} = useContext(CalendarContext);
 
+    const { availability } = user;
+
+    console.log(availability); // TODO work on this part.
+
     return (
         <div className="calendar-agency-item">
             <div className="calendar-agency-item-content">
