@@ -1,7 +1,7 @@
-const initialState = {selectedAgencies: [], items: []};
+const initialState = {selectedAgencies: [], items: [], event: {}, pagination: {}};
 
 const AgencyReducer = (state = initialState, action) => {
-    let {selectedAgencies, items}  = state;
+    let {selectedAgencies, items, event, pagination}  = state;
 
     selectedAgencies = selectedAgencies.filter(id => id != action.payload.id);
 
@@ -17,6 +17,12 @@ const AgencyReducer = (state = initialState, action) => {
         if (action.payload?.items) {
             items = action.payload.items;
         }
+        if (action.payload?.event) {
+            event = action.payload.event;
+        }
+        if (action.payload?.pagination) {
+            pagination = action.payload.pagination;
+        }
         if (action.payload?.selectedAgencies) {
             selectedAgencies = action.payload?.selectedAgencies;
         }
@@ -25,6 +31,8 @@ const AgencyReducer = (state = initialState, action) => {
     return {
         ...state,
         selectedAgencies,
+        event,
+        pagination,
         items,
     };
 };

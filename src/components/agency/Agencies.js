@@ -18,92 +18,11 @@ const Agencies = () => {
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
-        dispatch({type: "update-items", payload: {items: [
-                    {
-                        id: 1,
-                        name: "Jilian Erics, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Licensed therapist with 10 years of experience",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/aurora_bedford.jpg",
-                    },
-                    {
-                        id: 2,
-                        name: "Lawrence Hunter, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Cardiologist from California focusing on fitness and performance",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/craig_kistler.jpg",
-                    },
-                    {
-                        id: 3,
-                        name: "Tam Warner, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Dermatologist from United Kingdom. Book me for a telemedicine session",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/hannah_alvarez.jpg",
-                    },
-                    {
-                        id: 4,
-                        name: "Jilian Erics, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Licensed therapist with 10 years of experience",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/aurora_bedford.jpg",
-                    },
-                    {
-                        id: 5,
-                        name: "Lawrence Hunter, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Cardiologist from California focusing on fitness and performance",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/craig_kistler.jpg",
-                    },
-                    {
-                        id: 6,
-                        name: "Tam Warner, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Dermatologist from United Kingdom. Book me for a telemedicine session",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/hannah_alvarez.jpg",
-                    },
-                    {
-                        id: 7,
-                        name: "Jilian Erics, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Licensed therapist with 10 years of experience",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/aurora_bedford.jpg",
-                    },
-                    {
-                        id: 8,
-                        name: "Lawrence Hunter, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Cardiologist from California focusing on fitness and performance",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/craig_kistler.jpg",
-                    },
-                    {
-                        id: 9,
-                        name: "Tam Warner, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Dermatologist from United Kingdom. Book me for a telemedicine session",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/hannah_alvarez.jpg",
-                    },
-                    {
-                        id: 10,
-                        name: "Jilian Erics, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Licensed therapist with 10 years of experience",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/aurora_bedford.jpg",
-                    },
-                    {
-                        id: 11,
-                        name: "Lawrence Hunter, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Cardiologist from California focusing on fitness and performance",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/craig_kistler.jpg",
-                    },
-                    {
-                        id: 12,
-                        name: "Tam Warner, MD",
-                        email: 'eric@outbound.consulting',
-                        description: "Dermatologist from United Kingdom. Book me for a telemedicine session",
-                        image: "https://cxl.com/wp-content/uploads/2016/03/hannah_alvarez.jpg",
-                    },
-                ]}});
+        axios.get(`${apiUrl}/agencies`).then((response) => {
+            const {users, event, pagination} = response.data;
+
+            dispatch({type: "update-items", payload: {items: users, event, pagination}});
+        });
     }, []);
 
     return (
@@ -120,7 +39,7 @@ const Agencies = () => {
                             key={key}
                             id={item.id}
                             name={item.name}
-                            description={item.description}
+                            description={item.bio}
                             image={item.image}
                         />
                     )

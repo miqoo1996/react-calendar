@@ -10,10 +10,11 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 const Calendar = ({selectedAgencies}) => {
     const dispatch = useDispatch();
 
-    const { calendar, agencies } = useSelector(state => {
+    const { calendar, agencies, event } = useSelector(state => {
         return {
             calendar: state.calendar,
             agencies: state.agencies,
+            event: state.agencies.event,
         };
     });
 
@@ -26,6 +27,8 @@ const Calendar = ({selectedAgencies}) => {
     const [switchToForm, setSwitchToForm] = useState(false);
 
     const [slotSectionStyles, setSlotSectionStyles] = useState({});
+
+    const [showAdditionalGuestsInput, setShowAdditionalGuestsInput] = useState(false);
 
     const slotsWarningStyle = {
         border: "dashed red 3px",
@@ -67,10 +70,10 @@ const Calendar = ({selectedAgencies}) => {
                         <div className="px-4 sm:flex sm:p-4 sm:py-5">
                             <div className="sm:w-1/2 sm:border-r sm:dark:border-gray-700">
                                 <h2 className="font-cal text-bookinglight mt-2 font-medium dark:text-gray-300">
-                                    Outbound Consulting, Inc.
+                                    {event.title}
                                 </h2>
                                 <h1 className="text-bookingdark mb-4 text-xl font-semibold dark:text-white">
-                                    Consulting Call
+                                    {event.extra}
                                 </h1>
 
                                 <p className="text-bookinglight mb-2 dark:text-white">
@@ -81,7 +84,7 @@ const Calendar = ({selectedAgencies}) => {
                                               d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                               clipRule="evenodd" />
                                     </svg>
-                                    This is an opt-in meeting, which means we may reject your booking request and follow up by email for more details. Tell us more about yourself in the "additional notes"
+                                    {event.description}
                                 </p>
 
                                 <p className="text-bookinglight mb-2 dark:text-white">
@@ -92,7 +95,7 @@ const Calendar = ({selectedAgencies}) => {
                                               d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                                               clipRule="evenodd" />
                                     </svg>
-                                    60 Minutes
+                                    {event.duratiion} Minutes
                                 </p>
 
                                 <p className="text-bookinghighlight mb-4">
@@ -127,9 +130,14 @@ const Calendar = ({selectedAgencies}) => {
                                         </div>
                                     </div>
                                     <div className="mb-4">
-                                        <label htmlFor="guests" className="mb-1 block text-sm font-medium hover:cursor-pointer dark:text-white">
-                                            + Additional Guests
+                                        <label onClick={e => setShowAdditionalGuestsInput(!showAdditionalGuestsInput)} htmlFor="guests" className="mb-1 block text-sm font-medium hover:cursor-pointer dark:text-white">
+                                            {showAdditionalGuestsInput ? "-" : "+"} Additional Guests
                                         </label>
+                                        {showAdditionalGuestsInput && <div className="mt-1">
+                                            <input name="guests" type="text" id="guests"
+                                                   className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
+                                                   placeholder="example1@example.com, example2@example.com"/>
+                                        </div>}
                                     </div>
                                     <div className="mb-4">
                                         <label htmlFor="notes" className="mb-1 block text-sm font-medium text-gray-700 dark:text-white">

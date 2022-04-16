@@ -1,18 +1,18 @@
 import {useSelector} from "react-redux";
 
 const CalendarLeftSide = () => {
-    const { calendar } = useSelector(state => {
+    const { calendar, event } = useSelector(state => {
         return {
             calendar: state.calendar,
             agencies: state.agencies,
+            event: state.agencies.event,
         };
     });
 
     return (
         <div className="pr-8 sm:border-r sm:dark:border-gray-700 md:flex md:flex-col sm:w-1/3">
-            <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">Outbound Consulting, Inc.</h2>
-            <h1 className="font-cal text-bookingdark mb-4 text-3xl font-semibold dark:text-white">Consulting
-                Call</h1>
+            <h2 className="dark:text-bookinglight mt-3 font-medium text-gray-500">{event.title}</h2>
+            <h1 className="font-cal text-bookingdark mb-4 text-3xl font-semibold dark:text-white">{event.extra}</h1>
 
             <p className="text-bookinglight mb-1 -ml-2 px-2 py-1">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -21,7 +21,7 @@ const CalendarLeftSide = () => {
                           d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
                           clipRule="evenodd" />
                 </svg>
-                60 Minutes
+                {event.duratiion} Minutes
             </p>
 
             <div data-state="closed">
@@ -44,9 +44,7 @@ const CalendarLeftSide = () => {
                 </button>
                 <div data-state="closed" id="radix-460" hidden>&nbsp;</div>
 
-                <p className="mt-3 mb-8 text-gray-600 dark:text-gray-200">This is an opt-in meeting,
-                    which means we may reject your booking request and follow up by email for more
-                    details. Tell us more about yourself in the "additional notes"</p>
+                <p className="mt-3 mb-8 text-gray-600 dark:text-gray-200">{event.description}</p>
             </div>
         </div>
     );
