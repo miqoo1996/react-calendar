@@ -1,10 +1,14 @@
-import {useLayoutEffect} from "react";
+import {useContext, useLayoutEffect} from "react";
+import axios from "axios";
 import '../../public/Agencies.scss';
 import Agency from './Agency';
 import AgencyBottom from './AgencyBottom';
 import {connect} from "react-redux";
+import {AppContext} from "../../AppContext";
 
 const Agencies = ({dispatch, agencies}) => {
+    const { apiUrl } = useContext(AppContext);
+
     useLayoutEffect(() => {
         // TODO should come from API.
          dispatch({type: "update-items", payload: {items: [

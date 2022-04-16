@@ -3,13 +3,13 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Agencies from './components/agency/Agencies';
 import Booking from "./components/booking/Booking";
 import PageNoMatch from "./PageNoMatch";
-import {AppContext} from "./AppContext";
+import {AppContext, AppContextDefaultValue} from "./AppContext";
 import {connect} from "react-redux";
 
 function App() {
     return (
       <Router>
-          <AppContext.Provider value="">
+          <AppContext.Provider value={AppContextDefaultValue}>
               <div className="App">
                   <div className="container-fluid">
                       <Routes>
