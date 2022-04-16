@@ -4,7 +4,6 @@ import Agencies from './components/agency/Agencies';
 import Booking from "./components/booking/Booking";
 import PageNoMatch from "./PageNoMatch";
 import {AppContext, AppContextDefaultValue} from "./AppContext";
-import {connect} from "react-redux";
 
 function App() {
     return (
@@ -13,8 +12,8 @@ function App() {
               <div className="App">
                   <div className="container-fluid">
                       <Routes>
-                          <Route path="/" element={<Agencies />} />
-                          <Route path="/book-call/:ids" element={<Booking />} />
+                          <Route exact path="/" element={<Agencies />} />
+                          <Route exact path="/book-call/:ids" element={<Booking />} />
                           <Route path="*" element={<PageNoMatch><h1 className="text-center page-title top-50">404 Page Not Found.</h1></PageNoMatch>} />
                       </Routes>
                   </div>
@@ -24,10 +23,4 @@ function App() {
   );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        agencies: state.agencies,
-    };
-}
-
-export default connect(mapStateToProps)(App);
+export default App;
