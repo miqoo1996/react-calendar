@@ -21,9 +21,9 @@ const CalendarAgency = ({user}) => {
 
     const { availability } = user;
 
-    const weekdaysAvailable = availability.weekdaysAvailable.indexOf(GlobalHelper.getWeekdayFromDate().toLowerCase()) !== -1 ? availability.weekdaysAvailable : [];
+    const weekdaysAvailable = availability?.weekdaysAvailable?.indexOf(GlobalHelper.getWeekdayFromDate().toLowerCase()) !== -1 ? availability?.weekdaysAvailable : [];
 
-    const hoursData = weekdaysAvailable.length ? availability.working_time_diff.hoursData : [];
+    const hoursData = weekdaysAvailable?.length ? availability.working_time_diff.hoursData : [];
 
     return (
         <div className="calendar-agency-item">

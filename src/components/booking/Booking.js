@@ -1,7 +1,7 @@
 import {useParams} from "react-router";
 import Calendar from "./Calendar";
 import {useDispatch, useSelector} from "react-redux";
-import {useContext, useEffect, useLayoutEffect} from "react";
+import {useContext, useLayoutEffect} from "react";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
 
@@ -36,8 +36,6 @@ const Booking = () => {
 
     useLayoutEffect(() => {
         updateSelectedAgenciesDetails();
-
-        console.log("yyyyy");
     }, [calendar.activeDate]);
 
     return (
