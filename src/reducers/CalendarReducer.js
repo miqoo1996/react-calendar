@@ -14,6 +14,7 @@ const CalendarReducer = (state = initialState, action) => {
     }
 
     if (action.type === 'change-active-date') {
+        state.selectedSlots = {};
         state.activeDate = action.payload.activeDate;
     }
 

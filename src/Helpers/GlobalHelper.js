@@ -13,7 +13,7 @@ const GlobalHelper = {
         return GlobalHelper.date = new Date(GlobalHelper.date.setDate(number));
     },
 
-    changeMonth: (number = 1) => {
+    changeMonth: (number = 1, getDate = false) => {
         const now = new Date();
 
         const newDate = new Date(GlobalHelper.date.setMonth(GlobalHelper.date.getMonth() + number));
@@ -25,7 +25,7 @@ const GlobalHelper = {
             GlobalHelper.changeDay(1);
         }
 
-        return GlobalHelper.date;
+        return getDate ? GlobalHelper.date : GlobalHelper;
     },
 
     isCurrentMonthActive: () => {

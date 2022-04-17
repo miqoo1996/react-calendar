@@ -50,7 +50,7 @@ const CalendarContent = () => {
                 {GlobalHelper.getShortDate()}
                 <div className="w-1/2 text-right dark:text-gray-400">
                     <button
-                        onClick={e => !GlobalHelper.isCurrentMonthActive() && dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(-1)}})}
+                        onClick={e => !GlobalHelper.isCurrentMonthActive() && dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(-1, true)}})}
                         className="group p-1 ltr:mr-2 rtl:ml-2 text-bookinglighter dark:text-gray-600"
                         data-testid="decrementMonth" disabled={GlobalHelper.isCurrentMonthActive()}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
@@ -62,7 +62,7 @@ const CalendarContent = () => {
                         </svg>
                     </button>
                     <button
-                        onClick={e => dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(1)}})}
+                        onClick={e => dispatch({type: 'change-active-date', payload: {activeDate: GlobalHelper.changeMonth(1).changeDay(1)}})}
                         className="group p-1" data-testid="incrementMonth">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                              aria-hidden="true"
