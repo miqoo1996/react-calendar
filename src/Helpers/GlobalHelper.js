@@ -12,7 +12,7 @@ const GlobalHelper = {
     getUTCDate: (date) => {
         date = date || GlobalHelper.date;
 
-        return new Date(date.toLocaleString('default', { }));
+        return new Date(date.toUTCString('default', { }));
     },
 
     changeDay: (number = 1) => {
