@@ -60,7 +60,12 @@ const Calendar = ({selectedAgencies}) => {
 
         formData.append('event_id', event.id);
 
-        formData.append('calendar', JSON.stringify(calendar));
+        formData.append('calendar', JSON.stringify({
+            ...calendar,
+            activeDate: activeDate.getFullYear() + '-' +
+                ('00' + (activeDate.getMonth()+1)).slice(-2) + '-' +
+                ('00' + activeDate.getDate()).slice(-2)
+        }));
 
         selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
 
