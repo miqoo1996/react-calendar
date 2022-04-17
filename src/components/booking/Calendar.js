@@ -60,9 +60,9 @@ const Calendar = ({selectedAgencies}) => {
 
         formData.append('event_id', event.id);
 
-        const activeDate = calendar.activeDate.getFullYear() + '-' +
-            ('00' + (calendar.activeDate.getMonth()+1)).slice(-2) + '-' +
-            ('00' + calendar.activeDate.getDate()).slice(-2);
+        const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
+            ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
+            ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
         formData.append('calendar', JSON.stringify({
             ...calendar,

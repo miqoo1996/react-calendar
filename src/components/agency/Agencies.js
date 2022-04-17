@@ -5,6 +5,7 @@ import Agency from './Agency';
 import AgencyBottom from './AgencyBottom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppContext} from "../../AppContext";
+import GlobalHelper from "../../Helpers/GlobalHelper";
 
 const Agencies = () => {
     const dispatch = useDispatch();
@@ -19,9 +20,9 @@ const Agencies = () => {
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
-        const activeDate = calendar.activeDate.getFullYear() + '-' +
-            ('00' + (calendar.activeDate.getMonth()+1)).slice(-2) + '-' +
-            ('00' + calendar.activeDate.getDate()).slice(-2);
+        const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
+            ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
+            ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
         axios.get(`${apiUrl}/agencies?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
