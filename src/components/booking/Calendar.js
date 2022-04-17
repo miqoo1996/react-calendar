@@ -60,16 +60,18 @@ const Calendar = ({selectedAgencies}) => {
 
         formData.append('event_id', event.id);
 
+        const activeDate = calendar.activeDate.getFullYear() + '-' +
+            ('00' + (calendar.activeDate.getMonth()+1)).slice(-2) + '-' +
+            ('00' + calendar.activeDate.getDate()).slice(-2);
+
         formData.append('calendar', JSON.stringify({
             ...calendar,
-            activeDate: activeDate.getFullYear() + '-' +
-                ('00' + (activeDate.getMonth()+1)).slice(-2) + '-' +
-                ('00' + activeDate.getDate()).slice(-2)
+            activeDate,
         }));
 
         selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
 
-        axios.post(`${apiUrl}/book-call`, formData).then(response => {
+        axios.post(`${apiUrl}/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
             const { success, errors } = response.data;
 
             if (success) {
