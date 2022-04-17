@@ -1,7 +1,7 @@
 import GlobalHelper from "../Helpers/GlobalHelper";
 
 const initialState = {
-    activeDate: GlobalHelper.date,
+    activeDate: GlobalHelper.getUTCDate(),
     timeZoneName: Intl.DateTimeFormat().resolvedOptions().timeZone,
     selectedSlots: {},
 };
