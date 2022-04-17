@@ -13,6 +13,8 @@ const Calendar = ({selectedAgencies}) => {
     const dispatch = useDispatch();
 
     const { calendar, agencies, event } = useSelector(state => {
+        // console.log(state);
+
         return {
             calendar: state.calendar,
             agencies: state.agencies,
@@ -56,9 +58,11 @@ const Calendar = ({selectedAgencies}) => {
 
         const formData = new FormData(e.currentTarget);
 
-        selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
-
         formData.append('event_id', event.id);
+
+        formData.append('calendar', JSON.stringify(calendar));
+
+        selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
 
         axios.post(`${apiUrl}/book-call`, formData).then(response => {
             const { success, errors } = response.data;
