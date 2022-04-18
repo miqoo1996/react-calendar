@@ -17,6 +17,8 @@ const Agencies = () => {
         };
     });
 
+    console.log(agencies);
+
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
@@ -27,7 +29,7 @@ const Agencies = () => {
         axios.get(`${apiUrl}/agencies?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
 
-            dispatch({type: "update-items", payload: {items: users, event, pagination}});
+            dispatch({type: "update-items", payload: {items: users, selectedAgencies: [], event, pagination}});
         });
     }, []);
 
