@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 const weekDayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
 const shortWeekDayNames = [ "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" ];
@@ -75,22 +77,22 @@ const GlobalHelper = {
 
     getMonthFromDate: (date) => {
         date = date || GlobalHelper.date;
-        return GlobalHelper.getUTCDate(date).toLocaleString('default', { month: 'long'}); // eg. April
+        return moment(date).format('MMMM'); // eg. April
     },
 
     getWeekdayFromDate: (date) => {
         date = date || GlobalHelper.date;
-        return GlobalHelper.getUTCDate(date).toLocaleString('default', { weekday:'long'}); // eg. Saturday
+        return moment(date).format('dddd'); // eg. Saturday
     },
 
     getDayFromDate: (date) => {
         date = date || GlobalHelper.date;
-        return parseInt(GlobalHelper.getUTCDate(date).toLocaleString('default', {day:'numeric'})); // eg. 11
+        return parseInt(moment(date).format('D')); // eg. 11
     },
 
     getYearFromDate: (date) => {
         date = date || GlobalHelper.date;
-        return GlobalHelper.getUTCDate(date).toLocaleString('default', {year:'numeric'}); // eg. 2022
+        return moment(date).format('YYYY'); // eg. 2022
     },
 
     getFirsEmptyDaysCount: (date) => {
