@@ -113,18 +113,19 @@ const GlobalHelper = {
     getShortDate: () => {
         return <span
             className="w-1/2 dark:text-white"><strong
-            className="text-bookingdarker dark:text-white">{monthNames[GlobalHelper.getUTCDate().getMonth()]}</strong> <span
-            className="text-bookinglight">{GlobalHelper.getUTCDate().getFullYear()}</span></span>
+            className="text-bookingdarker dark:text-white">{GlobalHelper.getWeekdayFromDate()}</strong> <span
+            className="text-bookinglight">{GlobalHelper.getYearFromDate()}</span></span>
     },
 
     getCalendarWeekText: () => {
         return <div className="mb-4 text-left text-lg font-light text-gray-600"><span
             className="text-bookingdarker w-1/2 dark:text-white"><strong>{GlobalHelper.getWeekdayFromDate()}</strong><span
-            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {monthNames[GlobalHelper.getUTCDate().getMonth()]}</span></span></div>;
+            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {GlobalHelper.getMonthFromDate()}</span></span></div>;
     },
 
     getMonthDaysData: () => {
-        return  GlobalHelper.getDaysInMonth(GlobalHelper.getUTCDate().getMonth(), GlobalHelper.getUTCDate().getFullYear()).map(date => {
+        const M = moment(GlobalHelper.date).format('M');
+        return GlobalHelper.getDaysInMonth(parseInt(M), GlobalHelper.getYearFromDate()).map(date => {
             return {
                 day: GlobalHelper.getDayFromDate(date),
                 name: GlobalHelper.getWeekdayFromDate(date),
