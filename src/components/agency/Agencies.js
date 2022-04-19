@@ -33,10 +33,6 @@ const Agencies = () => {
     return (
         <div className="agency-teams" style={{ marginLeft: "6%" }}>
             <Team key={0} id={1} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
-            <Team key={1} id={2} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
-            <Team key={2} id={3} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
-            <Team key={3} id={4} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
-            <Team key={4} id={5} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
         </div>
     );
 };
