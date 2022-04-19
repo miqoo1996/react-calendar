@@ -9,6 +9,10 @@ const AgencyReducer = (state = initialState, action) => {
         };
     }
 
+    if (action.type === 'update-company') {
+        selectedUsers = []; // rollback on company update
+    }
+
     if (action.type === 'remove-selected-user') {
         selectedUsers = selectedUsers.filter(user => user.id.toString() !== action.payload.id.toString());
     }

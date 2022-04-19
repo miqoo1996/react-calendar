@@ -117,10 +117,14 @@ const GlobalHelper = {
             className="text-bookinglight">{GlobalHelper.getYearFromDate()}</span></span>
     },
 
-    getCalendarWeekText: () => {
-        return <div className="mb-4 text-left text-lg font-light text-gray-600"><span
-            className="text-bookingdarker w-1/2 dark:text-white"><strong>{GlobalHelper.getWeekdayFromDate()}</strong><span
-            className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {GlobalHelper.getMonthFromDate()}</span></span></div>;
+    getCalendarWeekText: (props = {}, element = "") => {
+        return <div {...props} className="mb-4 text-left text-lg font-light text-gray-600">
+            <span className="text-bookingdarker w-1/2 dark:text-white">
+                <strong>{GlobalHelper.getWeekdayFromDate()}</strong>
+                <span className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {GlobalHelper.getMonthFromDate()}</span>
+            </span>
+            {element}
+        </div>;
     },
 
     getMonthDaysData: () => {

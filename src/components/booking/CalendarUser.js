@@ -47,10 +47,9 @@ const CalendarUser = ({user}) => {
                         return (
                             <div key={key} className={"available-slot " + (selectedSlots?.[user.id] === time ? 'active' : '')}
                                  onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: time}}) && setSlotSectionStyles({})}>
-                                <a
-                                    className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
-                                    data-testid="time"
-                                    href="#">{time}</a>
+                                <a style={{cursor: "pointer"}}
+                                   className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
+                                   data-testid="time">{time}</a>
                             </div>
                         );
                     }) : (
