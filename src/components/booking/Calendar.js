@@ -9,12 +9,10 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import axios from "axios";
 import {toast} from "react-toastify";
 
-const Calendar = ({selectedAgencies}) => {
+const Calendar = ({selectedUsers}) => {
     const dispatch = useDispatch();
 
     const { calendar, agencies, event } = useSelector(state => {
-        // console.log(state);
-
         return {
             calendar: state.calendar,
             agencies: state.agencies,
@@ -69,9 +67,9 @@ const Calendar = ({selectedAgencies}) => {
             activeDate,
         }));
 
-        selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
+        selectedUsers.map(agent => formData.append('selectedAgencies[]', agent.id));
 
-        axios.post(`${apiUrl}/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
+        axios.post(`${apiUrl}/calendar/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
             const { success, errors } = response.data;
 
             if (success) {
@@ -87,7 +85,7 @@ const Calendar = ({selectedAgencies}) => {
     };
 
     return (
-        <CalendarContext.Provider value={{users, selectedAgencies, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles, calendar}}>
+        <CalendarContext.Provider value={{users, selectedUsers, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles, calendar}}>
             <section className="calendar-wrapper">
                 <div className="page-details">
                     <h1 className="page-title">Book a call</h1>
@@ -95,7 +93,7 @@ const Calendar = ({selectedAgencies}) => {
                 </div>
 
                 {switchToForm ? (
-                    <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl">
+                    <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl__disable_class">
                         <div className="px-4 sm:flex sm:p-4 sm:py-5">
                             {success ? (
                                 <p className="success-message-text">
@@ -196,7 +194,7 @@ const Calendar = ({selectedAgencies}) => {
                     </div>
                 ) : (
                     <>
-                        <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl">
+                        <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl__disable_class">
                             <div className="px-4 sm:flex sm:p-4 sm:py-5">
                                 <CalendarLeftSide />
                                 <CalendarContent />

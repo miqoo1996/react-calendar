@@ -7,12 +7,14 @@ import reportWebVitals from './reportWebVitals';
 import {combineReducers, createStore} from "redux";
 import {CalendarReducer} from "./reducers/CalendarReducer";
 import {AgencyReducer} from "./reducers/AgencyReducer";
+import {CompanyReducer} from "./reducers/CompanyReducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={createStore(combineReducers({
         calendar: CalendarReducer,
         agencies: AgencyReducer,
+        company: CompanyReducer,
     }))}>
         <App />
     </Provider>

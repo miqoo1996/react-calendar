@@ -36,11 +36,25 @@
 
   .agency-image {
     margin-bottom: 8px;
-    max-width: 50px;
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 100%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 100%;
+    }
   }
 
-  .agency-image img {
-    border-radius: 100%;
+  .agency-info {
+    display: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 3.2em;
+    max-width: 370px;
+    white-space: nowrap;
   }
 
   .selected-book-user {
@@ -49,12 +63,26 @@
     gap: 10px;
   }
 
+  .calendar-available-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .calendar-available-slots {
-    width: 80%;
     margin-top: 10px;
     margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 
     .available-slot {
+      & > a {
+        padding: 10px;
+      }
+
       &.active {
         .hover\:text-white {
           --tw-text-opacity: 1;
