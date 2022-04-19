@@ -11,10 +11,10 @@ const Booking = () => {
 
     const dispatch = useDispatch();
 
-    const { selectedUsersData, calendar} = useSelector(state => {
+    const { selectedUsers, calendar} = useSelector(state => {
         return {
             calendar: state.calendar,
-            selectedUsersData: state.agencies?.selectedUsersData || [],
+            selectedUsers: state.agencies?.selectedUsers || [],
         };
     });
 
@@ -30,7 +30,7 @@ const Booking = () => {
         axios.get(`${apiUrl}/agencies?ids=${ids.join(',')}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
 
-            dispatch({type: "update-items", payload: {event, selectedUsersData: users, pagination, selectedUsers: ids}});
+            dispatch({type: "update-items", payload: {event, pagination, selectedUsers: users}});
         });
     };
 
@@ -41,7 +41,7 @@ const Booking = () => {
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
             <div className="top-50 booking-calendar">
-                <Calendar selectedUsers={selectedUsersData} />
+                <Calendar selectedUsers={selectedUsers} />
             </div>
         </div>
     );

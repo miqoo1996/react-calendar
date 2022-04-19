@@ -1,5 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
 @import 'react-toastify/dist/ReactToastify.css';
+@import "Medias";
 
 @tailwind base;
 @tailwind components;
@@ -93,7 +94,7 @@ body {
 }
 
 .booking-calendar {
-  margin: 50px;
+  padding: 20px;
 }
 
 .success-message-text {

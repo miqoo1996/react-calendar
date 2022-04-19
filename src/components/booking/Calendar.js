@@ -13,8 +13,6 @@ const Calendar = ({selectedUsers}) => {
     const dispatch = useDispatch();
 
     const { calendar, agencies, event } = useSelector(state => {
-        // console.log(state);
-
         return {
             calendar: state.calendar,
             agencies: state.agencies,
@@ -95,7 +93,7 @@ const Calendar = ({selectedUsers}) => {
                 </div>
 
                 {switchToForm ? (
-                    <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl">
+                    <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl__disable_class">
                         <div className="px-4 sm:flex sm:p-4 sm:py-5">
                             {success ? (
                                 <p className="success-message-text">
@@ -196,7 +194,7 @@ const Calendar = ({selectedUsers}) => {
                     </div>
                 ) : (
                     <>
-                        <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl">
+                        <div className="bg-white dark:bg-gray-800 sm:dark:border-gray-600 border-bookinglightest rounded-sm md:border max-w-5xl__disable_class">
                             <div className="px-4 sm:flex sm:p-4 sm:py-5">
                                 <CalendarLeftSide />
                                 <CalendarContent />
