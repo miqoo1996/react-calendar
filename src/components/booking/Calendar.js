@@ -69,7 +69,7 @@ const Calendar = ({selectedUsers}) => {
 
         selectedUsers.map(agent => formData.append('selectedAgencies[]', agent.id));
 
-        axios.post(`${apiUrl}/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
+        axios.post(`${apiUrl}/calendar/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
             const { success, errors } = response.data;
 
             if (success) {

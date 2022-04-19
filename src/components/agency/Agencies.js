@@ -23,7 +23,7 @@ const Agencies = () => {
             ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
             ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
-        axios.get(`${apiUrl}/agencies?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
+        axios.get(`${apiUrl}/user?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
 
             dispatch({type: "update-items", payload: {items: users, selectedUsers: [], event, pagination}});
