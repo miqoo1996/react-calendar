@@ -1,4 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
+import {toast} from "react-toastify";
 
 const Agency = ({id, name, description, image}) => {
     const dispatch = useDispatch();
@@ -12,10 +13,14 @@ const Agency = ({id, name, description, image}) => {
     const selected = selectedAgencies.indexOf(id) !== -1;
 
     const onAgencyClickHandle = (id) => {
-        if (!selected) {
-            dispatch({type: 'add', payload: {id}});
+        if (selectedAgencies.length <= 4) {
+            if (!selected) {
+                dispatch({type: 'add', payload: {id}});
+            } else {
+                dispatch({type: 'remove', payload: {id}});
+            }
         } else {
-            dispatch({type: 'remove', payload: {id}});
+            toast("You can select maximum 5 items.");
         }
     };
 
