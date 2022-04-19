@@ -4,7 +4,7 @@ import {useContext} from "react";
 import {CalendarContext} from "../../AppContext";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 
-const CalendarAgency = ({user}) => {
+const CalendarUser = ({user}) => {
     const dispatch = useDispatch();
 
     const { calendar } = useSelector(state => {
@@ -56,4 +56,4 @@ const CalendarAgency = ({user}) => {
     );
 }
 
-export default CalendarAgency;
+export default CalendarUser;

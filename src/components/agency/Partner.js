@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-const Agency = ({id, name, description, image}) => {
+const Partner = ({id, name, description, image}) => {
     const dispatch = useDispatch();
 
     const { selectedAgencies } = useSelector(state => {
@@ -41,4 +41,4 @@ const Agency = ({id, name, description, image}) => {
     );
 }
 
-export default Agency;
+export default Partner;

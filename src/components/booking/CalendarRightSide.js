@@ -2,7 +2,7 @@ import '../../public/Calendar.scss';
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import {CalendarContext} from "../../AppContext";
 import {useContext} from "react";
-import CalendarAgency from "./CalendarAgency";
+import CalendarUser from "./CalendarUser";
 
 const CalendarRightSide = () => {
     const {calendar, selectedAgencies, slotSectionStyles} = useContext(CalendarContext);
@@ -16,7 +16,7 @@ const CalendarRightSide = () => {
             <div style={slotSectionStyles} className="slots-section flex-grow overflow-y-auto md:h-[364px]">
                 {selectedAgencies?.map((user, key) => {
                     return (
-                        <CalendarAgency key={key} user={user} />
+                        <CalendarUser key={key} user={user} />
                     );
                 })}
             </div>

@@ -1,7 +1,7 @@
 import {useContext, useLayoutEffect} from "react";
 import axios from "axios";
 import '../../public/Agencies.scss';
-import Agency from './Agency';
+import Partner from './Partner';
 import AgencyBottom from './AgencyBottom';
 import {useDispatch, useSelector} from "react-redux";
 import {AppContext} from "../../AppContext";
@@ -43,7 +43,7 @@ const Agencies = () => {
             <section className="agencies top-50">
                 {agencies?.items?.map((item, key) => {
                     return (
-                        <Agency
+                        <Partner
                             key={key}
                             id={item.id}
                             name={item.name}
