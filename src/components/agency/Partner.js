@@ -1,27 +1,32 @@
 import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
-const Partner = ({id, name, description, image}) => {
+const Partner = (user) => {
+    const {teamId, id, name, bio, image} = user;
+
     const dispatch = useDispatch();
 
-    const { selectedUsers, userStored, user } = useSelector(state => {
+    const { selectedUsers, userStored } = useSelector(state => {
         return {
-            user: state.agencies?.items?.find(u => u.id.toString() === id.toString()),
-            userStored: state.agencies?.selectedUsers?.find(u => u.id.toString() === id.toString()),
-            users: state.agencies?.items || [],
-            selectedUsers: state.agencies?.selectedUsers || [],
+            users: state.agencies.items,
+            selectedUsers: state.agencies.selectedUsers.length
+                ? state.agencies.selectedUsers.filter(u => u.teamId === parseInt(teamId))
+                : [],
+            userStored: state.agencies.selectedUsers.length
+                ? state.agencies.selectedUsers.find(u => u.id === parseInt(id))
+                : null,
         };
     });
 
     const onAgencyClickHandle = () => {
-        if (selectedUsers.length <= 4) {
-            if (!userStored) {
+        if (!userStored) {
+            if (selectedUsers.length <= 4) {
                 dispatch({type: 'add-selected-user', payload: user});
             } else {
-                dispatch({type: 'remove-selected-user', payload: user});
+                toast("You can select maximum 5 items.");
             }
         } else {
-            toast("You can select maximum 5 items.");
+            dispatch({type: 'remove-selected-user', payload: user});
         }
     };
 
@@ -34,10 +39,10 @@ const Partner = ({id, name, description, image}) => {
             </svg>
 
             <div className="agency-image">
-                <img src={image} />
+                <img src={image} alt={name} />
             </div>
             <p style={{marginBottom: "10px"}}><strong>{name}</strong></p>
-            <p className="info-text">{description}</p>
+            <p className="info-text">{bio}</p>
         </div>
     );
 }

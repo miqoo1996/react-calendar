@@ -18,7 +18,7 @@ const Booking = () => {
         };
     });
 
-    let { ids } = useParams();
+    let { ids, eventId } = useParams();
 
     ids = ids.split(',');
 
@@ -27,7 +27,7 @@ const Booking = () => {
             ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
             ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
-        axios.get(`${apiUrl}/user?ids=${ids.join(',')}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
+        axios.get(`${apiUrl}/user?ids=${ids.join(',')}&eventId=${eventId}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
 
             dispatch({type: "update-items", payload: {event, pagination, selectedUsers: users}});

@@ -1,7 +1,9 @@
 import Partner from "./Partner";
 import AgencyBottom from "./AgencyBottom";
 
-const Team = ({id, users, title, description}) => {
+const Team = (team) => {
+    const {id, users, title, description} = team;
+
     if (!users.length) {
         return "";
     }
@@ -14,19 +16,9 @@ const Team = ({id, users, title, description}) => {
             </div>
 
             <section className="agencies top-50">
-                {users?.map((item, key) => {
-                    return (
-                        <Partner
-                            key={key}
-                            id={item.id}
-                            name={item.name}
-                            description={item.bio}
-                            image={item.image}
-                        />
-                    )
-                })}
+                {users.map((item, key) => <Partner key={key} teamId={id} {...item} />)}
 
-                <AgencyBottom />
+                <AgencyBottom {...team} />
             </section>
         </div>
     );

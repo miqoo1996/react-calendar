@@ -6,13 +6,17 @@ import {AppContext} from "../../AppContext";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import Team from "./Team";
 
+// TODO should be taken from request params
+const company_id = 2;
+
 const Agencies = () => {
     const dispatch = useDispatch();
 
-    const { agencies, calendar } = useSelector(state => {
+    const { teams, calendar } = useSelector(state => {
         return {
             calendar: state.calendar,
-            agencies: state.agencies,
+            company: state.company,
+            teams: state.company.teams,
         };
     });
 
@@ -23,16 +27,14 @@ const Agencies = () => {
             ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
             ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
-        axios.get(`${apiUrl}/user?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
-            const {users, event, pagination} = response.data;
-
-            dispatch({type: "update-items", payload: {items: users, selectedUsers: [], event, pagination}});
+        axios.get(`${apiUrl}/company/find?id=${company_id}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
+            dispatch({type: "update-company", payload: response.data});
         });
     }, []);
 
     return (
         <div className="agency-teams" style={{ marginLeft: "6%" }}>
-            <Team key={0} id={1} title="Better Help Therapy" description="Book a time with one of our licensed professional therapists online today!" users={agencies.items} />
+            {teams.map((team, key) => <Team key={key} {...team} />)}
         </div>
     );
 };
