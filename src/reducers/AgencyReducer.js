@@ -1,7 +1,7 @@
-const initialState = {selectedAgencies: [], selectedUsersData: [], items: [], event: {}, pagination: {}};
+const initialState = {selectedUsers: [], selectedUsersData: [], items: [], event: {}, pagination: {}};
 
 const AgencyReducer = (state = initialState, action) => {
-    let {selectedAgencies, items, selectedUsersData, event, pagination}  = state;
+    let {selectedUsers, items, selectedUsersData, event, pagination}  = state;
 
     if (action.type === 'remove-agencies') {
         return {
@@ -9,10 +9,10 @@ const AgencyReducer = (state = initialState, action) => {
         };
     }
 
-    selectedAgencies = selectedAgencies.filter(id => id != action.payload.id);
+    selectedUsers = selectedUsers.filter(id => id != action.payload.id);
 
     if (action.type === 'add') {
-        selectedAgencies.push(action.payload.id);
+        selectedUsers.push(action.payload.id);
     }
 
     if (action.type === 'update-items') {
@@ -28,14 +28,14 @@ const AgencyReducer = (state = initialState, action) => {
         if (action.payload?.pagination) {
             pagination = action.payload.pagination;
         }
-        if (action.payload?.selectedAgencies) {
-            selectedAgencies = action.payload?.selectedAgencies;
+        if (action.payload?.selectedUsers) {
+            selectedUsers = action.payload?.selectedUsers;
         }
     }
 
     return {
         ...state,
-        selectedAgencies,
+        selectedUsers,
         event,
         pagination,
         items,

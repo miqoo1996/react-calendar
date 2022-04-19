@@ -9,7 +9,7 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import axios from "axios";
 import {toast} from "react-toastify";
 
-const Calendar = ({selectedAgencies}) => {
+const Calendar = ({selectedUsers}) => {
     const dispatch = useDispatch();
 
     const { calendar, agencies, event } = useSelector(state => {
@@ -69,7 +69,7 @@ const Calendar = ({selectedAgencies}) => {
             activeDate,
         }));
 
-        selectedAgencies.map(agent => formData.append('selectedAgencies[]', agent.id));
+        selectedUsers.map(agent => formData.append('selectedAgencies[]', agent.id));
 
         axios.post(`${apiUrl}/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
             const { success, errors } = response.data;
@@ -87,7 +87,7 @@ const Calendar = ({selectedAgencies}) => {
     };
 
     return (
-        <CalendarContext.Provider value={{users, selectedAgencies, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles, calendar}}>
+        <CalendarContext.Provider value={{users, selectedUsers, slotsWarningStyle, slotSectionStyles, setSlotSectionStyles, calendar}}>
             <section className="calendar-wrapper">
                 <div className="page-details">
                     <h1 className="page-title">Book a call</h1>

@@ -4,16 +4,16 @@ import {toast} from "react-toastify";
 const Partner = ({id, name, description, image}) => {
     const dispatch = useDispatch();
 
-    const { selectedAgencies } = useSelector(state => {
+    const { selectedUsers } = useSelector(state => {
         return {
-            selectedAgencies: state.agencies?.selectedAgencies,
+            selectedUsers: state.agencies?.selectedUsers,
         };
     });
 
-    const selected = selectedAgencies.indexOf(id) !== -1;
+    const selected = selectedUsers.indexOf(id) !== -1;
 
     const onAgencyClickHandle = (id) => {
-        if (selectedAgencies.length <= 4) {
+        if (selectedUsers.length <= 4) {
             if (!selected) {
                 dispatch({type: 'add', payload: {id}});
             } else {

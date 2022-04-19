@@ -5,7 +5,7 @@ import {useContext} from "react";
 import CalendarUser from "./CalendarUser";
 
 const CalendarRightSide = () => {
-    const {calendar, selectedAgencies, slotSectionStyles} = useContext(CalendarContext);
+    const {calendar, selectedUsers, slotSectionStyles} = useContext(CalendarContext);
 
     GlobalHelper.date = calendar.activeDate;
 
@@ -14,7 +14,7 @@ const CalendarRightSide = () => {
             {GlobalHelper.getCalendarWeekText()}
 
             <div style={slotSectionStyles} className="slots-section flex-grow overflow-y-auto md:h-[364px]">
-                {selectedAgencies?.map((user, key) => {
+                {selectedUsers?.map((user, key) => {
                     return (
                         <CalendarUser key={key} user={user} />
                     );

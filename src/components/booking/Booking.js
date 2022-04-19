@@ -22,7 +22,7 @@ const Booking = () => {
 
     ids = ids.split(',');
 
-    const updateSelectedAgenciesDetails = () => {
+    const updateSelectedUsersDetails = () => {
         const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
             ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
             ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
@@ -30,18 +30,18 @@ const Booking = () => {
         axios.get(`${apiUrl}/agencies?ids=${ids.join(',')}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
 
-            dispatch({type: "update-items", payload: {event, selectedUsersData: users, pagination, selectedAgencies: ids}});
+            dispatch({type: "update-items", payload: {event, selectedUsersData: users, pagination, selectedUsers: ids}});
         });
     };
 
     useLayoutEffect(() => {
-        updateSelectedAgenciesDetails();
+        updateSelectedUsersDetails();
     }, [calendar.activeDate]);
 
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
             <div className="top-50 booking-calendar">
-                <Calendar selectedAgencies={selectedUsersData} />
+                <Calendar selectedUsers={selectedUsersData} />
             </div>
         </div>
     );
