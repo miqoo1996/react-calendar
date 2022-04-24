@@ -17,6 +17,18 @@ const GlobalHelper = {
         return new Date(date.toUTCString('default', { }));
     },
 
+    getUTCDateTimeString: (date) => {
+        date = date || GlobalHelper.date;
+
+        return moment(date).format("YYYY-MM-DD HH:mm:ss");
+    },
+
+    getUTCDateString: (date) => {
+        date = date || GlobalHelper.date;
+
+        return moment(date).format("YYYY-MM-DD");
+    },
+
     changeDay: (number = 1) => {
         return GlobalHelper.date = new Date(GlobalHelper.getUTCDate().setDate(number));
     },

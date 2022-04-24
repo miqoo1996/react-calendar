@@ -2,7 +2,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {toast} from "react-toastify";
 
 const Partner = (user) => {
-    const {teamId, id, name, bio, image} = user;
+    const {teamId, id, groupId, name, bio, image} = user;
+
+    const maxLimit = user?.maxLimit || 4;
 
     const dispatch = useDispatch();
 
@@ -10,20 +12,23 @@ const Partner = (user) => {
         return {
             users: state.agencies.items,
             selectedUsers: state.agencies.selectedUsers.length
-                ? state.agencies.selectedUsers.filter(u => u.teamId === parseInt(teamId))
+                ? state.agencies.selectedUsers.filter(u => u.teamId === parseInt(teamId) && u.groupId === groupId)
                 : [],
             userStored: state.agencies.selectedUsers.length
-                ? state.agencies.selectedUsers.find(u => u.id === parseInt(id))
+                ? state.agencies.selectedUsers.find(u => u.id === parseInt(id) && u.groupId === groupId)
                 : null,
         };
     });
 
     const onAgencyClickHandle = () => {
         if (!userStored) {
-            if (selectedUsers.length <= 4) {
-                dispatch({type: 'add-selected-user', payload: user});
+            if (selectedUsers.length <= (maxLimit - 1)) {
+                dispatch({type: 'add-selected-user', payload: {
+                        ...user,
+                        groupId
+                    }});
             } else {
-                toast("You can select maximum 5 items.");
+                toast(`You can select maximum ${maxLimit} items.`);
             }
         } else {
             dispatch({type: 'remove-selected-user', payload: user});

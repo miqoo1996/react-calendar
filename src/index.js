@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import {combineReducers, createStore} from "redux";
 import {CalendarReducer} from "./reducers/CalendarReducer";
 import {AgencyReducer} from "./reducers/AgencyReducer";
-import {CompanyReducer} from "./reducers/CompanyReducer";
+import {CompanyReducer, UsersReducer} from "./reducers/CompanyReducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,6 +15,7 @@ root.render(
         calendar: CalendarReducer,
         agencies: AgencyReducer,
         company: CompanyReducer,
+        users: UsersReducer,
     }))}>
         <App />
     </Provider>

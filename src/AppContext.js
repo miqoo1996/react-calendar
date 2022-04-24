@@ -1,7 +1,7 @@
 import {createContext} from "react";
 
 export const AppContextDefaultValue = {
-    apiUrl: "http://cal.loc/api",
+    apiUrl: "http://127.0.0.1:8888/api",
 };
 
 export const AppContext = createContext(AppContextDefaultValue);

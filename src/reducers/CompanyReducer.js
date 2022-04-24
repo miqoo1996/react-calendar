@@ -15,6 +15,21 @@ const CompanyReducer = (state = initialState, action) => {
     };
 };
 
+const userInitialState = {
+    usersFiltered: {},
+};
+
+const UsersReducer = (state = userInitialState, action) => {
+    if (action.type === 'update-filtered-users') {
+        state.usersFiltered = action.payload;
+    }
+
+    return {
+        ...state,
+    };
+}
+
 export {
-    CompanyReducer
+    CompanyReducer,
+    UsersReducer
 }
