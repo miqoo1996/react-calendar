@@ -6,9 +6,6 @@ import {AppContext} from "../../AppContext";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import Team from "./Team";
 
-// TODO should be taken from request params
-const company_id = 2;
-
 const Agencies = () => {
     const dispatch = useDispatch();
 
@@ -27,13 +24,13 @@ const Agencies = () => {
             ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
             ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
 
-        axios.get(`${apiUrl}/company/find?id=${company_id}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
+        axios.get(`${apiUrl}/company?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             dispatch({type: "update-company", payload: response.data});
         });
     }, []);
 
     return (
-        <div className="agency-teams" style={{ marginLeft: "6%" }}>
+        <div className="agency-teams row">
             {teams.map((team, key) => <Team key={key} {...team} />)}
         </div>
     );

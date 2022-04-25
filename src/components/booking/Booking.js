@@ -5,6 +5,7 @@ import {useContext, useLayoutEffect} from "react";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
 import GlobalHelper from "../../Helpers/GlobalHelper";
+import {useSearchParams} from "react-router-dom";
 
 const Booking = () => {
     const { apiUrl } = useContext(AppContext);
@@ -22,10 +23,10 @@ const Booking = () => {
 
     ids = ids.split(',');
 
+    const [searchParams, setSearchParams] = useSearchParams();
+
     const updateSelectedUsersDetails = () => {
-        const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
-            ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
-            ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
+        const activeDate = GlobalHelper.getUTCDateTimeString(searchParams.get('date'));
 
         axios.get(`${apiUrl}/user?ids=${ids.join(',')}&eventId=${eventId}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
