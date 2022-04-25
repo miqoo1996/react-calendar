@@ -1,21 +1,21 @@
 import Partner from "./Partner";
 import AgencyBottom from "./AgencyBottom";
 import TeamDialog from "./TeamDialog";
-import {createRef} from "react";
+import {useState} from "react";
 
 const Team = (team) => {
     const {id, users, title, description} = team;
 
-    const dialogBtnRef = createRef();
+    const [showDialog, setShowDialog] = useState(false);
 
     return (
         <div className="col-lg-6 col-md-6 col-sm-6">
-            <div className="page-details white-selection-section" onClick={e => dialogBtnRef.current?.click()}>
+            <div className="page-details white-selection-section" onClick={e => setShowDialog(!showDialog)}>
                 <h1 className="page-title">{title}</h1>
                 <p className="info-text">{description}</p>
             </div>
 
-            <TeamDialog {...team} buttonRef={dialogBtnRef} />
+            { showDialog && <TeamDialog {...team} /> }
 
             {users.length ? (
                 <section className="agencies top-50">

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import moment from "moment";
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
@@ -16,6 +15,7 @@ import TeamDialogDatePicker from "./TeamDialogDatePicker";
 import {useDispatch, useSelector} from "react-redux";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import AgencyBottom from "./AgencyBottom";
+import TeamDialogFilter from "./TeamDialogFillter";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -23,12 +23,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const TeamDialog = ({id, buttonRef}) => {
     const dispatch = useDispatch();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(true);
     const [usersCount, setUsersCount] = React.useState(0);
     const [fullScreen, setFullScreen] = React.useState(false);
     const [dateSelectionStep, setDateSelectionStep] = React.useState(false);
 
     const {usersFiltered} = useSelector(state => {
+        console.log(state.users.usersFiltered, state.users.currentFilterDate);
         return {
             usersFiltered: state.users.usersFiltered,
         };
@@ -53,22 +54,6 @@ const TeamDialog = ({id, buttonRef}) => {
     const handleClose = () => {
         setOpen(false);
     };
-
-    const filters = [
-        <div key={-1} className="date-picker-dialog" style={{padding: "50px"}}>
-            <TeamDialogDatePicker id={id} maxLabelLimit={usersCount}/>
-        </div>,
-    ];
-
-    for (let date in usersFiltered) {
-        const newDate = moment(date).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
-
-        filters.push(
-            <div key={Math.random()} className="date-picker-dialog" style={{padding: "0 50px 50px"}}>
-                <TeamDialogDatePicker id={id} defaultValue={newDate} maxLabelLimit={usersCount}/>
-            </div>
-        );
-    }
 
     return (
         <>
@@ -103,7 +88,15 @@ const TeamDialog = ({id, buttonRef}) => {
                 </AppBar>
                 {dateSelectionStep ? (
                     <List>
-                        {filters}
+                        <div className="date-picker-dialog" style={{padding: "50px"}}>
+                            {Object.keys(usersFiltered).map((date, key) => {
+                                return (
+                                    <TeamDialogDatePicker key={key} id={id} dateFormatted={date} maxLabelLimit={usersCount}/>
+                                );
+                            })}
+
+                            <TeamDialogFilter id={id} />
+                        </div>
                     </List>
                 ) : (
                     <List>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import moment from "moment";
 import {SingleDateFilterItems} from "./DateFilterItems";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CloseIcon from "@mui/icons-material/Close";
@@ -8,20 +9,21 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
 
-export default function TeamDialogFilter({id, value, defaultValue, handleChange}) {
+export default function TeamDialogFilter({id}) {
     const dispatch = useDispatch();
 
     const { apiUrl } = React.useContext(AppContext);
 
-    const {users, selectedUsers, calendar} = useSelector(state => {
+    const {users, selectedUsers, calendar, currentFilterDate} = useSelector(state => {
         return {
             calendar: state.calendar,
             selectedUsers: state.agencies?.selectedUsers || [],
             users: state.users,
+            currentFilterDate: state.users.currentFilterDate,
         };
     });
 
-    const handleFilterChange = () => {
+    const handleFilterClick = () => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
 
         axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${activeDate}&team_id=${id}`, {
@@ -29,15 +31,19 @@ export default function TeamDialogFilter({id, value, defaultValue, handleChange}
         }).then((response) => {
             const usersFiltered = users.usersFiltered;
 
-            usersFiltered[activeDate] = response.data;
+            usersFiltered[currentFilterDate] = response.data;
 
             dispatch({type: 'update-filtered-users', payload: usersFiltered});
         });
     };
 
+    const handleChange = (newValue) => {
+        dispatch({type: 'update-current-filter-date', payload: {value: GlobalHelper.getUTCDateTimeString(newValue)}});
+    };
+
     return (
         <>
-            <SingleDateFilterItems value={value} defaultValue={defaultValue} handleChange={handleChange} />
+            <SingleDateFilterItems value={currentFilterDate} handleChange={handleChange} />
 
             <div style={{marginTop: "10px", display: "flex", justifyContent: "space-between"}}>
                 {selectedUsers.length ? (
@@ -56,7 +62,7 @@ export default function TeamDialogFilter({id, value, defaultValue, handleChange}
                     </div>
                 ) : <div />}
 
-                <Button onClick={handleFilterChange} variant="contained" disableElevation>
+                <Button onClick={handleFilterClick} variant="contained" disableElevation>
                     <span className="add-box-icon-btn"><FilterAltIcon /></span> Filter Agencies
                 </Button>
             </div>

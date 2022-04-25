@@ -10,13 +10,8 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-export function SingleDateFilterItems({value, defaultValue, handleChange, secondary, children}) {
+export function SingleDateFilterItems({value, handleChange, secondary, children}) {
     const [active, setActive] = React.useState(true);
-
-    if (!value) {
-        value = defaultValue || new Date();
-        handleChange(value);
-    }
 
     return active ? (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
