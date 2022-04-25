@@ -58,9 +58,7 @@ const Calendar = ({selectedUsers}) => {
 
         formData.append('event_id', event.id);
 
-        const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
-            ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
-            ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
+        const activeDate = GlobalHelper.getUTCDateTimeString(calendar.activeDate);
 
         formData.append('calendar', JSON.stringify({
             ...calendar,
