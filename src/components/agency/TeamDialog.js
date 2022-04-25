@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import ListItemText from '@mui/material/ListItemText';
 import ListItem from '@mui/material/ListItem';
@@ -22,7 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const TeamDialog = ({id, buttonRef}) => {
+const TeamDialog = ({id}) => {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(true);
     const [usersCount, setUsersCount] = React.useState(0);

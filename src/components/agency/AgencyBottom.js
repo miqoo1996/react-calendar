@@ -1,20 +1,30 @@
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
+import moment from "moment";
 
 const AgencyBottom = ({id, groupId}) => {
-  const { agencies, teams } = useSelector(state => {
+  const { agencies, teams, usersFilteredDates } = useSelector(state => {
     return {
       agencies: state.agencies,
-      teams: state.company.teams
+      teams: state.company.teams,
+      usersFilteredDates: Object.keys(state.users.usersFiltered),
     };
+  });
+
+  let smallestDate = usersFilteredDates[0];
+
+  usersFilteredDates.map(date => {
+    if (moment(date).diff(smallestDate) < 0) {
+      smallestDate = date;
+    }
   });
 
   const team = teams.find(t => parseInt(t.id) === parseInt(id));
   const event = team?.event || {id: 0};
 
   const linkUrl = groupId
-      ? "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?gid=" + groupId
-      : "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id).map(u => u.id).join(',');
+      ? "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?date=" + groupId
+      : "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id).map(u => u.id).join(',') + "?date=" + smallestDate;
 
   const active = groupId
       ? agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).length
