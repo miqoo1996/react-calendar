@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
 
-export default function TeamDialogFilter({id, defaultValue, handleChange}) {
+export default function TeamDialogFilter({id, value, defaultValue, handleChange}) {
     const dispatch = useDispatch();
 
     const { apiUrl } = React.useContext(AppContext);
@@ -37,7 +37,7 @@ export default function TeamDialogFilter({id, defaultValue, handleChange}) {
 
     return (
         <>
-            <SingleDateFilterItems defaultValue={defaultValue} handleChange={handleChange} />
+            <SingleDateFilterItems value={value} defaultValue={defaultValue} handleChange={handleChange} />
 
             <div style={{marginTop: "10px", display: "flex", justifyContent: "space-between"}}>
                 {selectedUsers.length ? (
