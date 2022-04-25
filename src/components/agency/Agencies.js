@@ -20,9 +20,7 @@ const Agencies = () => {
     const { apiUrl } = useContext(AppContext);
 
     useLayoutEffect(() => {
-        const activeDate = GlobalHelper.getUTCDate(calendar.activeDate).getFullYear() + '-' +
-            ('00' + (GlobalHelper.getUTCDate(calendar.activeDate).getMonth()+1)).slice(-2) + '-' +
-            ('00' + GlobalHelper.getUTCDate(calendar.activeDate).getDate()).slice(-2);
+        const activeDate = GlobalHelper.getUTCDateTimeString();
 
         axios.get(`${apiUrl}/company?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             dispatch({type: "update-company", payload: response.data});
