@@ -29,7 +29,6 @@ const TeamDialog = ({id, buttonRef}) => {
     const [dateSelectionStep, setDateSelectionStep] = React.useState(false);
 
     const {usersFiltered} = useSelector(state => {
-        console.log(state.users.usersFiltered, state.users.currentFilterDate);
         return {
             usersFiltered: state.users.usersFiltered,
         };

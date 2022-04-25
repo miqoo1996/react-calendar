@@ -9,9 +9,16 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import {useSelector} from "react-redux";
 
-export function SingleDateFilterItems({value, handleChange, secondary, children}) {
+export function SingleDateFilterItems({handleChange, secondary, children}) {
     const [active, setActive] = React.useState(true);
+
+    const {currentFilterDate} = useSelector(state => {
+        return {
+            currentFilterDate: state.users?.currentFilterDate || new Date(),
+        };
+    });
 
     return active ? (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -20,7 +27,7 @@ export function SingleDateFilterItems({value, handleChange, secondary, children}
                     <div className="additional-filter-item">
                         <DateTimePicker
                             label="Date&Time you want to chat with"
-                            value={value}
+                            value={currentFilterDate}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}
                         />
@@ -37,7 +44,7 @@ export function SingleDateFilterItems({value, handleChange, secondary, children}
                     <>
                         <DateTimePicker
                             label="Date&Time you want to chat with"
-                            value={value}
+                            value={currentFilterDate}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}
                         />

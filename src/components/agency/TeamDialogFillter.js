@@ -8,11 +8,14 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
+import {toast} from "react-toastify";
 
 export default function TeamDialogFilter({id}) {
     const dispatch = useDispatch();
 
     const { apiUrl } = React.useContext(AppContext);
+
+    const [allowProceed, setAllowProceed] = React.useState(true);
 
     const {users, selectedUsers, calendar, currentFilterDate} = useSelector(state => {
         return {
@@ -26,24 +29,34 @@ export default function TeamDialogFilter({id}) {
     const handleFilterClick = () => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
 
-        axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${activeDate}&team_id=${id}`, {
-            selectedUsers: selectedUsers.map(u => u.id),
-        }).then((response) => {
-            const usersFiltered = users.usersFiltered;
+        if (allowProceed) {
+            axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${activeDate}&team_id=${id}`, {
+                selectedUsers: selectedUsers.map(u => u.id),
+            }).then((response) => {
+                const usersFiltered = users.usersFiltered;
 
-            usersFiltered[currentFilterDate] = response.data;
+                usersFiltered[currentFilterDate] = response.data;
 
-            dispatch({type: 'update-filtered-users', payload: usersFiltered});
-        });
+                dispatch({type: 'update-filtered-users', payload: usersFiltered});
+            });
+        } else {
+            toast("The date should be after current Date&Time.");
+        }
     };
 
     const handleChange = (newValue) => {
-        dispatch({type: 'update-current-filter-date', payload: {value: GlobalHelper.getUTCDateTimeString(newValue)}});
+        setAllowProceed((moment(newValue).diff(moment()) * 60) >= 1);
+
+        if (allowProceed) {
+            dispatch({type: 'update-current-filter-date', payload: {value: GlobalHelper.getUTCDateTimeString(newValue)}});
+        } else {
+            dispatch({type: 'update-current-filter-date', payload: {value: currentFilterDate}});
+        }
     };
 
     return (
         <>
-            <SingleDateFilterItems value={currentFilterDate} handleChange={handleChange} />
+            <SingleDateFilterItems handleChange={handleChange} />
 
             <div style={{marginTop: "10px", display: "flex", justifyContent: "space-between"}}>
                 {selectedUsers.length ? (
