@@ -20,8 +20,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const now = GlobalHelper.date;
-
 const TeamDialog = ({id, buttonRef}) => {
     const dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
@@ -55,19 +53,18 @@ const TeamDialog = ({id, buttonRef}) => {
         setOpen(false);
     };
 
-    // TODO fix the date param now!!
     const filters = [
         <div key={-1} className="date-picker-dialog" style={{padding: "50px"}}>
-            <TeamDialogDatePicker id={id} date={now} maxLabelLimit={usersCount}/>
-        </div>
+            <TeamDialogDatePicker id={id} maxLabelLimit={usersCount}/>
+        </div>,
     ];
 
     for (let date in usersFiltered) {
-        const newDate = moment(date).add(1, 'hours');
+        const newDate = moment(date).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
 
         filters.push(
             <div key={Math.random()} className="date-picker-dialog" style={{padding: "50px"}}>
-                <TeamDialogDatePicker id={id} date={newDate} maxLabelLimit={usersCount}/>
+                <TeamDialogDatePicker id={id} defaultValue={newDate} maxLabelLimit={usersCount}/>
             </div>
         );
     }

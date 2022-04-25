@@ -8,28 +8,18 @@ import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../AppContext";
 
-export default function TeamDialogFilter({id, date}) {
+export default function TeamDialogFilter({id, defaultValue, handleChange}) {
     const dispatch = useDispatch();
 
     const { apiUrl } = React.useContext(AppContext);
 
     const {users, selectedUsers, calendar} = useSelector(state => {
-        console.log(state);
-
         return {
             calendar: state.calendar,
             selectedUsers: state.agencies?.selectedUsers || [],
             users: state.users,
         };
     });
-
-    if (date) {
-        GlobalHelper.date = date;
-    }
-
-    const handleChange = (newValue) => {
-        GlobalHelper.date = new Date(newValue);
-    };
 
     const handleFilterChange = () => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
@@ -47,7 +37,7 @@ export default function TeamDialogFilter({id, date}) {
 
     return (
         <>
-            <SingleDateFilterItems value={GlobalHelper.date} handleChange={handleChange} />
+            <SingleDateFilterItems defaultValue={defaultValue} handleChange={handleChange} />
 
             <div style={{marginTop: "10px", display: "flex", justifyContent: "space-between"}}>
                 {selectedUsers.length ? (

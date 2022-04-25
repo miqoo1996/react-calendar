@@ -10,8 +10,13 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 
-export function SingleDateFilterItems({value, handleChange, secondary, children}) {
+export function SingleDateFilterItems({value, defaultValue, handleChange, secondary, children}) {
     const [active, setActive] = React.useState(true);
+
+    if (!value) {
+        value = defaultValue || new Date();
+        handleChange(value);
+    }
 
     return active ? (
         <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -55,7 +60,7 @@ export default function DateFilterItems({value, handleChange, children}) {
 
     const handelClick = () => {
         setItems(prevState => {
-            const item = <SingleDateFilterItems key={Math.random()} value={value} secondary={true} handleChange={handleChange || (() => {})}>
+            const item = <SingleDateFilterItems key={Math.random()} value={value} secondary={true} handleChange={handleChange}>
                 <div>
                     <Button variant="contained" disableElevation onClick={handelClick}>
                         <span className="add-box-icon-btn"><FilterAltIcon /></span> Filter

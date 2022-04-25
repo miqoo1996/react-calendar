@@ -6,10 +6,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import AgencyBottom from "./AgencyBottom";
 import TeamDialogFilter from "./TeamDialogFillter";
 
-export default function TeamDialogDatePicker({id, maxLabelLimit, date}) {
+export default function TeamDialogDatePicker({id, defaultValue, maxLabelLimit}) {
     const dispatch = useDispatch();
 
+    const [dateFormatted, setDateFormatted] = React.useState("");
+
     const {users, selectedUsers} = useSelector(state => {
+        console.log(state, dateFormatted);
+
         return {
             users: state.users,
             selectedUsers: state.agencies.selectedUsers,
@@ -24,11 +28,14 @@ export default function TeamDialogDatePicker({id, maxLabelLimit, date}) {
         dispatch({type: 'update-items', payload: {selectedUsers: selectedUsers.filter(u => u.groupId !== groupId)}});
     };
 
-    const dateFormatted = GlobalHelper.getUTCDateTimeString(date);
+    const handleChange = (newValue) => {
+        GlobalHelper.date = new Date(newValue);
+        setDateFormatted(GlobalHelper.getUTCDateTimeString());
+    };
 
     return (
         <>
-            {users.usersFiltered[dateFormatted] ? (
+            {dateFormatted && users.usersFiltered[dateFormatted] ? (
                 <section className="bg-gray-100" style={{position: "relative", padding: "20px", marginTop: "20px"}}>
                     <div className="right-close-icon">
                         <CloseIcon onClick={e => handleCloseUsersSection(dateFormatted)} />
@@ -42,7 +49,7 @@ export default function TeamDialogDatePicker({id, maxLabelLimit, date}) {
                         <AgencyBottom id={id} groupId={dateFormatted} />
                     </div>
                 </section>
-            ) : <TeamDialogFilter id={id} date={date} />}
+            ) : <TeamDialogFilter id={id} defaultValue={defaultValue} handleChange={handleChange} />}
         </>
     );
 }
