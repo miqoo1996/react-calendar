@@ -32,8 +32,6 @@ const Booking = () => {
 
             dispatch({type: "update-items", payload: {event, pagination, selectedUsers: users}});
         });
-
-        dispatch({type: "update-filtered-users", payload: {}});
     };
 
     useLayoutEffect(() => {

@@ -16,6 +16,7 @@ import {useDispatch, useSelector} from "react-redux";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import AgencyBottom from "./AgencyBottom";
 import TeamDialogFilter from "./TeamDialogFillter";
+import moment from "moment";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -40,26 +41,16 @@ const TeamDialog = ({id, buttonRef}) => {
         setFullScreen(true);
     };
 
-    const handleClickOpen = () => {
-        setUsersCount(0);
-        setDateSelectionStep(false);
-        setFullScreen(false);
-        setOpen(true);
+    const handleClose = () => {
+        setOpen(false);
 
+        dispatch({type: 'currentFilterDate', payload: {value: moment().format("YYYY-MM-DD HH:mm:ss")}});
         dispatch({type: 'update-items', payload: {selectedUsers: []}});
         dispatch({type: 'update-filtered-users', payload: {}});
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
-
     return (
         <>
-            <Button hidden ref={buttonRef} variant="outlined" onClick={handleClickOpen}>
-                Open full-screen dialog
-            </Button>
-
             <Dialog
                 fullScreen={fullScreen}
                 open={open}
