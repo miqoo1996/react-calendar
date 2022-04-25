@@ -15,6 +15,7 @@ import Slide from '@mui/material/Slide';
 import TeamDialogDatePicker from "./TeamDialogDatePicker";
 import {useDispatch, useSelector} from "react-redux";
 import GlobalHelper from "../../Helpers/GlobalHelper";
+import AgencyBottom from "./AgencyBottom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -63,7 +64,7 @@ const TeamDialog = ({id, buttonRef}) => {
         const newDate = moment(date).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
 
         filters.push(
-            <div key={Math.random()} className="date-picker-dialog" style={{padding: "50px"}}>
+            <div key={Math.random()} className="date-picker-dialog" style={{padding: "0 50px 50px"}}>
                 <TeamDialogDatePicker id={id} defaultValue={newDate} maxLabelLimit={usersCount}/>
             </div>
         );
@@ -81,7 +82,7 @@ const TeamDialog = ({id, buttonRef}) => {
                 onClose={handleClose}
                 TransitionComponent={Transition}
             >
-                <AppBar sx={{ position: 'relative' }}>
+                <AppBar sx={{ position: Object.keys(usersFiltered).length ? 'fixed' : 'relative' }}>
                     <Toolbar>
                         <IconButton
                             edge="start"
@@ -92,7 +93,11 @@ const TeamDialog = ({id, buttonRef}) => {
                             <CloseIcon />
                         </IconButton>
                         <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            {dateSelectionStep ? 'Please select the date and time you want to chat with.' : 'how many people do you want to chat with?'}
+                            {dateSelectionStep ? <div style={{display:  "flex", justifyContent: "space-between"}}>
+                                <span className="tablet-desktop-only">Please select the date and time you want to chat with.</span>
+
+                                <AgencyBottom id={id} />
+                            </div> : 'how many people do you want to chat with?'}
                         </Typography>
                     </Toolbar>
                 </AppBar>

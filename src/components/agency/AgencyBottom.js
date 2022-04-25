@@ -12,11 +12,19 @@ const AgencyBottom = ({id, groupId}) => {
   const team = teams.find(t => parseInt(t.id) === parseInt(id));
   const event = team?.event || {id: 0};
 
+  const linkUrl = groupId
+      ? "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?gid=" + groupId
+      : "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id).map(u => u.id).join(',');
+
+  const active = groupId
+      ? agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).length
+      : agencies.selectedUsers.filter(u => u.teamId === id).length;
+
   return (
     <>
-      {agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).length ? (
+      {active ? (
         <div className="book-call-btn">
-          <Link to={{pathname: "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?gid=" + groupId}} className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
+          <Link to={{pathname: linkUrl}} className="text-gray-900 bg-gradient-to-r from-teal-200 to-lime-200 hover:bg-gradient-to-l hover:from-teal-200 hover:to-lime-200 focus:ring-4 focus:outline-none focus:ring-lime-200 dark:focus:ring-teal-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
             Book call with agencies
           </Link>
         </div>

@@ -24,7 +24,7 @@ export function SingleDateFilterItems({value, defaultValue, handleChange, second
                 {secondary ? (
                     <div className="additional-filter-item">
                         <DateTimePicker
-                            label="Date&Time picker"
+                            label="Date&Time you want to chat with"
                             value={value}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}
@@ -41,7 +41,7 @@ export function SingleDateFilterItems({value, defaultValue, handleChange, second
                 ) : (
                     <>
                         <DateTimePicker
-                            label="Date&Time picker"
+                            label="Date&Time you want to chat with"
                             value={value}
                             onChange={handleChange}
                             renderInput={(params) => <TextField {...params} />}

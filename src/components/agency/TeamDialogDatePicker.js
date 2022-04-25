@@ -47,9 +47,9 @@ export default function TeamDialogDatePicker({id, defaultValue, maxLabelLimit}) 
                               {users.usersFiltered[dateFormatted].map((item, key) => <Partner key={key} groupId={dateFormatted} maxLimit={maxLabelLimit} teamId={id} {...item} />)}
                           </div>
 
-                          <div className="top-50" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                              <AgencyBottom id={id} groupId={dateFormatted} />
-                          </div>
+                          {/*<div className="top-50" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>*/}
+                          {/*    <AgencyBottom id={id} groupId={dateFormatted} />*/}
+                          {/*</div>*/}
                       </>
                     ) : (
                         <>

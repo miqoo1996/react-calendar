@@ -64,6 +64,9 @@
       min-width: 100%;
     }
   }
+  .tablet-desktop-only {
+    display: none;
+  }
 }
 
 @media (max-width:1025px) {
