@@ -27,10 +27,10 @@ export default function TeamDialogFilter({id}) {
     });
 
     const handleFilterClick = () => {
-        const activeDate = GlobalHelper.getUTCDateTimeString();
+        // const activeDate = GlobalHelper.getUTCDateTimeString();
 
         if (allowProceed) {
-            axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${activeDate}&team_id=${id}`, {
+            axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${currentFilterDate}&team_id=${id}`, {
                 selectedUsers: selectedUsers.map(u => u.id),
             }).then((response) => {
                 const usersFiltered = users.usersFiltered;
