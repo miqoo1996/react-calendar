@@ -12,18 +12,21 @@ import axios from "axios";
 import {AppContext} from "../../../AppContext";
 
 const Questionnaire = () => {
+    const { teamId } = useParams();
+
+    const [team, setTeam] = useState({});
+
     const { apiUrl } = useContext(AppContext);
 
     const dispatch = useDispatch();
 
     const [animate, setAnimate] = useState(false);
 
-    const { teams, defaultTeamId, questionnaire, calendar } = useSelector(state => {
+    const { questionnaire, calendar } = useSelector(state => {
         return {
             questionnaire: state.questionnaire,
             calendar: state.calendar,
             teams: state.company.teams || [],
-            defaultTeamId: state.company.teams?.[0]?.id,
         };
     });
 
@@ -42,17 +45,11 @@ const Questionnaire = () => {
     useLayoutEffect(() => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
 
-        axios.get(`${apiUrl}/company?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
-            dispatch({type: "update-company", payload: response.data});
+        axios.get(`${apiUrl}/team/find/?team_id=${teamId}&type=only-team&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
+            setTeam(response.data);
             setIsLoading(false);
         });
     }, []);
-
-    let { teamId } = useParams();
-
-    teamId = teamId || defaultTeamId;
-
-    const team = teams.find(t => t.id === parseInt(teamId));
 
     const handelAnswerSelection = (data, animationDuration = 601) => {
         if (!data.answer || (data.answer && data.answer.value)) {
@@ -66,6 +63,17 @@ const Questionnaire = () => {
             toast('Please type your answer.');
         }
     };
+
+    if (!teamId || !team) {
+        return (
+            <div id="questionnaire">
+                <div className='questions-section'>
+                    <p className='page-title'>Please pass the survey before booking a call!</p>
+                    <p className="info-text" style={{fontSize: '15px'}}>You need to ask the owner of the website for the URL of the "Survey" in case you don't have it.</p>
+                </div>
+            </div>
+        );
+    }
 
     const questionnaireComponent = questionnaire.sub1Running ? <SubQuestionnaire1 team={team} /> : (
         <div id="questionnaire">
