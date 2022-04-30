@@ -8,6 +8,7 @@ import Partner from "../../agency/Partner";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../../AppContext";
+import moment from "moment/moment";
 
 const Agencies = ({handelAnswerSelection, team}) => {
     const { apiUrl } = useContext(AppContext);
@@ -35,17 +36,19 @@ const Agencies = ({handelAnswerSelection, team}) => {
     const [isLoading, setIsLoading] = useState(true);
 
     useLayoutEffect(() => {
-        axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${previousAnswer}&team_id=${team.id}`, {
-            selectedUsers: selectedUsers.map(u => u.id),
-        }).then((response) => {
-            const usersFiltered = users.usersFiltered;
+        if (typeof previousAnswer === 'string' && team.id) {
+            axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${previousAnswer}&team_id=${team.id}`, {
+                selectedUsers: selectedUsers.map(u => u.id),
+            }).then((response) => {
+                const usersFiltered = users.usersFiltered;
 
-            usersFiltered[previousAnswer] = response.data;
+                usersFiltered[previousAnswer] = response.data;
 
-            dispatch({type: 'update-filtered-users', payload: usersFiltered});
+                dispatch({type: 'update-filtered-users', payload: usersFiltered});
 
-            setIsLoading(false);
-        });
+                setIsLoading(false);
+            });
+        }
     }, []);
 
     const handleClick = () => {

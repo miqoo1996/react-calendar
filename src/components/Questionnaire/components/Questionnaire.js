@@ -49,7 +49,7 @@ const Questionnaire = () => {
 
     teamId = teamId || defaultTeamId;
 
-    const team = teams[teamId];
+    const team = teams.find(t => t.id === parseInt(teamId));
 
     const handelAnswerSelection = (data, animationDuration = 601) => {
         if (!data.answer || (data.answer && data.answer.value)) {
