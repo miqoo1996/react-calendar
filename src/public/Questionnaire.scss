@@ -56,6 +56,12 @@ body {
       margin-bottom: 20px;
     }
   }
+
+  .agencies {
+    overflow: auto;
+    max-height: 43vh;
+    margin-bottom: 25px;
+  }
 }
 
 .transparent-textarea {
