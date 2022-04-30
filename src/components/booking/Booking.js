@@ -8,6 +8,8 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import {useSearchParams} from "react-router-dom";
 
 const Booking = () => {
+    const questionnairePassed = !! localStorage.getItem('questionnaire');
+
     const { apiUrl } = useContext(AppContext);
 
     const dispatch = useDispatch();
@@ -42,7 +44,12 @@ const Booking = () => {
     return (
         <div className="col-md-12 col-sm-12 col-lg-12">
             <div className="top-50 booking-calendar">
-                <Calendar selectedUsers={selectedUsers} />
+                {questionnairePassed ? <Calendar selectedUsers={selectedUsers} /> : (
+                    <div className='text-center'>
+                        <p className='page-title'>Please pass the survey before booking a call!</p>
+                        <p className="info-text">You need to ask the owner of the website for the URL of the "Survey" in case you don't have it.</p>
+                    </div>
+                )}
             </div>
         </div>
     );

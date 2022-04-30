@@ -2,6 +2,8 @@ import Button from "@mui/material/Button";
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 
 const GetStarted = ({handelAnswerSelection, title, description}) => {
+    localStorage.removeItem('questionnaire');
+
     return (
         <div className="center-column">
             <div className="question-title" style={{marginBottom: 0}}>
