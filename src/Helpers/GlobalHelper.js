@@ -20,13 +20,21 @@ const GlobalHelper = {
     getUTCDateTimeString: (date) => {
         date = date || GlobalHelper.date;
 
-        return moment(date).format("YYYY-MM-DD HH:mm:ss");
+        if (date) {
+            return moment(date).format("YYYY-MM-DD HH:mm:ss");
+        }
+
+        return moment().format("YYYY-MM-DD HH:mm:ss");
     },
 
     getUTCDateString: (date) => {
         date = date || GlobalHelper.date;
 
-        return moment(date).format("YYYY-MM-DD");
+        if (date) {
+            return moment(date).format("YYYY-MM-DD");
+        }
+
+        return moment().format("YYYY-MM-DD");
     },
 
     changeDay: (number = 1) => {
@@ -147,6 +155,16 @@ const GlobalHelper = {
                 name: GlobalHelper.getWeekdayFromDate(date),
             };
         });
+    },
+
+    objectNextElement: (db, key) => {
+        for (let i = 0; i < db.length; i++) {
+            if (db[i].key === key) {
+                return db[i + 1] && db[i + 1].value;
+            }
+        }
+
+        return null;
     },
 };
 

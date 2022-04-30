@@ -1,0 +1,1 @@
+export const AMOUNT_OF_PEOPLE_NUMBER = 1;

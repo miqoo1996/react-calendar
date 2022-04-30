@@ -1,8 +1,6 @@
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import CalendarCel from "./CalendarCel";
 import {useDispatch} from "react-redux";
-import {useSearchParams} from "react-router-dom";
-import {useLayoutEffect} from "react";
 
 const now = new Date();
 
@@ -10,14 +8,6 @@ const currentMonthActiveDay = GlobalHelper.getDayFromDate(now);
 
 const CalendarContent = () => {
     const dispatch = useDispatch();
-
-    const [searchParams, setSearchParams] = useSearchParams();
-
-    useLayoutEffect(() => {
-        if (searchParams.get('date')) {
-            dispatch({type: 'change-active-date', payload: {activeDate: searchParams.get('date')}});
-        }
-    }, []);
 
     let [emptyItems, disabledItems, availableItems] = [[], [], []];
 

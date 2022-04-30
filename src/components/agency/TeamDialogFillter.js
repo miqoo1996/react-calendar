@@ -10,7 +10,7 @@ import axios from "axios";
 import {AppContext} from "../../AppContext";
 import {toast} from "react-toastify";
 
-export default function TeamDialogFilter({id}) {
+export default function TeamDialogFilter({id, callback}) {
     const dispatch = useDispatch();
 
     const { apiUrl } = React.useContext(AppContext);
@@ -39,9 +39,13 @@ export default function TeamDialogFilter({id}) {
 
                 dispatch({type: 'update-filtered-users', payload: usersFiltered});
             });
+
+            return true;
         } else {
             toast("The date should be after current Date&Time.");
         }
+
+        return false;
     };
 
     const handleChange = (newValue) => {
@@ -75,9 +79,11 @@ export default function TeamDialogFilter({id}) {
                     </div>
                 ) : <div />}
 
-                <Button onClick={handleFilterClick} variant="contained" disableElevation>
-                    <span className="add-box-icon-btn"><FilterAltIcon /></span> Filter Agencies
-                </Button>
+                {callback ? callback(handleFilterClick, currentFilterDate) : (
+                    <Button onClick={e => handleFilterClick()} variant="contained" disableElevation>
+                        <span className="add-box-icon-btn"><FilterAltIcon /></span> Filter Agencies
+                    </Button>
+                )}
             </div>
         </>
     );

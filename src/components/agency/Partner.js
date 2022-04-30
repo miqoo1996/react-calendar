@@ -3,8 +3,9 @@ import {toast} from "react-toastify";
 
 const Partner = (user) => {
     const {teamId, id, groupId, name, bio, image} = user;
+    let {maxLimit} = user;
 
-    const maxLimit = user?.maxLimit || 4;
+    maxLimit = maxLimit || user?.maxLimit || 4;
 
     const dispatch = useDispatch();
 

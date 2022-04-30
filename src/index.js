@@ -8,6 +8,7 @@ import {combineReducers, createStore} from "redux";
 import {CalendarReducer} from "./reducers/CalendarReducer";
 import {AgencyReducer} from "./reducers/AgencyReducer";
 import {CompanyReducer, UsersReducer} from "./reducers/CompanyReducer";
+import {QuestionnaireReducer, SubQuestionnaire1Reducer} from "./reducers/QuestionnaireReducer";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,8 @@ root.render(
         agencies: AgencyReducer,
         company: CompanyReducer,
         users: UsersReducer,
+        questionnaire: QuestionnaireReducer,
+        subQuestionnaire1: SubQuestionnaire1Reducer,
     }))}>
         <App />
     </Provider>

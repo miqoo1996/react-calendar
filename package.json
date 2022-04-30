@@ -26,6 +26,7 @@
     "react-toastify": "^8.2.0",
     "redux": "^4.1.2",
     "sass": "^1.50.0",
+    "validator": "^13.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -33,12 +34,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
