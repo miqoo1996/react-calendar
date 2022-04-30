@@ -13,10 +13,10 @@ const AdditionalNotes = ({handelAnswerSelection}) => {
     const answer = {number: 5, key: 'AdditionalNotes', value};
 
     const handleClick = () => {
-        if (!value || value.length < 10) {
+        if (value && value.length < 10) {
             toast('Please provide at least 10 symbols.');
         } else {
-            handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer});
+            handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer}, false);
         }
     }
 

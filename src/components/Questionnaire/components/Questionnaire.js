@@ -51,8 +51,8 @@ const Questionnaire = () => {
         });
     }, []);
 
-    const handelAnswerSelection = (data, animationDuration = 601) => {
-        if (!data.answer || (data.answer && data.answer.value)) {
+    const handelAnswerSelection = (data, validate = true, animationDuration = 601) => {
+        if (!validate || (!data.answer || (data.answer && data.answer.value))) {
             setAnimate(true);
 
             setTimeout(() => {

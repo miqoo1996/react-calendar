@@ -3,7 +3,9 @@ import DoneIcon from "@mui/icons-material/Done";
 import AgencyBottom from "../agency/AgencyBottom";
 import {useSelector} from "react-redux";
 
-const ScheduleMeeting = ({handelAnswerSelection, id}) => {
+const ScheduleMeeting = (props) => {
+    const {handelAnswerSelection, id} = props;
+
     const { questionnaire, subQuestionnaire1 } = useSelector(state => {
         return {
             questionnaire: state.questionnaire,
@@ -32,7 +34,7 @@ const ScheduleMeeting = ({handelAnswerSelection, id}) => {
 
                 <div>
                     <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <AgencyBottom id={id} />
+                        <AgencyBottom {...props} />
                     </div>
                 </div>
             </div>

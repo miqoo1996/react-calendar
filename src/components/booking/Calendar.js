@@ -10,6 +10,18 @@ import axios from "axios";
 import {toast} from "react-toastify";
 
 const Calendar = ({selectedUsers}) => {
+    const {answers} = JSON.parse(localStorage.getItem('questionnaire')) || {answers: [], answersSub1: []};
+
+    const getAnswer = key => {
+        for (const i in answers) {
+            if (answers[i]?.key === key) {
+                return answers[i]?.value || '';
+            }
+        }
+
+        return '';
+    };
+
     const dispatch = useDispatch();
 
     const { calendar, agencies, event } = useSelector(state => {
@@ -147,6 +159,7 @@ const Calendar = ({selectedUsers}) => {
                                                 </label>
                                                 <div className="mt-1">
                                                     <input name="name" type="text" id="name" required=""
+                                                           defaultValue={(getAnswer('FirstName') + ' ' + getAnswer('LastName')).trim()}
                                                            className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
                                                            placeholder="John Doe" />
                                                 </div>
@@ -156,7 +169,9 @@ const Calendar = ({selectedUsers}) => {
                                                     Email address
                                                 </label>
                                                 <div className="mt-1">
-                                                    <input type="search" autoCapitalize="none" autoComplete="email" autoCorrect="off" inputMode="email" name="email" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
+                                                    <input type="search"
+                                                           defaultValue={getAnswer('Email')}
+                                                           autoCapitalize="none" autoComplete="email" autoCorrect="off" inputMode="email" name="email" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
                                                            placeholder="you@example.com" />
                                                 </div>
                                             </div>
@@ -174,7 +189,9 @@ const Calendar = ({selectedUsers}) => {
                                                 <label htmlFor="notes" className="mb-1 block text-sm font-medium text-gray-700 dark:text-white">
                                                     Additional notes
                                                 </label>
-                                                <textarea name="notes" id="notes" rows="3" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm" placeholder="Please share anything that will help prepare for our meeting." />
+                                                <textarea
+                                                    defaultValue={getAnswer('AdditionalNotes')}
+                                                    name="notes" id="notes" rows="3" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm" placeholder="Please share anything that will help prepare for our meeting." />
                                             </div>
                                             <div className="flex items-start space-x-2 rtl:space-x-reverse">
                                                 <button type="submit" data-testid="confirm-book-button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-transparent dark:text-darkmodebrandcontrast text-brandcontrast bg-brand dark:bg-darkmodebrand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">

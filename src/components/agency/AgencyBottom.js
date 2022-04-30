@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import moment from "moment";
 
-const AgencyBottom = ({id, groupId}) => {
+const AgencyBottom = ({id, groupId, event}) => {
   const { agencies, teams, usersFilteredDates } = useSelector(state => {
     return {
       agencies: state.agencies,
@@ -20,7 +20,7 @@ const AgencyBottom = ({id, groupId}) => {
   });
 
   const team = teams.find(t => parseInt(t.id) === parseInt(id));
-  const event = team?.event || {id: 0};
+  event = event || team?.event || {id: 0};
 
   const linkUrl = groupId
       ? "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?date=" + groupId
