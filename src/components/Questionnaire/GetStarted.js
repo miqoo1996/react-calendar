@@ -1,13 +1,13 @@
 import Button from "@mui/material/Button";
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
 
-const GetStarted = ({handelAnswerSelection}) => {
+const GetStarted = ({handelAnswerSelection, title, description}) => {
     return (
         <div className="center-column">
             <div className="question-title" style={{marginBottom: 0}}>
                 <div>
-                    <p className="page-title">With one click, interview with "Better Help Therapy".</p>
-                    <p className="info-text">Book a time with one of our licensed professional therapists online today!</p>
+                    <p className="page-title">With one click, interview with "{title}".</p>
+                    <p className="info-text">{description}</p>
                 </div>
             </div>
 

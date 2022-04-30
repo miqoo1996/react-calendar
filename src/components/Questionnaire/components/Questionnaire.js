@@ -27,6 +27,8 @@ const Questionnaire = () => {
         };
     });
 
+    const [isLoading, setIsLoading] = useState(true);
+
     useEffect(() => {
         if (questionnaire.sub1Running === false) {
             setAnimate(true);
@@ -42,6 +44,7 @@ const Questionnaire = () => {
 
         axios.get(`${apiUrl}/company?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             dispatch({type: "update-company", payload: response.data});
+            setIsLoading(false);
         });
     }, []);
 
@@ -64,7 +67,7 @@ const Questionnaire = () => {
         }
     };
 
-    return questionnaire.sub1Running ? <SubQuestionnaire1 team={team} /> : (
+    const questionnaireComponent = questionnaire.sub1Running ? <SubQuestionnaire1 team={team} /> : (
         <div id="questionnaire">
             <div className={'questions-section' + (animate ? ' animate' : '')}>
                 <QuestionnaireFactory component={questionnaire.active} props={{handelAnswerSelection, isActive: true, ...team}} defaultComponent={
@@ -78,6 +81,8 @@ const Questionnaire = () => {
             </div>
         </div>
     );
+
+    return isLoading ? <div id="questionnaire"><i>Please wait while loading data...</i></div> : questionnaireComponent;
 }
 
 export default Questionnaire;
