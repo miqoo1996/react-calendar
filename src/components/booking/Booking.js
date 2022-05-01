@@ -6,6 +6,7 @@ import axios from "axios";
 import {AppContext} from "../../AppContext";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import {useSearchParams} from "react-router-dom";
+import moment from "moment/moment";
 
 const Booking = () => {
     const questionnairePassed = !! localStorage.getItem('questionnaire');
@@ -28,7 +29,13 @@ const Booking = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const updateSelectedUsersDetails = () => {
-        const activeDate = searchParams.get('date') ? GlobalHelper.getUTCDateTimeString(searchParams.get('date')) : GlobalHelper.getUTCDateTimeString();
+        let activeDate = searchParams.get('date') ? GlobalHelper.getUTCDateTimeString(searchParams.get('date')) : GlobalHelper.getUTCDateTimeString();
+
+        const now = moment(new Date(), 'YYYY-MM-DD');
+
+        if (moment(activeDate, 'YYYY-MM-DD').isAfter(now)) {
+            activeDate = moment(activeDate, 'YYYY-MM-DD');
+        }
 
         axios.get(`${apiUrl}/user?ids=${ids.join(',')}&eventId=${eventId}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;
