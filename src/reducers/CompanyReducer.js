@@ -28,9 +28,13 @@ const UsersReducer = (state = filtersInitialState, action) => {
 
         const keys = Object.keys(state.usersFiltered);
 
+        // state.currentFilterDate = keys.length
+        //     ? moment(keys[keys.length - 1]).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss")
+        //     : moment(filtersInitialState.currentFilterDate).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
+
         state.currentFilterDate = keys.length
-            ? moment(keys[keys.length - 1]).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss")
-            : moment(filtersInitialState.currentFilterDate).add(1, 'hours').format("YYYY-MM-DD HH:mm:ss");
+            ? moment(keys[keys.length - 1]).format("YYYY-MM-DD HH:mm:ss")
+            : moment(filtersInitialState.currentFilterDate).format("YYYY-MM-DD HH:mm:ss");
     }
 
     if (action.type === 'update-current-filter-date') {

@@ -1,16 +1,19 @@
+import React from 'react';
 import CalendarLeftSide from "./CalendarLeftSide";
 import CalendarContent from "./CalendarContent";
 import CalendarRightSide from "./CalendarRightSide";
 import {AppContextDefaultValue, CalendarContext} from "../../AppContext";
-import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import GlobalHelper from "../../Helpers/GlobalHelper";
 import axios from "axios";
 import {toast} from "react-toastify";
+import moment from "moment/moment";
+import Divider from "@mui/material/Divider";
 
 const Calendar = ({selectedUsers}) => {
-    const {answers} = JSON.parse(localStorage.getItem('questionnaire')) || {answers: [], answersSub1: []};
+    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {users: [], answers: [], answersSub1: []};
+    const answers = questionnaire.answers;
 
     const getAnswer = key => {
         for (const i in answers) {
@@ -141,15 +144,38 @@ const Calendar = ({selectedUsers}) => {
                                             {event.duratiion} Minutes
                                         </p>
 
-                                        <p className="text-bookinghighlight mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-                                                 aria-hidden="true" className="mr-[10px] ml-[2px] -mt-1 inline-block h-4 w-4">
-                                                <path fillRule="evenodd"
-                                                      d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                                      clipRule="evenodd" />
-                                            </svg>
-                                            {Object.values(selectedSlots).join(", ") }, {GlobalHelper.getWeekdayFromDate()}, {GlobalHelper.getMonthFromDate()} {GlobalHelper.getDayFromDate()}, {GlobalHelper.getYearFromDate()}
-                                        </p>
+                                        {selectedSlots.map((s, number) => {
+                                            GlobalHelper.date = moment(s.date, 'YYYY-MM-DD').format();
+
+                                            const user = questionnaire.users.find(u => u.id === s.userId);
+
+                                            return (
+                                                <React.Fragment key={number}>
+                                                    <p className="text-bookinghighlight mb-2">
+                                                        <svg className="mr-[10px] ml-[2px] -mt-1 inline-block h-4 w-4"
+                                                             fill="none" stroke="currentColor"
+                                                             viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                            <path strokeLinecap="round" strokeLinejoin="round"
+                                                                  strokeWidth="2"
+                                                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                                        </svg>
+
+                                                        {user.name}
+                                                    </p>
+
+                                                    <p className="text-bookinghighlight mb-4">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                                                             aria-hidden="true" className="mr-[10px] ml-[2px] -mt-1 inline-block h-4 w-4">
+                                                            <path fillRule="evenodd"
+                                                                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                                                  clipRule="evenodd" />
+                                                        </svg>
+
+                                                        {Object.values(s.slot)}, {GlobalHelper.getWeekdayFromDate()}, {GlobalHelper.getMonthFromDate()} {GlobalHelper.getDayFromDate()}, {GlobalHelper.getYearFromDate()}
+                                                    </p>
+                                                </React.Fragment>
+                                            )
+                                        })}
                                     </div>
                                     <div className="sm:w-1/2 sm:pl-8 sm:pr-4">
                                         <form onSubmit={e => onFormSubmitHandler(e)}>

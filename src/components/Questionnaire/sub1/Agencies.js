@@ -85,11 +85,13 @@ const Agencies = ({handelAnswerSelection, team}) => {
                     </section>
                 )}
 
-                <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button onClick={handleClick} variant="contained" disableElevation>
-                        OK <span className="add-box-icon-btn" style={{marginLeft: "5px"}}><DoneIcon /></span>
-                    </Button>
-                </div>
+                {isLoading ? null : (
+                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                        <Button onClick={handleClick} variant="contained" disableElevation>
+                            OK <span className="add-box-icon-btn" style={{marginLeft: "5px"}}><DoneIcon /></span>
+                        </Button>
+                    </div>
+                )}
             </div>
         </>
     );

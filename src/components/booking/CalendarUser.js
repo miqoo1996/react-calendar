@@ -17,7 +17,9 @@ const CalendarUser = ({user}) => {
 
     const { selectedSlots } = calendar;
 
-    const {setSlotSectionStyles} = useContext(CalendarContext);
+    const userSlot = selectedSlots?.find(s => s.date === GlobalHelper.getUTCDateString() && s.userId === user.id);
+
+    const { setSlotSectionStyles } = useContext(CalendarContext);
 
     const { availability } = user;
 
@@ -45,8 +47,8 @@ const CalendarUser = ({user}) => {
                 <div className="calendar-available-slots">
                     {hoursData.length ? hoursData.map((time, key) => {
                         return (
-                            <div key={key} className={"available-slot " + (selectedSlots?.[user.id] === time ? 'active' : '')}
-                                 onClick={e => dispatch({type: "update-selected-slots", payload: {userId: user.id, slot: time}}) && setSlotSectionStyles({})}>
+                            <div key={key} className={"available-slot " + (userSlot?.slot === time ? 'active' : '')}
+                                 onClick={e => dispatch({type: (userSlot?.slot === time ? 'remove' : 'update') + "-selected-slots", payload: {userId: user.id, date: GlobalHelper.getUTCDateString(), slot: time}}) && setSlotSectionStyles({})}>
                                 <a style={{cursor: "pointer"}}
                                    className="text-bookingdarker hover:bg-brand hover:text-brandcontrast dark:hover:bg-darkmodebrand dark:hover:text-darkmodebrandcontrast mb-2 block rounded-sm border bg-white py-4 font-medium hover:text-white dark:border-transparent dark:bg-gray-600 dark:text-neutral-200 dark:hover:border-black border-brand"
                                    data-testid="time">{time}</a>

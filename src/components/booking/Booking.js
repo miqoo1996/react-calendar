@@ -28,7 +28,7 @@ const Booking = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const updateSelectedUsersDetails = () => {
-        const activeDate = GlobalHelper.getUTCDateTimeString(searchParams.get('date'));
+        const activeDate = searchParams.get('date') ? GlobalHelper.getUTCDateTimeString(searchParams.get('date')) : GlobalHelper.getUTCDateTimeString();
 
         axios.get(`${apiUrl}/user?ids=${ids.join(',')}&eventId=${eventId}&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
             const {users, event, pagination} = response.data;

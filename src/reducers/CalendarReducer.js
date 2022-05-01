@@ -3,7 +3,7 @@ import GlobalHelper from "../Helpers/GlobalHelper";
 const initialState = {
     activeDate: GlobalHelper.getUTCDate(),
     timeZoneName: Intl.DateTimeFormat().resolvedOptions().timeZone,
-    selectedSlots: {},
+    selectedSlots: [],
 };
 
 const CalendarReducer = (state = initialState, action) => {
@@ -14,12 +14,27 @@ const CalendarReducer = (state = initialState, action) => {
     }
 
     if (action.type === 'change-active-date') {
-        state.selectedSlots = {};
         state.activeDate = action.payload.activeDate;
     }
 
+    if (action.type === 'update-all-selected-slots') {
+        state.selectedSlots = action.payload;
+    }
+
+    if (action.type === 'remove-selected-slots') {
+        state.selectedSlots = state.selectedSlots.filter(s => s.userId !== action.payload.userId || (s.userId === action.payload.userId && s.date !== action.payload.date));
+    }
+
     if (action.type === 'update-selected-slots') {
-        state.selectedSlots[action.payload.userId] = action.payload.slot;
+        const slot = {
+            userId: action.payload.userId,
+            date: action.payload.date,
+            slot: action.payload.slot,
+        };
+
+        state.selectedSlots = state.selectedSlots.filter(s => s.userId !== action.payload.userId || (s.userId === action.payload.userId && s.date !== action.payload.date));
+
+        state.selectedSlots.push(slot);
     }
 
     return {

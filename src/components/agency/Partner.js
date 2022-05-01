@@ -9,8 +9,9 @@ const Partner = (user) => {
 
     const dispatch = useDispatch();
 
-    const { selectedUsers, userStored } = useSelector(state => {
+    const { selectedUsers, userStored, currentFilterDate } = useSelector(state => {
         return {
+            currentFilterDate: state.users.currentFilterDate,
             users: state.agencies.items,
             selectedUsers: state.agencies.selectedUsers.length
                 ? state.agencies.selectedUsers.filter(u => u.teamId === parseInt(teamId) && u.groupId === groupId)
@@ -26,7 +27,8 @@ const Partner = (user) => {
             if (selectedUsers.length <= (maxLimit - 1)) {
                 dispatch({type: 'add-selected-user', payload: {
                         ...user,
-                        groupId
+                        groupId,
+                        currentFilterDate
                     }});
             } else {
                 toast(`You can select maximum ${maxLimit} items.`);

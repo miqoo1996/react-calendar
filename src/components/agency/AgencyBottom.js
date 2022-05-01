@@ -24,7 +24,7 @@ const AgencyBottom = ({id, groupId, event}) => {
 
   const linkUrl = groupId
       ? "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).map(u => u.id).join(',') + "?date=" + groupId
-      : "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id).map(u => u.id).join(',') + "?date=" + smallestDate;
+      : "/book-call/" + event.id + '/' + agencies.selectedUsers.filter(u => u.teamId === id).map(u => u.id).join(','); // + "?date=" + smallestDate;
 
   const active = groupId
       ? agencies.selectedUsers.filter(u => u.teamId === id && u.groupId === groupId).length

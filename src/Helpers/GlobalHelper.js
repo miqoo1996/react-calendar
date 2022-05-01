@@ -1,4 +1,5 @@
 import moment from "moment";
+import styled from 'styled-components';
 
 const monthNames = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 const weekDayNames = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
@@ -137,13 +138,35 @@ const GlobalHelper = {
             className="text-bookinglight">{GlobalHelper.getYearFromDate()}</span></span>
     },
 
-    getCalendarWeekText: (props = {}, element = "") => {
+    getCalendarWeekText: (props = {}, element, element2) => {
+        const Wrapper = styled.div`
+                          display: flex;
+                          width: 100%;
+                          align-items: center;
+                          justify-content: space-between;
+                        `;
         return <div {...props} className="mb-4 text-left text-lg font-light text-gray-600">
-            <span className="text-bookingdarker w-1/2 dark:text-white">
-                <strong>{GlobalHelper.getWeekdayFromDate()}</strong>
-                <span className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {GlobalHelper.getMonthFromDate()}</span>
-            </span>
+            <Wrapper className="text-bookingdarker w-1/2 dark:text-white">
+                <div>
+                    <strong>{GlobalHelper.getWeekdayFromDate()}</strong>
+                    <span className="text-bookinglight">, {GlobalHelper.getDayFromDate()} {GlobalHelper.getMonthFromDate()}</span>
+                </div>
+                <div>
+                    {element2}
+                </div>
+            </Wrapper>
             {element}
+        </div>;
+    },
+
+    getCalendarDateTextSimple: (date, props = {}) => {
+        return <div {...props} className="mb-4 text-left text-lg font-light text-gray-600">
+            <div className="text-bookingdarker w-1/2 dark:text-white">
+                <div>
+                    <strong>{GlobalHelper.getWeekdayFromDate(date)}</strong>
+                    <span style={{whiteSpace: 'nowrap'}} className="text-bookinglight">, {GlobalHelper.getDayFromDate(date)} {GlobalHelper.getMonthFromDate(date)}</span>
+                </div>
+            </div>
         </div>;
     },
 

@@ -6,14 +6,24 @@ import {useSelector} from "react-redux";
 const ScheduleMeeting = (props) => {
     const {handelAnswerSelection, id} = props;
 
-    const { questionnaire, subQuestionnaire1 } = useSelector(state => {
+    const { questionnaire, subQuestionnaire1, selectedUsers } = useSelector(state => {
         return {
+            selectedUsers: state.agencies.selectedUsers,
             questionnaire: state.questionnaire,
             subQuestionnaire1: state.subQuestionnaire1,
         };
     });
 
+    const users = [];
+    selectedUsers.map(user => {
+        users.push({
+            ...user,
+            filterDate: user.currentFilterDate,
+        });
+    });
+
     localStorage.setItem('questionnaire', JSON.stringify({
+        users,
         answers: {
             ...questionnaire.answers
         },
