@@ -80,7 +80,9 @@ const CalendarRightSide = () => {
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
             {GlobalHelper.getCalendarWeekText({},
                 <div className="text-bookingdarker dark:text-white">
-                    <small>You've booked <strong>{Object.values(calendar.selectedSlots).length}</strong> of <strong>{selectedUsers.length}</strong> agencies</small>
+                    <small>You've booked <strong>{Object.values(calendar.selectedSlots).length}</strong>
+                        {/*of <strong>{selectedUsers.length}</strong>*/}
+                        &nbsp;agencies</small>
                     <div>
                         <FormControlLabel
                             sx={{
