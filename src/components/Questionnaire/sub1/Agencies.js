@@ -3,12 +3,10 @@ import Typography from "@mui/material/Typography";
 import DoneIcon from '@mui/icons-material/Done';
 import Button from "@mui/material/Button";
 import {useContext, useLayoutEffect, useState} from "react";
-import {toast} from "react-toastify";
 import Partner from "../../agency/Partner";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../../AppContext";
-import moment from "moment/moment";
 
 const Agencies = ({handelAnswerSelection, team}) => {
     const { apiUrl } = useContext(AppContext);
@@ -35,6 +33,8 @@ const Agencies = ({handelAnswerSelection, team}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const [isFiltering, setIsFiltering] = useState(false);
+
     useLayoutEffect(() => {
         if (typeof previousAnswer === 'string' && team.id) {
             axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${previousAnswer}&team_id=${team.id}`, {
@@ -44,25 +44,33 @@ const Agencies = ({handelAnswerSelection, team}) => {
 
                 usersFiltered[previousAnswer] = response.data;
 
-                dispatch({type: 'update-filtered-users', payload: usersFiltered});
-
                 setIsLoading(false);
+
+                if (response.data.length) {
+                    dispatch({type: 'update-filtered-users', payload: usersFiltered});
+                    setIsFiltering(false);
+                }
             });
         }
-    }, []);
+    }, [isFiltering, isLoading]);
 
     const handleClick = () => {
-        if (selectedUsers.length && usersAmountNeeded && usersAmountNeeded === selectedUsers.length) {
+        setIsFiltering(true);
+
+        if (users.usersFiltered?.[previousAnswer]?.length && usersAmountNeeded && usersAmountNeeded === selectedUsers.length) {
             dispatch({type: 'update-questionnaire-answer', payload: {active: 'FirstName', next: 'FirstName', sub1Running: false}});
 
             // setTimout is used for smooth moving from sub-questionnaire component to main questionnaire component
             setTimeout(() => {
                 dispatch({type: 'update-questionnaire-answer', payload: {active: 'FirstName', next: 'LastName', sub1Running: false}});
             }, 601);
+        } else if (!users.usersFiltered?.[previousAnswer]?.length) {
+            // forward to previous step
+            handelAnswerSelection({active: 'DateAndTime', next: 'Agencies', answer});
+        } else {
+            // remove active and next to make component rerender clear components
+            handelAnswerSelection({active: null, next: null, answer});
         }
-
-        // remove active and next to make component rerender clear components
-        handelAnswerSelection({active: null, next: null, answer});
     }
 
     return (
@@ -77,7 +85,7 @@ const Agencies = ({handelAnswerSelection, team}) => {
             <div>
                 {users?.usersFiltered?.[previousAnswer]?.length ? (
                     <section className="agencies top-50">
-                        {users?.usersFiltered[previousAnswer].map((item, key) => <Partner key={key} teamId={team.id} maxLimit={usersAmountNeeded} {...item} />)}
+                        {users?.usersFiltered[previousAnswer].map((item, key) => <Partner key={key} teamId={team.id} maxLimit={1} {...item} />)}
                     </section>
                 ) : (
                     <section className="agencies top-50">

@@ -20,7 +20,7 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
         if (options.indexOf(value) < 0) {
             toast("Please select an answer from the list.");
         } else {
-            handelAnswerSelection({active: 'DateAndTime', next: 'FirstName', answer});
+            handelAnswerSelection({active: 'DateAndTime', next: 'Agencies', answer});
         }
     }
 

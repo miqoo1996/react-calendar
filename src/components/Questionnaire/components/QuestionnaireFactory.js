@@ -1,5 +1,4 @@
 import AmountOfPeople from "../AmountOfPeople";
-import DateAndTime from "../DateAndTime";
 import FirstName from "../FirstName";
 import LastName from "../LastName";
 import Email from "../Email";
@@ -8,6 +7,7 @@ import Agencies from "../sub1/Agencies";
 import ScheduleMeeting from "../ScheduleMeeting";
 import GetStarted from "../GetStarted";
 import EmptyString from "../EmptyString";
+import DateAndTime from "../sub1/DateAndTime";
 
 const QuestionnaireFactory = ({component, defaultComponent, props}) => {
     const {isActive} = props;
@@ -23,6 +23,9 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
             break;
         case "DateAndTime":
             item = <DateAndTime {...props} />;
+            break;
+        case "Agencies":
+            item = <Agencies {...props} />;
             break;
         case "FirstName":
             item = <FirstName {...props} />;
