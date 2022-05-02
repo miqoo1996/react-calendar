@@ -8,41 +8,44 @@ const initialState = {
 };
 
 const questionnaireAction = (state, action, key) => {
-    if (action.type === `update-${key}-answer`) {
-        state.active = action.payload?.active || null;
+    const prevState = state;
 
-        state.next = action.payload?.next || null;
+    if (action.type === `update-${key}-answer`) {
+        if (action.payload.active) {
+            prevState.active = action.payload.active;
+        }
+        if (action.payload.next) {
+            prevState.next = action.payload.next;
+        }
 
         if (action.payload?.answer) {
-            const answers = state.answers.filter(a => a.number < action.payload.answer.number);
+            const answers = prevState.answers.filter(a => a.number < action.payload.answer.number);
             answers.push(action.payload.answer);
-            state.answers = answers;
+            prevState.answers = answers;
+        }
+
+        if (key === 'questionnaire') {
+            if (action.payload.answer?.number === AMOUNT_OF_PEOPLE_NUMBER) {
+                prevState.sub1Running = true;
+            } else if (typeof action.payload.sub1Running === 'boolean') {
+                prevState.sub1Running = !! action.payload?.sub1Running;
+            }
         }
     }
 
     if (action.type === `remove-${key}-all`) {
-        state = initialState;
+        return {
+            ...initialState,
+        };
     }
 
     return {
-        ...state,
+        ...prevState,
     };
 }
 
 const QuestionnaireReducer = (state = initialState, action) => {
-    state = questionnaireAction(state, action, 'questionnaire');
-
-    if (action.type === 'update-questionnaire-answer') {
-        if (action.payload.answer?.number === AMOUNT_OF_PEOPLE_NUMBER) {
-            state.sub1Running = true;
-        } else if (typeof action.payload.sub1Running === 'boolean') {
-            state.sub1Running = !! action.payload?.sub1Running;
-        }
-    }
-
-    return {
-        ...state,
-    };
+    return {...questionnaireAction(state, action, 'questionnaire')};
 };
 
 const sub1InitialState = {
@@ -52,11 +55,7 @@ const sub1InitialState = {
 };
 
 const SubQuestionnaire1Reducer = (state = sub1InitialState, action) => {
-    state = questionnaireAction(state, action, `sub${AMOUNT_OF_PEOPLE_NUMBER}-questionnaire`);
-
-    return {
-        ...state,
-    };
+    return {...questionnaireAction(state, action, `sub${AMOUNT_OF_PEOPLE_NUMBER}-questionnaire`)};
 };
 
 export {

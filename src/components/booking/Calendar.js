@@ -9,7 +9,6 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import axios from "axios";
 import {toast} from "react-toastify";
 import moment from "moment/moment";
-import Divider from "@mui/material/Divider";
 
 const Calendar = ({selectedUsers}) => {
     const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {users: [], answers: [], answersSub1: []};

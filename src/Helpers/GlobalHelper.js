@@ -15,7 +15,7 @@ const GlobalHelper = {
     getUTCDate: (date) => {
         date = date || GlobalHelper.date;
 
-        return new Date(date.toUTCString('default', { }));
+        return moment(date).toDate();
     },
 
     getUTCDateTimeString: (date) => {

@@ -6,8 +6,18 @@ import PageNoMatch from "./PageNoMatch";
 import {AppContext, AppContextDefaultValue} from "./AppContext";
 import {ToastContainer} from "react-toastify";
 import Questionnaire from "./components/Questionnaire/components/Questionnaire";
+import axios from "axios";
+import {useEffect} from "react";
+import {useDispatch} from "react-redux";
+import {setIpAddress} from "./slices/VisitorSlice";
 
 function App() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        axios.get("https://api.ipify.org?format=json").then(response => response.data).then(({ip}) => dispatch(setIpAddress(ip)));
+    }, []);
+
     return (
       <Router>
           <AppContext.Provider value={AppContextDefaultValue}>
