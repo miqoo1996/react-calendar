@@ -68,8 +68,8 @@ const Agencies = ({handelAnswerSelection, team}) => {
             // forward to previous step
             handelAnswerSelection({active: 'DateAndTime', next: 'Agencies', answer});
         } else {
-            // remove active and next to make component rerender clear components
-            handelAnswerSelection({active: null, next: null, answer});
+            // forward to previous step
+            handelAnswerSelection({active: 'DateAndTime', next: 'Agencies', answer});
         }
     }
 
