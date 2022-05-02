@@ -24,21 +24,17 @@ const Partner = (user) => {
 
     const onAgencyClickHandle = () => {
         if (!userStored) {
-            // TODO work on this.
-            // if (selectedUsers.length <= (maxLimit - 1)) {
-            //     dispatch({type: 'add-selected-user', payload: {
-            //             ...user,
-            //             groupId,
-            //             currentFilterDate
-            //         }});
-            // } else {
-            //     toast(`You can select maximum ${maxLimit} items.`);
-            // }
-            dispatch({type: 'add-selected-user', payload: {
-                    ...user,
-                    groupId,
-                    currentFilterDate
-                }});
+            if (selectedUsers.findIndex(u => u.currentFilterDate === currentFilterDate) !== -1) {
+                toast("You have already chosen the date.");
+            } else if (selectedUsers.filter(u => u.currentFilterDate === currentFilterDate).length <= (maxLimit - 1)) {
+                dispatch({type: 'add-selected-user', payload: {
+                        ...user,
+                        groupId,
+                        currentFilterDate
+                    }});
+            } else {
+                toast(`You can choose maximum ${maxLimit} item.`);
+            }
         } else {
             dispatch({type: 'remove-selected-user', payload: user});
         }

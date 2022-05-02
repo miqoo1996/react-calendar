@@ -17,9 +17,10 @@ import {useSelector} from "react-redux";
 const DateAndTime = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
 
-    const { subQuestionnaire1 } = useSelector(state => {
+    const { subQuestionnaire1, selectedUsers } = useSelector(state => {
         return {
             subQuestionnaire1: state.subQuestionnaire1,
+            selectedUsers: state.agencies.selectedUsers,
         };
     });
 
@@ -36,10 +37,15 @@ const DateAndTime = ({handelAnswerSelection}) => {
             answer.value = GlobalHelper.getUTCDateTimeString();
         }
 
+        const now = moment(new Date(), 'YYYY-MM-DD HH:mm:ss');
+
         if (! moment(answer.value).isValid()) {
             toast('Wrong date specified.');
+        } else if (selectedUsers.findIndex(u => u.currentFilterDate === answer.value) !== -1) {
+            toast("You have already chosen the date.");
+        } else if (moment(answer.value, 'YYYY-MM-DD HH:mm:ss').isBefore(now)) {
+            toast("meeting date must be greater then the current time.");
         } else {
-            // TODO fix "next=DateAndTime"
             handelAnswerSelection({active: 'Agencies', next: 'DateAndTime', answer});
         }
     }
