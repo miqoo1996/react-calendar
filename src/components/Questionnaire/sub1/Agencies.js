@@ -70,7 +70,7 @@ const Agencies = ({handelAnswerSelection, team}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    {usersAmountNeeded ? 'Please select the date and time you want to chat with.' : 'Please wait...'}
+                    {usersAmountNeeded ? 'Select people you want to chat with.' : 'Please wait...'}
                 </Typography>
             </div>
 
