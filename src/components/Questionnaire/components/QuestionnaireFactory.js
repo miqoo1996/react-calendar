@@ -71,9 +71,13 @@ const SubQuestionnaire1Factory = ({component, defaultComponent, props}) => {
             item = <Agencies {...props} />;
             break;
         default:
-            if (defaultComponent) {
-                item = defaultComponent;
+            if (component) {
+                return QuestionnaireFactory({component, defaultComponent, props});
             }
+    }
+
+    if (!item && defaultComponent) {
+        item = defaultComponent;
     }
 
     return (

@@ -33,8 +33,6 @@ const Agencies = ({handelAnswerSelection, team}) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    const [isFiltering, setIsFiltering] = useState(false);
-
     useLayoutEffect(() => {
         if (typeof previousAnswer === 'string' && team.id) {
             axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${previousAnswer}&team_id=${team.id}`, {
@@ -48,22 +46,19 @@ const Agencies = ({handelAnswerSelection, team}) => {
 
                 if (response.data.length) {
                     dispatch({type: 'update-filtered-users', payload: usersFiltered});
-                    setIsFiltering(false);
                 }
             });
         }
-    }, [isFiltering, isLoading]);
+    }, [isLoading]);
 
     const handleClick = () => {
-        setIsFiltering(true);
-
         if (users.usersFiltered?.[previousAnswer]?.length && usersAmountNeeded && usersAmountNeeded === selectedUsers.length) {
             dispatch({type: 'update-questionnaire-answer', payload: {active: 'FirstName', next: 'FirstName', sub1Running: false}});
 
             // setTimout is used for smooth moving from sub-questionnaire component to main questionnaire component
             setTimeout(() => {
                 dispatch({type: 'update-questionnaire-answer', payload: {active: 'FirstName', next: 'LastName', sub1Running: false}});
-            }, 601);
+            }, 800);
         } else if (!users.usersFiltered?.[previousAnswer]?.length) {
             // forward to previous step
             handelAnswerSelection({active: 'DateAndTime', next: 'Agencies', answer});

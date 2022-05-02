@@ -1,7 +1,7 @@
 import "../../../public/Questionnaire.scss";
 import {useDispatch, useSelector} from "react-redux";
 import AmountOfPeople from "../AmountOfPeople";
-import {useContext, useEffect, useLayoutEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import GetStarted from "../GetStarted";
 import {toast} from "react-toastify";
 import SubQuestionnaire1 from "./SubQuestionnaire1";
@@ -42,7 +42,7 @@ const Questionnaire = () => {
         }
     }, [questionnaire.sub1Running]);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
 
         axios.get(`${apiUrl}/team/find/?team_id=${teamId}&type=only-team&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
