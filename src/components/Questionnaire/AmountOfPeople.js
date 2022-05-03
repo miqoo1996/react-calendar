@@ -8,11 +8,12 @@ import {useState} from "react";
 import {toast} from "react-toastify";
 import TextField from "@mui/material/TextField";
 import {MenuItem} from "@mui/material";
+import {AMOUNT_OF_PEOPLE_NUMBER} from "../../Helpers/ConstsHelper";
 
 const AmountOfPeople = ({handelAnswerSelection}) => {
     const [value, setValue] = useState(1);
 
-    const answer = {number: 1, key: 'AmountOfPeople', value};
+    const answer = {number: AMOUNT_OF_PEOPLE_NUMBER, key: 'AmountOfPeople', value};
 
     const options = [1, 2, 3];
 
@@ -28,7 +29,7 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
-                    <span className="question-number">1 <ArrowRightAltIcon /></span>
+                    <span className="question-number">2 <ArrowRightAltIcon /></span>
                     How many people do you want to chat with?
                 </Typography>
             </div>

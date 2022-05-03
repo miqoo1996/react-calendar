@@ -1,6 +1,5 @@
 import "../../../public/Questionnaire.scss";
 import {useDispatch, useSelector} from "react-redux";
-import AmountOfPeople from "../AmountOfPeople";
 import {useContext, useEffect, useState} from "react";
 import GetStarted from "../GetStarted";
 import {toast} from "react-toastify";
@@ -10,6 +9,7 @@ import {useParams} from "react-router";
 import GlobalHelper from "../../../Helpers/GlobalHelper";
 import axios from "axios";
 import {AppContext} from "../../../AppContext";
+import ServicesList from "../ServicesList";
 
 const Questionnaire = () => {
     const { teamId } = useParams();
@@ -33,6 +33,13 @@ const Questionnaire = () => {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        if (questionnaire.answers.length) {
+            dispatch({type: "remove-questionnaire-all"});
+            dispatch({type: "remove-sub1-questionnaire-all"});
+        }
+    }, []);
+
+    useEffect(() => {
         if (questionnaire.sub1Running === false) {
             setAnimate(true);
 
@@ -49,7 +56,7 @@ const Questionnaire = () => {
             setTeam(response.data);
             setIsLoading(false);
         });
-    }, []);
+    }, [teamId]);
 
     const handelAnswerSelection = (data, validate = true, animationDuration = 601) => {
         if (!validate || (!data.answer || (data.answer && data.answer.value))) {
@@ -84,7 +91,7 @@ const Questionnaire = () => {
             </div>
             <div className={'questions-section' + (animate ? ' animate' : '')}>
                 <QuestionnaireFactory component={questionnaire.next} props={{handelAnswerSelection, isNext: true, ...team}} defaultComponent={
-                    <AmountOfPeople handelAnswerSelection={handelAnswerSelection} {...team} />
+                    <ServicesList handelAnswerSelection={handelAnswerSelection} {...team} />
                 } />
             </div>
         </div>

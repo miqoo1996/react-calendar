@@ -2,11 +2,12 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Typography from "@mui/material/Typography";
 import DoneIcon from '@mui/icons-material/Done';
 import Button from "@mui/material/Button";
-import {useContext, useLayoutEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import Partner from "../../agency/Partner";
 import {useDispatch, useSelector} from "react-redux";
 import axios from "axios";
 import {AppContext} from "../../../AppContext";
+import {AMOUNT_OF_PEOPLE_KEY} from "../../../Helpers/ConstsHelper";
 
 const Agencies = ({handelAnswerSelection, team}) => {
     const { apiUrl } = useContext(AppContext);
@@ -23,17 +24,19 @@ const Agencies = ({handelAnswerSelection, team}) => {
         };
     });
 
-    const usersAmountNeeded = questionnaire.answers[0].value;
+    const usersAmountNeeded = questionnaire.answers[AMOUNT_OF_PEOPLE_KEY].value;
 
     const previousAnswer = subQuestionnaire1.answers[subQuestionnaire1.answers.length - 1]?.value;
 
+    console.log(previousAnswer, "asdsad");
+
     const num = subQuestionnaire1.answers.length ? (subQuestionnaire1.answers.length + 1) : 2;
 
-    const answer = {number: "1." + num, key: 'Agencies', value: selectedUsers};
+    const answer = {number: "2." + num, key: 'Agencies', value: selectedUsers};
 
     const [isLoading, setIsLoading] = useState(true);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         if (typeof previousAnswer === 'string' && team.id) {
             axios.post(`${apiUrl}/user/team-available-users?timezone=${calendar.timeZoneName}&activeDate=${previousAnswer}&team_id=${team.id}`, {
                 selectedUsers: selectedUsers.map(u => u.id),

@@ -55,7 +55,7 @@ const sub1InitialState = {
 };
 
 const SubQuestionnaire1Reducer = (state = sub1InitialState, action) => {
-    return {...questionnaireAction(state, action, `sub${AMOUNT_OF_PEOPLE_NUMBER}-questionnaire`)};
+    return {...questionnaireAction(state, action, `sub1-questionnaire`)};
 };
 
 export {

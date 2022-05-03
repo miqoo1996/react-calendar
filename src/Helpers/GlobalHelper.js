@@ -145,6 +145,7 @@ const GlobalHelper = {
                           align-items: center;
                           justify-content: space-between;
                         `;
+
         return <div {...props} className="mb-4 text-left text-lg font-light text-gray-600">
             <Wrapper className="text-bookingdarker w-1/2 dark:text-white">
                 <div>

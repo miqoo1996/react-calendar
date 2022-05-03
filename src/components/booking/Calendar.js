@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CalendarLeftSide from "./CalendarLeftSide";
 import CalendarContent from "./CalendarContent";
 import CalendarRightSide from "./CalendarRightSide";
@@ -9,9 +9,10 @@ import GlobalHelper from "../../Helpers/GlobalHelper";
 import axios from "axios";
 import {toast} from "react-toastify";
 import moment from "moment/moment";
+import {Link} from "react-router-dom";
 
 const Calendar = ({selectedUsers}) => {
-    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {users: [], answers: [], answersSub1: []};
+    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {teamId: null, users: [], answers: [], answersSub1: []};
     const answers = questionnaire.answers;
 
     const getAnswer = key => {
@@ -54,6 +55,10 @@ const Calendar = ({selectedUsers}) => {
         border: "dashed red 3px",
         padding: "5px",
     };
+
+    useEffect(() => {
+        onSwitchToFormHandler();
+    }, []);
 
     const onSwitchToFormHandler = () => {
         const hasSelectedSlots = Object.values(calendar.selectedSlots).length > 0;
@@ -222,9 +227,9 @@ const Calendar = ({selectedUsers}) => {
                                                 <button type="submit" data-testid="confirm-book-button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-transparent dark:text-darkmodebrandcontrast text-brandcontrast bg-brand dark:bg-darkmodebrand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">
                                                     Confirm
                                                 </button>
-                                                <button onClick={e => setSwitchToForm(false)} type="button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900 dark:bg-transparent dark:text-white dark:border-gray-800 dark:hover:bg-gray-800">
+                                                <Link to={{pathname: "/" + questionnaire.teamId}} type="button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900 dark:bg-transparent dark:text-white dark:border-gray-800 dark:hover:bg-gray-800">
                                                     Cancel
-                                                </button>
+                                                </Link>
                                             </div>
                                         </form>
                                     </div>

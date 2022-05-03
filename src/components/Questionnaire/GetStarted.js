@@ -18,7 +18,7 @@ const GetStarted = ({handelAnswerSelection, title, description}) => {
             </div>
 
             <div>
-                <Button onClick={e => handelAnswerSelection({active: 'AmountOfPeople', next: 'DateAndTime'})} variant="contained" disableElevation>
+                <Button onClick={e => handelAnswerSelection({active: 'ServicesList', next: 'AmountOfPeople'})} variant="contained" disableElevation>
                     Get Started
                 </Button>
             </div>

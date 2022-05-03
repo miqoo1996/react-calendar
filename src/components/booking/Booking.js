@@ -9,7 +9,8 @@ import {useSearchParams} from "react-router-dom";
 import moment from "moment/moment";
 
 const Booking = () => {
-    const questionnairePassed = !! localStorage.getItem('questionnaire');
+    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {teamId: null, users: [], answers: [], answersSub1: []};
+    const questionnairePassed = questionnaire && questionnaire.teamId;
 
     const { apiUrl } = useContext(AppContext);
 

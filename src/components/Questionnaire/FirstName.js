@@ -11,7 +11,7 @@ import {toast} from "react-toastify";
 const FirstName = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
 
-    const answer = {number: 2, key: 'FirstName', value};
+    const answer = {number: 3, key: 'FirstName', value};
 
     const handleClick = () => {
         if (!value || !validator.isAlpha(value)) {
@@ -27,7 +27,7 @@ const FirstName = ({handelAnswerSelection}) => {
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
-                    <span className="question-number">2 <ArrowRightAltIcon /></span>
+                    <span className="question-number">3 <ArrowRightAltIcon /></span>
                     Great, now let's get a little personal. What's your first name?
                 </Typography>
             </div>

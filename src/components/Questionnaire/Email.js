@@ -15,17 +15,17 @@ const Email = ({handelAnswerSelection}) => {
         if (!value || !validator.isEmail(value)) {
             toast('Wrong email specified.');
         } else {
-            handelAnswerSelection({active: 'AdditionalNotes', next: 'ScheduleMeeting', answer});
+            handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer});
         }
     }
 
-    const answer = {number: 4, key: 'Email', value};
+    const answer = {number: 5, key: 'Email', value};
 
     return (
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
-                    <span className="question-number">4 <ArrowRightAltIcon /></span>
+                    <span className="question-number">5 <ArrowRightAltIcon /></span>
                     Great, thanks, sad! Where should we send the calendar invite?
                 </Typography>
 

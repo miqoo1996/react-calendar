@@ -8,6 +8,7 @@ import ScheduleMeeting from "../ScheduleMeeting";
 import GetStarted from "../GetStarted";
 import EmptyString from "../EmptyString";
 import DateAndTime from "../sub1/DateAndTime";
+import ServicesList from "../ServicesList";
 
 const QuestionnaireFactory = ({component, defaultComponent, props}) => {
     const {isActive} = props;
@@ -17,6 +18,9 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
     switch (component) {
         case "GetStarted":
             item = <GetStarted {...props} />;
+            break;
+        case "ServicesList":
+            item = <ServicesList {...props} />;
             break;
         case "AmountOfPeople":
             item = <AmountOfPeople {...props} />;

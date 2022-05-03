@@ -34,12 +34,12 @@ const SubQuestionnaire1 = (team) => {
         <div id="questionnaire">
             <div className={'questions-section' + (animate ? ' animate' : '')}>
                 <SubQuestionnaire1Factory component={subQuestionnaire1.active} props={{handelAnswerSelection, isActive: true, ...team}} defaultComponent={
-                    <DateAndTime handelAnswerSelection={handelAnswerSelection} {...team} subNumber={1} />
+                    <DateAndTime handelAnswerSelection={handelAnswerSelection} {...team} />
                 } />
             </div>
             <div className={'questions-section' + (animate ? ' animate' : '')}>
                 <SubQuestionnaire1Factory component={subQuestionnaire1.next} props={{handelAnswerSelection, isNext: true, ...team}} defaultComponent={
-                    <Agencies handelAnswerSelection={handelAnswerSelection} {...team} subNumber={2} />
+                    <Agencies handelAnswerSelection={handelAnswerSelection} {...team} />
                 } />
             </div>
         </div>

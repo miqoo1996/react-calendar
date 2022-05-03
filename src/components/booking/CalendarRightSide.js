@@ -11,6 +11,34 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import moment from "moment/moment";
 import {useDispatch} from "react-redux";
 
+
+const BookedMeetingSectionItem = styled.div`
+    margin: 0;
+    min-width: 160px;
+    margin-bottom: 50px;
+    `;
+
+const BookedMeetingSection = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    `;
+
+const BookedMeetingWrapper = styled.div`
+     text-align: initial;
+     margin-bottom: 20px;
+    `;
+const BookedMeetingSlot = styled.div`
+    color: #948ca9;
+    `;
+const BookedMeetingUserName = styled.div`
+    color: black;
+    font-weight: 500;
+    `;
+const DividerSection = styled.div`
+    margin-bottom: 30px;
+    `;
+
 const CalendarRightSide = () => {
     const {calendar, selectedUsers, slotSectionStyles} = useContext(CalendarContext);
 
@@ -48,33 +76,6 @@ const CalendarRightSide = () => {
     }, []);
 
     GlobalHelper.date = calendar.activeDate;
-
-    const BookedMeetingSectionItem = styled.div`
-    margin: 0;
-    min-width: 160px;
-    margin-bottom: 50px;
-    `;
-
-    const BookedMeetingSection = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    `;
-
-    const BookedMeetingWrapper = styled.div`
-     text-align: initial;
-     margin-bottom: 20px;
-    `;
-    const BookedMeetingSlot = styled.div`
-    color: #948ca9;
-    `;
-    const BookedMeetingUserName = styled.div`
-    color: black;
-    font-weight: 500;
-    `;
-    const DividerSection = styled.div`
-    margin-bottom: 30px;
-    `;
 
     return (
         <div className="mt-8 flex flex-col text-center sm:mt-0 sm:w-1/3 sm:pl-4 md:-mb-5">
