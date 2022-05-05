@@ -24,7 +24,7 @@ const AdditionalNotes = ({handelAnswerSelection}) => {
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
-                    <span className="question-number">5 <ArrowRightAltIcon /></span>
+                    <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
                     Additional notes
                 </Typography>
 

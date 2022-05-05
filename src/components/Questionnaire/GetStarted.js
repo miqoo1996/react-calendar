@@ -8,7 +8,7 @@ const GetStarted = ({handelAnswerSelection, title, description}) => {
         <div className="center-column">
             <div className="question-title" style={{marginBottom: 0}}>
                 <div>
-                    <p className="page-title">With one click, interview with "{title}".</p>
+                    <p className="page-title">{title}</p>
                     <p className="info-text">{description}</p>
                 </div>
             </div>
@@ -18,7 +18,7 @@ const GetStarted = ({handelAnswerSelection, title, description}) => {
             </div>
 
             <div>
-                <Button onClick={e => handelAnswerSelection({active: 'ServicesList', next: 'AmountOfPeople'})} variant="contained" disableElevation>
+                <Button onClick={e => handelAnswerSelection({active: 'ServicesList', next: 'BudgetConfirmation'})} variant="contained" disableElevation>
                     Get Started
                 </Button>
             </div>

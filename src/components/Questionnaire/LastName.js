@@ -11,7 +11,7 @@ import {toast} from "react-toastify";
 const LastName = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
 
-    const answer = {number: 4, key: 'LastName', value};
+    const answer = {number: 5, key: 'LastName', value};
 
     const handleClick = () => {
         if (!value || !validator.isAlpha(value)) {
@@ -19,7 +19,7 @@ const LastName = ({handelAnswerSelection}) => {
         } else if (value.length < 2) {
             toast('Please provide at least 2 symbols.');
         } else {
-            handelAnswerSelection({active: 'Email', next: 'ScheduleMeeting', answer});
+            handelAnswerSelection({active: 'Email', next: 'Website', answer});
         }
     }
 
@@ -27,7 +27,7 @@ const LastName = ({handelAnswerSelection}) => {
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
-                    <span className="question-number">4 <ArrowRightAltIcon /></span>
+                    <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
                     And your last name?
                 </Typography>
             </div>

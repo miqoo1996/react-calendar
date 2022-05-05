@@ -1,12 +1,10 @@
 import Typography from "@mui/material/Typography";
 import DoneIcon from "@mui/icons-material/Done";
 import AgencyBottom from "../agency/AgencyBottom";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 
 const ScheduleMeeting = (props) => {
-    const {handelAnswerSelection, id} = props;
-
-    const dispatch = useDispatch();
+    const {slug} = props;
 
     const { questionnaire, subQuestionnaire1, selectedUsers } = useSelector(state => {
         return {
@@ -25,7 +23,7 @@ const ScheduleMeeting = (props) => {
     });
 
     localStorage.setItem('questionnaire', JSON.stringify({
-        teamId: id,
+        slug,
         users,
         answers: {
             ...questionnaire.answers

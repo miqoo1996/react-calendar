@@ -22,7 +22,7 @@ const AgencyReducer = (state = initialState, action) => {
 
         selectedUsers.push(action.payload);
 
-        selectedUsers = selectedUsers.filter(user => user.teamId.toString() === action.payload.teamId.toString());
+        // selectedUsers = selectedUsers.filter(user => user.teamId.toString() === action.payload.teamId.toString());
     }
 
     if (action.type === 'update-items') {

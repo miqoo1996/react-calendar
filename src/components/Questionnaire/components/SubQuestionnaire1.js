@@ -5,7 +5,7 @@ import {useState} from "react";
 import DateAndTime from "../sub1/DateAndTime";
 import Agencies from "../sub1/Agencies";
 
-const SubQuestionnaire1 = (team) => {
+const SubQuestionnaire1 = (data) => {
     const dispatch = useDispatch();
 
     const [animate, setAnimate] = useState(false);
@@ -33,13 +33,13 @@ const SubQuestionnaire1 = (team) => {
     return (
         <div id="questionnaire">
             <div className={'questions-section' + (animate ? ' animate' : '')}>
-                <SubQuestionnaire1Factory component={subQuestionnaire1.active} props={{handelAnswerSelection, isActive: true, ...team}} defaultComponent={
-                    <DateAndTime handelAnswerSelection={handelAnswerSelection} {...team} />
+                <SubQuestionnaire1Factory component={subQuestionnaire1.active} props={{handelAnswerSelection, isActive: true, ...data}} defaultComponent={
+                    <DateAndTime handelAnswerSelection={handelAnswerSelection} {...data} />
                 } />
             </div>
             <div className={'questions-section' + (animate ? ' animate' : '')}>
-                <SubQuestionnaire1Factory component={subQuestionnaire1.next} props={{handelAnswerSelection, isNext: true, ...team}} defaultComponent={
-                    <Agencies handelAnswerSelection={handelAnswerSelection} {...team} />
+                <SubQuestionnaire1Factory component={subQuestionnaire1.next} props={{handelAnswerSelection, isNext: true, ...data}} defaultComponent={
+                    <Agencies handelAnswerSelection={handelAnswerSelection} {...data} />
                 } />
             </div>
         </div>

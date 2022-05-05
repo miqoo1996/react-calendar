@@ -10,9 +10,10 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import moment from "moment/moment";
 import {Link} from "react-router-dom";
+import {CircularProgress} from "@mui/material";
 
 const Calendar = ({selectedUsers}) => {
-    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {teamId: null, users: [], answers: [], answersSub1: []};
+    const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {slug: null, users: [], answers: [], answersSub1: []};
     const answers = questionnaire.answers;
 
     const getAnswer = key => {
@@ -45,9 +46,11 @@ const Calendar = ({selectedUsers}) => {
 
     const [switchToForm, setSwitchToForm] = useState(false);
 
-    const [slotSectionStyles, setSlotSectionStyles] = useState({});
+    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
     const [showAdditionalGuestsInput, setShowAdditionalGuestsInput] = useState(false);
+
+    const [slotSectionStyles, setSlotSectionStyles] = useState({});
 
     const {apiUrl} = AppContextDefaultValue;
 
@@ -89,6 +92,8 @@ const Calendar = ({selectedUsers}) => {
         axios.post(`${apiUrl}/calendar/book-call?timezone=${calendar.timeZoneName}&activeDate=${activeDate}`, formData).then(response => {
             const { success, errors } = response.data;
 
+            setIsFormSubmitted(false);
+
             if (success) {
                 dispatch({type: "remove-agencies"});
                 dispatch({type: "remove-calendar"});
@@ -97,6 +102,8 @@ const Calendar = ({selectedUsers}) => {
                 toast((Object.values(errors)?.[0] || "Oops! something went wrong."));
             }
         });
+
+        setIsFormSubmitted(true);
 
         return false;
     };
@@ -119,6 +126,11 @@ const Calendar = ({selectedUsers}) => {
                             ) : (
                                 <>
                                     <div className="sm:w-1/2 sm:border-r sm:dark:border-gray-700">
+                                        {event.imageUrl ? (
+                                            <div style={{maxWidth: "150px", marginBottom: "30px"}} className="text-bookinglight mt-2 font-medium dark:text-gray-300">
+                                                <img alt="Brand Logo" src={event.imageUrl}/>
+                                            </div>
+                                        ) : null}
                                         <h2 className="font-cal text-bookinglight mt-2 font-medium dark:text-gray-300">
                                             {event.title}
                                         </h2>
@@ -206,6 +218,28 @@ const Calendar = ({selectedUsers}) => {
                                                 </div>
                                             </div>
                                             <div className="mb-4">
+                                                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-white">
+                                                    Phone number
+                                                </label>
+                                                <div className="mt-1">
+                                                    <input type="search"
+                                                           defaultValue={getAnswer('Phone')}
+                                                           autoCapitalize="none" autoComplete="phone" autoCorrect="off" inputMode="phone" name="phone" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
+                                                           placeholder="" />
+                                                </div>
+                                            </div>
+                                            <div className="mb-4">
+                                                <label htmlFor="website" className="block text-sm font-medium text-gray-700 dark:text-white">
+                                                    Website
+                                                </label>
+                                                <div className="mt-1">
+                                                    <input type="url"
+                                                           defaultValue={getAnswer('Website')}
+                                                           autoCapitalize="none" autoComplete="website" autoCorrect="off" inputMode="website" name="website" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
+                                                           placeholder="" />
+                                                </div>
+                                            </div>
+                                            <div className="mb-4">
                                                 <label onClick={e => setShowAdditionalGuestsInput(!showAdditionalGuestsInput)} htmlFor="guests" className="mb-1 block text-sm font-medium hover:cursor-pointer dark:text-white">
                                                     {showAdditionalGuestsInput ? "-" : "+"} Additional Guests
                                                 </label>
@@ -224,10 +258,10 @@ const Calendar = ({selectedUsers}) => {
                                                     name="notes" id="notes" rows="3" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm" placeholder="Please share anything that will help prepare for our meeting." />
                                             </div>
                                             <div className="flex items-start space-x-2 rtl:space-x-reverse">
-                                                <button type="submit" data-testid="confirm-book-button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-transparent dark:text-darkmodebrandcontrast text-brandcontrast bg-brand dark:bg-darkmodebrand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">
-                                                    Confirm
+                                                <button type={isFormSubmitted ? 'button' : 'submit'} data-testid="confirm-book-button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-transparent dark:text-darkmodebrandcontrast text-brandcontrast bg-brand dark:bg-darkmodebrand hover:bg-opacity-90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900">
+                                                    {isFormSubmitted ? 'Processing...' : 'Confirm'}
                                                 </button>
-                                                <Link to={{pathname: "/" + questionnaire.teamId}} type="button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900 dark:bg-transparent dark:text-white dark:border-gray-800 dark:hover:bg-gray-800">
+                                                <Link to={{pathname: "/" + questionnaire.slug}} type="button" className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-sm relative border border-gray-300 text-gray-700 bg-white hover:bg-gray-50 hover:text-gray-900 hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-neutral-900 dark:bg-transparent dark:text-white dark:border-gray-800 dark:hover:bg-gray-800">
                                                     Cancel
                                                 </Link>
                                             </div>

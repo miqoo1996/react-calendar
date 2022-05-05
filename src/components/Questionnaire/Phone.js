@@ -3,33 +3,33 @@ import Typography from "@mui/material/Typography";
 import DoneIcon from "@mui/icons-material/Done";
 import Button from "@mui/material/Button";
 import {useState} from "react";
-import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
-import validator from 'validator'
 import {toast} from "react-toastify";
+import TextField from "@mui/material/TextField";
+import {PHONE_NUMBER_REGEX} from "../../Helpers/ConstsHelper";
 
-const Email = ({handelAnswerSelection}) => {
-    const [value, setValue] = useState();
+const Phone = ({handelAnswerSelection}) => {
+    const [value, setValue] = useState("");
 
     const handleClick = () => {
-        if (!value || !validator.isEmail(value)) {
-            toast('Wrong email specified.');
+        if (!value || !value.match(PHONE_NUMBER_REGEX)) {
+            toast('Wrong phone number specified.');
         } else {
-            handelAnswerSelection({active: 'Website', next: 'Phone', answer});
+            handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer});
         }
     }
 
-    const answer = {number: 6, key: 'Email', value};
+    const answer = {number: 8, key: 'Phone', value};
 
     return (
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    Great, thanks, sad! Where should we send the calendar invite?
+                    Thanks! Now, what number should we call you on?
                 </Typography>
 
-                <p className="info-text">We'll use this email address to send calendar invites and introductions to your marketing expert. Your work email is recommended.</p>
+                <p className="info-text">This is where the first phone call will happen. We'll include this number in the invite so your expert can call you directly.</p>
             </div>
 
             <div>
@@ -37,7 +37,7 @@ const Email = ({handelAnswerSelection}) => {
                     <TextField
                         fullWidth
                         id="standard-helperText"
-                        label="email"
+                        label="phone number"
                         defaultValue=""
                         helperText="Type your answer here"
                         variant="standard"
@@ -55,4 +55,4 @@ const Email = ({handelAnswerSelection}) => {
     );
 }
 
-export default Email;
+export default Phone;

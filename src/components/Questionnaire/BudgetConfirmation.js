@@ -1,4 +1,3 @@
-import _ from "lodash";
 import React, {useState} from 'react';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -7,43 +6,45 @@ import Typography from "@mui/material/Typography";
 import DoneIcon from "@mui/icons-material/Done";
 import Button from "@mui/material/Button";
 import {toast} from "react-toastify";
-import {Checkbox, ListItemButton} from "@mui/material";
+import {Radio, ListItemButton} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import {ANSWER_YES_ID, ANSWER_NO_ID} from "../../Helpers/ConstsHelper";
+import {useDispatch} from "react-redux";
 
-const ServicesList = ({handelAnswerSelection, questions}) => {
-    const [value, setValue] = useState([]);
+const BudgetConfirmation = ({handelAnswerSelection}) => {
+    const dispatch = useDispatch();
 
-    const answer = {number: 1, key: 'ServicesList', value};
+    const [value, setValue] = useState({});
 
-    const questionItems = _.merge([], ...questions.filter(question => question.question_type === 'service').map(question => question.questionnaireItems));
+    const answer = {number: 2, key: 'BudgetConfirmation', value};
 
-    const options = questionItems.sort((prev, next) => prev.order - next.order).map(question => {
-        return {
-            id: question.id,
-            value: question.title,
-        };
-    });
+    const options = [
+        {
+            id: ANSWER_YES_ID,
+            value: "Yes",
+        },
+        {
+            id: ANSWER_NO_ID,
+            value: "No",
+        },
+    ];
 
     const handleClick = () => {
-        if (!value.length) {
+        if (!value.id) {
             toast("Please select an answer from the list.");
         } else {
-            handelAnswerSelection({active: 'BudgetConfirmation', next: 'AmountOfPeople', answer});
+            if (value.id === ANSWER_YES_ID) {
+                handelAnswerSelection({active: 'AmountOfPeople', next: 'DateAndTime', answer});
+            } else {
+                dispatch({type: 'update-questionnaire-answer', payload: {active: 'BudgetConfirmation', next: 'BudgetNotConfirmed'}});
+                handelAnswerSelection({active: 'BudgetNotConfirmed', next: 'EmptyString'});
+            }
         }
     }
 
     const handleToggle = (v) => () => {
-        const currentIndex = value.indexOf(v);
-        const newChecked = [...value];
-
-        if (currentIndex === -1) {
-            newChecked.push(v);
-        } else {
-            newChecked.splice(currentIndex, 1);
-        }
-
-        setValue(newChecked);
+        setValue(v);
     };
 
     return (
@@ -51,10 +52,10 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    Let's start here. Select the services you are most interested in.
+                    For the right strategy, do you have a budget of $1,000+?
                 </Typography>
 
-                <p className="info-text">We'll pick the right marketer(s) and ensure they are prepared for the call.</p>
+                <p className="info-text">Our marketers are incredibly talented, but not magicians.</p>
             </div>
 
             <div>
@@ -66,14 +67,14 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
                                 {number ? <Divider /> : null}
                                 <ListItem
                                     secondaryAction={
-                                        <Checkbox
+                                        <Radio
                                             edge="end"
-                                            checked={value.indexOf(option.id) !== -1}
+                                            checked={value.id === option.id}
                                             inputProps={{ 'aria-labelledby': labelId }}
                                         />
                                     }
                                     disablePadding
-                                    onClick={handleToggle(option.id)}
+                                    onClick={handleToggle(option)}
                                 >
                                     <ListItemButton>
                                         <ListItemText id={labelId} primary={option.value} />
@@ -94,4 +95,4 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
     );
 }
 
-export default ServicesList;
+export default BudgetConfirmation;

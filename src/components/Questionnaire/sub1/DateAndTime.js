@@ -26,7 +26,7 @@ const DateAndTime = ({handelAnswerSelection}) => {
 
     const num = subQuestionnaire1.answers.length ? subQuestionnaire1.answers.length + 1 : 1;
 
-    const answer = {number: "2." + num, key: 'DateAndTime', value};
+    const answer = {number: "3." + num, key: 'DateAndTime', value};
 
     const handleChange = (value) => {
         setValue(GlobalHelper.getUTCDateTimeString(value));
@@ -46,7 +46,6 @@ const DateAndTime = ({handelAnswerSelection}) => {
         } else if (moment(answer.value, 'YYYY-MM-DD HH:mm:ss').isBefore(now)) {
             toast("meeting date must be greater then the current time.");
         } else {
-            console.log(answer, "5555 asdsad");
             handelAnswerSelection({active: 'Agencies', next: 'DateAndTime', answer});
         }
     }

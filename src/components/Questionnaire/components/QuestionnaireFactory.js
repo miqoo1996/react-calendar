@@ -9,6 +9,10 @@ import GetStarted from "../GetStarted";
 import EmptyString from "../EmptyString";
 import DateAndTime from "../sub1/DateAndTime";
 import ServicesList from "../ServicesList";
+import BudgetConfirmation from "../BudgetConfirmation";
+import BudgetNotConfirmed from "../BudgetNotConfirmed";
+import Website from "../Website";
+import Phone from "../Phone";
 
 const QuestionnaireFactory = ({component, defaultComponent, props}) => {
     const {isActive} = props;
@@ -21,6 +25,12 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
             break;
         case "ServicesList":
             item = <ServicesList {...props} />;
+            break;
+        case "BudgetConfirmation":
+            item = <BudgetConfirmation {...props} />;
+            break;
+        case "BudgetNotConfirmed":
+            item = <BudgetNotConfirmed {...props} />;
             break;
         case "AmountOfPeople":
             item = <AmountOfPeople {...props} />;
@@ -39,6 +49,12 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
             break;
         case "Email":
             item = <Email {...props} />;
+            break;
+        case "Website":
+            item = <Website {...props} />;
+            break;
+        case "Phone":
+            item = <Phone {...props} />;
             break;
         case "AdditionalNotes":
             item = <AdditionalNotes {...props} />;

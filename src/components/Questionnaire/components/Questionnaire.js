@@ -12,9 +12,9 @@ import {AppContext} from "../../../AppContext";
 import ServicesList from "../ServicesList";
 
 const Questionnaire = () => {
-    const { teamId } = useParams();
+    const { slug } = useParams();
 
-    const [team, setTeam] = useState({});
+    const [data, setData] = useState({});
 
     const { apiUrl } = useContext(AppContext);
 
@@ -51,12 +51,11 @@ const Questionnaire = () => {
 
     useEffect(() => {
         const activeDate = GlobalHelper.getUTCDateTimeString();
-
-        axios.get(`${apiUrl}/team/find/?team_id=${teamId}&type=only-team&timezone=${calendar.timeZoneName}&activeDate=${activeDate}`).then((response) => {
-            setTeam(response.data);
+        axios.get(`${apiUrl}/questionnaire/find/?slug=${slug}&activeDate=${activeDate}`).then((response) => {
+            setData(response.data);
             setIsLoading(false);
         });
-    }, [teamId]);
+    }, [slug]);
 
     const handelAnswerSelection = (data, validate = true, animationDuration = 601) => {
         if (!validate || (!data.answer || (data.answer && data.answer.value))) {
@@ -71,7 +70,7 @@ const Questionnaire = () => {
         }
     };
 
-    if (!teamId || !team) {
+    if (!slug || !data) {
         return (
             <div id="questionnaire">
                 <div className='questions-section'>
@@ -82,16 +81,16 @@ const Questionnaire = () => {
         );
     }
 
-    const questionnaireComponent = questionnaire.sub1Running ? <SubQuestionnaire1 team={team} /> : (
+    const questionnaireComponent = questionnaire.sub1Running ? <SubQuestionnaire1 data={data} /> : (
         <div id="questionnaire">
             <div className={'questions-section' + (animate ? ' animate' : '')}>
-                <QuestionnaireFactory component={questionnaire.active} props={{handelAnswerSelection, isActive: true, ...team}} defaultComponent={
-                    <GetStarted handelAnswerSelection={handelAnswerSelection} {...team} />
+                <QuestionnaireFactory component={questionnaire.active} props={{handelAnswerSelection, isActive: true, ...data}} defaultComponent={
+                    <GetStarted handelAnswerSelection={handelAnswerSelection} {...data} />
                 } />
             </div>
             <div className={'questions-section' + (animate ? ' animate' : '')}>
-                <QuestionnaireFactory component={questionnaire.next} props={{handelAnswerSelection, isNext: true, ...team}} defaultComponent={
-                    <ServicesList handelAnswerSelection={handelAnswerSelection} {...team} />
+                <QuestionnaireFactory component={questionnaire.next} props={{handelAnswerSelection, isNext: true, ...data}} defaultComponent={
+                    <ServicesList handelAnswerSelection={handelAnswerSelection} {...data} />
                 } />
             </div>
         </div>

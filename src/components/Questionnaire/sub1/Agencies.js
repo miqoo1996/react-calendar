@@ -9,8 +9,10 @@ import axios from "axios";
 import {AppContext} from "../../../AppContext";
 import {AMOUNT_OF_PEOPLE_KEY} from "../../../Helpers/ConstsHelper";
 
-const Agencies = ({handelAnswerSelection, team}) => {
+const Agencies = ({handelAnswerSelection, data}) => {
     const { apiUrl } = useContext(AppContext);
+
+    const team = data.event.team;
 
     const dispatch = useDispatch();
 
@@ -28,11 +30,9 @@ const Agencies = ({handelAnswerSelection, team}) => {
 
     const previousAnswer = subQuestionnaire1.answers[subQuestionnaire1.answers.length - 1]?.value;
 
-    console.log(previousAnswer, "asdsad");
-
     const num = subQuestionnaire1.answers.length ? (subQuestionnaire1.answers.length + 1) : 2;
 
-    const answer = {number: "2." + num, key: 'Agencies', value: selectedUsers};
+    const answer = {number: "3." + num, key: 'Agencies', value: selectedUsers};
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -52,7 +52,7 @@ const Agencies = ({handelAnswerSelection, team}) => {
                 }
             });
         }
-    }, [isLoading]);
+    }, []);
 
     const handleClick = () => {
         if (users.usersFiltered?.[previousAnswer]?.length && usersAmountNeeded && usersAmountNeeded === selectedUsers.length) {

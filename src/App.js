@@ -26,7 +26,7 @@ function App() {
                       <Routes>
                           {/*<Route exact path="/" element={<Agencies />} />*/}
                           <Route exact path="/" element={<Questionnaire />} />
-                          <Route exact path="/:teamId" element={<Questionnaire />} />
+                          <Route exact path="/:slug" element={<Questionnaire />} />
                           <Route exact path="/book-call/:eventId/:ids" element={<Booking />} />
                           <Route path="*" element={<PageNoMatch><h1 className="text-center page-title top-50">404 Page Not Found.</h1></PageNoMatch>} />
                       </Routes>

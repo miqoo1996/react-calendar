@@ -8,28 +8,28 @@ import List from "@mui/material/List";
 import validator from 'validator'
 import {toast} from "react-toastify";
 
-const Email = ({handelAnswerSelection}) => {
+const Website = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
 
     const handleClick = () => {
-        if (!value || !validator.isEmail(value)) {
-            toast('Wrong email specified.');
+        if (!value || !validator.isURL(value)) {
+            toast('Wrong website URL specified.');
         } else {
-            handelAnswerSelection({active: 'Website', next: 'Phone', answer});
+            handelAnswerSelection({active: 'Phone', next: 'ScheduleMeeting', answer});
         }
     }
 
-    const answer = {number: 6, key: 'Email', value};
+    const answer = {number: 7, key: 'Website', value};
 
     return (
         <>
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    Great, thanks, sad! Where should we send the calendar invite?
+                    Awesome. Now, what is your company website?
                 </Typography>
 
-                <p className="info-text">We'll use this email address to send calendar invites and introductions to your marketing expert. Your work email is recommended.</p>
+                <p className="info-text">It really helps our experts to check out your online presence (no matter its condition).</p>
             </div>
 
             <div>
@@ -37,7 +37,7 @@ const Email = ({handelAnswerSelection}) => {
                     <TextField
                         fullWidth
                         id="standard-helperText"
-                        label="email"
+                        label="website"
                         defaultValue=""
                         helperText="Type your answer here"
                         variant="standard"
@@ -55,4 +55,4 @@ const Email = ({handelAnswerSelection}) => {
     );
 }
 
-export default Email;
+export default Website;
