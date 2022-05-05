@@ -10,7 +10,6 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import moment from "moment/moment";
 import {Link} from "react-router-dom";
-import {CircularProgress} from "@mui/material";
 
 const Calendar = ({selectedUsers}) => {
     const questionnaire = JSON.parse(localStorage.getItem('questionnaire')) || {slug: null, users: [], answers: [], answersSub1: []};
@@ -68,9 +67,9 @@ const Calendar = ({selectedUsers}) => {
 
         if (!hasSelectedSlots) {
             setSlotSectionStyles(slotsWarningStyle);
-        } else {
-            setSwitchToForm(true);
         }
+
+        setSwitchToForm(true);
     };
 
     const onFormSubmitHandler = (e) => {

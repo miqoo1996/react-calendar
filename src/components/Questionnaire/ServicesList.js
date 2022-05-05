@@ -58,31 +58,33 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
             </div>
 
             <div>
-                <List sx={{ width: '100%', bgcolor: 'background.paper', marginBottom: "10px" }}>
-                    {options.map((option, number) => {
-                        const labelId = `checkbox-list-secondary-label-${option.id}`;
-                        return (
-                            <React.Fragment key={option.id}>
-                                {number ? <Divider /> : null}
-                                <ListItem
-                                    secondaryAction={
-                                        <Checkbox
-                                            edge="end"
-                                            checked={value.indexOf(option.id) !== -1}
-                                            inputProps={{ 'aria-labelledby': labelId }}
-                                        />
-                                    }
-                                    disablePadding
-                                    onClick={handleToggle(option.id)}
-                                >
-                                    <ListItemButton>
-                                        <ListItemText id={labelId} primary={option.value} />
-                                    </ListItemButton>
-                                </ListItem>
-                            </React.Fragment>
-                        );
-                    })}
-                </List>
+                <div style={{overflow: "auto", maxHeight: "43vh"}}>
+                    <List sx={{ width: '100%', bgcolor: 'background.paper', marginBottom: "10px" }}>
+                        {options.map((option, number) => {
+                            const labelId = `checkbox-list-secondary-label-${option.id}`;
+                            return (
+                                <React.Fragment key={option.id}>
+                                    {number ? <Divider /> : null}
+                                    <ListItem
+                                        secondaryAction={
+                                            <Checkbox
+                                                edge="end"
+                                                checked={value.indexOf(option.id) !== -1}
+                                                inputProps={{ 'aria-labelledby': labelId }}
+                                            />
+                                        }
+                                        disablePadding
+                                        onClick={handleToggle(option.id)}
+                                    >
+                                        <ListItemButton>
+                                            <ListItemText id={labelId} primary={option.value} />
+                                        </ListItemButton>
+                                    </ListItem>
+                                </React.Fragment>
+                            );
+                        })}
+                    </List>
+                </div>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button variant="contained" disableElevation onClick={handleClick}>
