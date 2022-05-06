@@ -28,6 +28,16 @@ const GlobalHelper = {
         return moment().format("YYYY-MM-DD HH:mm:ss");
     },
 
+    getUTCDateTimeWithoutMinsSecsString: (date) => {
+        date = date || GlobalHelper.date;
+
+        if (date) {
+            return moment(date).format("YYYY-MM-DD HH:00:00");
+        }
+
+        return moment().format("YYYY-MM-DD HH:00:00");
+    },
+
     getUTCDateString: (date) => {
         date = date || GlobalHelper.date;
 

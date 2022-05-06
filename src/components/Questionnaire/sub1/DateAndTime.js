@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import Stack from "@mui/material/Stack";
@@ -14,6 +15,18 @@ import moment from "moment/moment";
 import GlobalHelper from "../../../Helpers/GlobalHelper";
 import {useSelector} from "react-redux";
 
+const StyledDateTimePicker = styled.div`
+    width: 100%;
+    
+    & label {
+        color: inherit !important;
+    }
+    
+    & fieldset {
+        border-color: ${props => props.fieldsetColor} !important;
+    }
+`;
+
 const DateAndTime = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
 
@@ -29,12 +42,13 @@ const DateAndTime = ({handelAnswerSelection}) => {
     const answer = {number: "3." + num, key: 'DateAndTime', value};
 
     const handleChange = (value) => {
-        setValue(GlobalHelper.getUTCDateTimeString(value));
+        console.log(value);
+        setValue(GlobalHelper.getUTCDateTimeWithoutMinsSecsString(value));
     }
 
     const handleClick = () => {
         if (!answer.value) {
-            answer.value = GlobalHelper.getUTCDateTimeString();
+            answer.value = GlobalHelper.getUTCDateTimeWithoutMinsSecsString();
         }
 
         const now = moment(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -60,18 +74,25 @@ const DateAndTime = ({handelAnswerSelection}) => {
             </div>
 
             <div>
-                <List>
-                    <LocalizationProvider dateAdapter={AdapterDateFns}>
-                        <Stack spacing={3}>
-                            <DateTimePicker
-                                label="Date&Time you want to chat with"
-                                value={GlobalHelper.getUTCDateTimeString(value)}
-                                onChange={handleChange}
-                                renderInput={(params) => <TextField {...params} />}
-                            />
-                        </Stack>
-                    </LocalizationProvider>
-                </List>
+                <StyledDateTimePicker fieldsetColor="rgba(0, 0, 0, 0.23)">
+                    <List>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <Stack spacing={3}>
+                                <DateTimePicker
+                                    disablePast
+                                    label="Date&Time you want to chat with"
+                                    value={GlobalHelper.getUTCDateTimeWithoutMinsSecsString(value)}
+                                    ampmInClock={true}
+                                    ampm={true}
+                                    openTo="hours"
+                                    views={["hours","day"]}
+                                    onChange={handleChange}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </Stack>
+                        </LocalizationProvider>
+                    </List>
+                </StyledDateTimePicker>
 
                 <div style={{display: 'flex', justifyContent: 'flex-end'}}>
                     <Button onClick={handleClick} variant="contained" disableElevation>

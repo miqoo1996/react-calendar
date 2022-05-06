@@ -58,7 +58,7 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
             </div>
 
             <div>
-                <div style={{overflow: "auto", maxHeight: "43vh"}}>
+                <div style={{overflow: "auto", maxHeight: "43vh", marginBottom: "20px"}}>
                     <List sx={{ width: '100%', bgcolor: 'background.paper', marginBottom: "10px" }}>
                         {options.map((option, number) => {
                             const labelId = `checkbox-list-secondary-label-${option.id}`;
