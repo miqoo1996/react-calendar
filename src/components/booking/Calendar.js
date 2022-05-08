@@ -210,7 +210,7 @@ const Calendar = ({selectedUsers}) => {
                                                     Email address
                                                 </label>
                                                 <div className="mt-1">
-                                                    <input type="search"
+                                                    <input type="email"
                                                            defaultValue={getAnswer('Email')}
                                                            autoCapitalize="none" autoComplete="email" autoCorrect="off" inputMode="email" name="email" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
                                                            placeholder="you@example.com" />
@@ -221,7 +221,7 @@ const Calendar = ({selectedUsers}) => {
                                                     Phone number
                                                 </label>
                                                 <div className="mt-1">
-                                                    <input type="search"
+                                                    <input type="text"
                                                            defaultValue={getAnswer('Phone')}
                                                            autoCapitalize="none" autoComplete="phone" autoCorrect="off" inputMode="phone" name="phone" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
                                                            placeholder="" />
@@ -232,7 +232,7 @@ const Calendar = ({selectedUsers}) => {
                                                     Website
                                                 </label>
                                                 <div className="mt-1">
-                                                    <input type="url"
+                                                    <input type="text"
                                                            defaultValue={getAnswer('Website')}
                                                            autoCapitalize="none" autoComplete="website" autoCorrect="off" inputMode="website" name="website" required="" className="mt-1 block w-full rounded-sm border border-gray-300 py-2 px-3 shadow-sm focus:border-neutral-800 focus:outline-none focus:ring-1 focus:ring-neutral-800 sm:text-sm focus:border-brand block w-full rounded-sm border-gray-300 shadow-sm focus:ring-black dark:border-gray-900 dark:bg-gray-700 dark:text-white dark:selection:bg-green-500 sm:text-sm"
                                                            placeholder="" />

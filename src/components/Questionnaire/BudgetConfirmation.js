@@ -17,7 +17,7 @@ const BudgetConfirmation = ({handelAnswerSelection}) => {
 
     const [value, setValue] = useState({});
 
-    const answer = {number: 2, key: 'BudgetConfirmation', value};
+    const answer = {number: 9, key: 'BudgetConfirmation', value};
 
     const options = [
         {
@@ -35,7 +35,7 @@ const BudgetConfirmation = ({handelAnswerSelection}) => {
             toast("Please select an answer from the list.");
         } else {
             if (value.id === ANSWER_YES_ID) {
-                handelAnswerSelection({active: 'AmountOfPeople', next: 'DateAndTime', answer});
+                handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer});
             } else {
                 dispatch({type: 'update-questionnaire-answer', payload: {active: 'BudgetConfirmation', next: 'BudgetNotConfirmed'}});
                 handelAnswerSelection({active: 'BudgetNotConfirmed', next: 'EmptyString'});

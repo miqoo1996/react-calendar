@@ -15,7 +15,7 @@ const Phone = ({handelAnswerSelection}) => {
         if (!value || !value.match(PHONE_NUMBER_REGEX)) {
             toast('Wrong phone number specified.');
         } else {
-            handelAnswerSelection({active: 'ScheduleMeeting', next: 'EmptyString', answer});
+            handelAnswerSelection({active: 'BudgetConfirmation', next: 'ScheduleMeeting', answer});
         }
     }
 

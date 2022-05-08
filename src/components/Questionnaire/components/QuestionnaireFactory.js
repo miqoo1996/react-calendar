@@ -26,12 +26,6 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
         case "ServicesList":
             item = <ServicesList {...props} />;
             break;
-        case "BudgetConfirmation":
-            item = <BudgetConfirmation {...props} />;
-            break;
-        case "BudgetNotConfirmed":
-            item = <BudgetNotConfirmed {...props} />;
-            break;
         case "AmountOfPeople":
             item = <AmountOfPeople {...props} />;
             break;
@@ -59,8 +53,14 @@ const QuestionnaireFactory = ({component, defaultComponent, props}) => {
         case "AdditionalNotes":
             item = <AdditionalNotes {...props} />;
             break;
+        case "BudgetConfirmation":
+            item = <BudgetConfirmation {...props} />;
+            break;
         case "ScheduleMeeting":
             item = <ScheduleMeeting {...props} />;
+            break;
+        case "BudgetNotConfirmed":
+            item = <BudgetNotConfirmed {...props} />;
             break;
         case "EmptyString":
             item = <EmptyString {...props} />;

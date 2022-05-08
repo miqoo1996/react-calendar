@@ -5,7 +5,6 @@ import Button from "@mui/material/Button";
 import {useState} from "react";
 import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
-import validator from "validator";
 import {toast} from "react-toastify";
 
 const LastName = ({handelAnswerSelection}) => {
@@ -14,14 +13,19 @@ const LastName = ({handelAnswerSelection}) => {
     const answer = {number: 5, key: 'LastName', value};
 
     const handleClick = () => {
-        if (!value || !validator.isAlpha(value)) {
-            toast('Last name should contain only alphabetic symbols.');
+        if (!value) {
+            toast('Last name field is required.');
         } else if (value.length < 2) {
             toast('Please provide at least 2 symbols.');
         } else {
             handelAnswerSelection({active: 'Email', next: 'Website', answer});
         }
-    }
+    };
+
+    const handleChange = (e) => {
+        e.currentTarget.value = (e.currentTarget.value.match(/[\p{L}\s]+/gui) || []).join('').replace(/\s{2,}/i, ' ');
+        setValue(e.currentTarget.value.trim());
+    };
 
     return (
         <>
@@ -41,7 +45,7 @@ const LastName = ({handelAnswerSelection}) => {
                         defaultValue=""
                         helperText="Type your answer here"
                         variant="standard"
-                        onChange={e => setValue(e.target.value.trim())}
+                        onChange={handleChange}
                     />
                 </List>
 

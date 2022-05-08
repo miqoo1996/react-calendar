@@ -29,7 +29,7 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
         if (!value.length) {
             toast("Please select an answer from the list.");
         } else {
-            handelAnswerSelection({active: 'BudgetConfirmation', next: 'AmountOfPeople', answer});
+            handelAnswerSelection({active: 'AmountOfPeople', next: 'DateAndTime', answer});
         }
     }
 

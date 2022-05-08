@@ -15,7 +15,7 @@ const Website = ({handelAnswerSelection}) => {
         if (!value || !validator.isURL(value)) {
             toast('Wrong website URL specified.');
         } else {
-            handelAnswerSelection({active: 'Phone', next: 'ScheduleMeeting', answer});
+            handelAnswerSelection({active: 'Phone', next: 'BudgetConfirmation', answer});
         }
     }
 

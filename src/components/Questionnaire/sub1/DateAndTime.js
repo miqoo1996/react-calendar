@@ -42,7 +42,6 @@ const DateAndTime = ({handelAnswerSelection}) => {
     const answer = {number: "3." + num, key: 'DateAndTime', value};
 
     const handleChange = (value) => {
-        console.log(value);
         setValue(GlobalHelper.getUTCDateTimeWithoutMinsSecsString(value));
     }
 
@@ -84,8 +83,8 @@ const DateAndTime = ({handelAnswerSelection}) => {
                                     value={GlobalHelper.getUTCDateTimeWithoutMinsSecsString(value)}
                                     ampmInClock={true}
                                     ampm={true}
-                                    openTo="hours"
-                                    views={["hours","day"]}
+                                    openTo="day"
+                                    views={["day","hours"]}
                                     onChange={handleChange}
                                     renderInput={(params) => <TextField {...params} />}
                                 />
