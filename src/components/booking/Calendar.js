@@ -94,6 +94,7 @@ const Calendar = ({selectedUsers}) => {
             setIsFormSubmitted(false);
 
             if (success) {
+                localStorage.removeItem('questionnaire');
                 dispatch({type: "remove-agencies"});
                 dispatch({type: "remove-calendar"});
                 setSuccess(true);
