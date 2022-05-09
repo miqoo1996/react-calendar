@@ -9,6 +9,7 @@ import axios from "axios";
 import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {setIpAddress} from "./slices/VisitorSlice";
+import GoogleCalendar from "./components/GoogleCalendar";
 
 function App() {
     const dispatch = useDispatch();
@@ -23,6 +24,8 @@ function App() {
               <div className="App">
                   <div className="container-fluid">
                       <Routes>
+                          <Route exact path="/" element={<></>} />
+                          <Route exact path="/user/default/google-calendar" element={<GoogleCalendar />} />
                           <Route exact path="/:slug" element={<Questionnaire />} />
                           <Route exact path="/book-call/:eventId/:ids" element={<Booking />} />
                           <Route path="*" element={<PageNoMatch><h1 className="text-center page-title top-50">404 Page Not Found.</h1></PageNoMatch>} />
