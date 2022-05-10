@@ -8,7 +8,7 @@ const useBackendGoogleAuth = () => {
 
     useEffect(() => {
         axios.post(`${websiteUrl}/user/social-auth/google`).then((response) => {
-            setAuthUrl(response.url);
+            setAuthUrl(response.data?.url || '');
         });
     }, []);
 
