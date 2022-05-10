@@ -1,23 +1,20 @@
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
+import axios from "axios";
+import {AppContext} from "../AppContext";
 
 const useBackendGoogleAuth = () => {
+    const {apiUrl} = useContext(AppContext);
     const [authUrl, setAuthUrl] = useState('');
 
     useEffect(() => {
-        // TODO update access token if exists in backend
-        // localStorage.setItem("google_access_token", null);
-        console.log("fetch access token");
-    }, []);
-
-    useEffect(() => {
-        // TODO fetch it from backend
-        setAuthUrl('/');
-        console.log("get auth url");
+        axios.post(`${apiUrl}/user/social-auth/google`).then((response) => {
+            setAuthUrl(response.url);
+        });
     }, []);
 
     return {
         authUrl,
-        accessToken: localStorage.getItem('google_access_token')
+        accessToken: localStorage.getItem('google_access_token'),
     };
 }
 

@@ -194,6 +194,7 @@ const useGoogle = () => {
     return {
         isAppReady,
         isUserLogged,
+        setIsUserLogged,
         accessTokenUpdated,
         handleAuthClick,
         handleSignoutClick,
