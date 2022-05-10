@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import useGoogle, {fetchEvents} from "../../hooks/useGoogle";
+import useGoogle, {useBackendGoogleAuth, fetchEvents} from "../../hooks/useGoogle";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -19,6 +19,8 @@ const CalendarWrapper = styled.div`
 `;
 
 const GoogleCalendar = () => {
+    const {authUrl} = useBackendGoogleAuth();
+
     const {accessTokenUpdated, isUserLogged, handleAuthClick, handleSignoutClick} = useGoogle();
 
     const [events, setEvents] = useState();

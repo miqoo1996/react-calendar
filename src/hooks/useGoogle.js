@@ -1,5 +1,6 @@
 import {useEffect, useContext, useState, useCallback} from "react";
 import {AppContext} from "../AppContext";
+import useBackendGoogleAuth from "./useBackendGoogleAuth";
 import useGoogleCreateEvent from "./useGoogleCreateEvent";
 
 let tokenClient;
@@ -202,6 +203,7 @@ const useGoogle = () => {
 export default useGoogle;
 
 export {
+    useBackendGoogleAuth,
     useGoogleCreateEvent,
     formatEvents,
     fetchEvents,
