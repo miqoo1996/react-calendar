@@ -3,9 +3,10 @@ import useGoogle, {useBackendGoogleAuth, fetchEvents} from "../../hooks/useGoogl
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import moment from "moment/moment";
 import axios from "axios";
+import {AppContext} from "../../AppContext";
 
 const StyledEventsCalendar = styled.div`
    
@@ -24,12 +25,14 @@ const GoogleCalendar = () => {
 
     const {isUserLogged, setIsUserLogged} = useGoogle();
 
+    const {websiteUrl} = useContext(AppContext);
+
     const [events, setEvents] = useState();
 
     const [isFullyComplete, setIsFullyComplete] = useState(false);
 
     const handleSignoutClick = () => {
-        axios.post(`${apiUrl}/user/social-auth/google-sign-out`).then((response) => {
+        axios.post(`${websiteUrl}/user/social-auth/google-sign-out`).then((response) => {
             setIsUserLogged(false);
             localStorage.removeItem('google_access_token');
         });

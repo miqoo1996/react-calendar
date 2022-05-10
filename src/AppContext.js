@@ -1,6 +1,7 @@
 import {createContext} from "react";
 
 export const AppContextDefaultValue = {
+    websiteUrl: "https://booking-call-app.herokuapp.com",
     apiUrl: "https://booking-call-app.herokuapp.com/api",
     GOOGLE_SCOPES: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/calendar.readonly https://www.googleapis.com/auth/calendar.events https://www.googleapis.com/auth/calendar",
     GOOGLE_API_KEY: "AIzaSyDEujdZt-SPte2quj583OQbidQwvMMFsRo",
