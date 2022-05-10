@@ -5,6 +5,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import {useEffect, useState} from "react";
 import moment from "moment/moment";
+import axios from "axios";
 
 const StyledEventsCalendar = styled.div`
    
