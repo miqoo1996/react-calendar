@@ -1,3 +1,4 @@
+import "../../../public/Agencies.scss";
 import "../../../public/Questionnaire.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {useContext, useEffect, useState} from "react";
