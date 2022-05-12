@@ -11,6 +11,7 @@ import GlobalHelper from "../../../Helpers/GlobalHelper";
 import axios from "axios";
 import {AppContext} from "../../../AppContext";
 import ServicesList from "../ServicesList";
+import useDocumentOnEnter from "../../../hooks/useDocumentOnEnter";
 
 const Questionnaire = () => {
     const { slug } = useParams();
@@ -23,10 +24,9 @@ const Questionnaire = () => {
 
     const [animate, setAnimate] = useState(false);
 
-    const { questionnaire, calendar } = useSelector(state => {
+    const { questionnaire } = useSelector(state => {
         return {
             questionnaire: state.questionnaire,
-            calendar: state.calendar,
             teams: state.company.teams || [],
         };
     });
@@ -70,6 +70,18 @@ const Questionnaire = () => {
             toast('Please type your answer.');
         }
     };
+
+    const entersCount = useDocumentOnEnter();
+
+    useEffect(() => {
+        const element = document.querySelector('.MuiPaper-root');
+
+        const button = document.querySelector('.question.active .add-box-icon-btn');
+
+        if (button && !element && entersCount) {
+            button.click();
+        }
+    }, [entersCount]);
 
     if (!slug || !data) {
         return (

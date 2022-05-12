@@ -10,8 +10,6 @@ import {toast} from "react-toastify";
 import TextField from "@mui/material/TextField";
 import {MenuItem} from "@mui/material";
 import {AMOUNT_OF_PEOPLE_NUMBER} from "../../Helpers/ConstsHelper";
-import useDocumentOnEnter from "../../hooks/useDocumentOnEnter";
-import {useSelector} from "react-redux";
 
 const QuestionWrapper = styled.div`
 
@@ -20,23 +18,13 @@ const QuestionWrapper = styled.div`
 const AmountOfPeople = ({handelAnswerSelection}) => {
     const [value, setValue] = useState(1);
 
-    const entersCount = useDocumentOnEnter();
-
-    const {activeStep} = useSelector(state => {
-        return {
-            activeStep: state.questionnaire.active,
-        };
-    });
-
-    useEffect(() => {
-        if (entersCount && activeStep === answer.key) {
-            handleClick();
-        }
-    }, [entersCount]);
-
     const answer = {number: AMOUNT_OF_PEOPLE_NUMBER, key: 'AmountOfPeople', value};
 
     const options = [1, 2, 3];
+
+    const handleChange = (e) => {
+        setValue(e.target.value);
+    };
 
     const handleClick = () => {
         if (options.indexOf(value) < 0) {
@@ -64,7 +52,7 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
                             select
                             label="Select"
                             value={value}
-                            onChange={e => setValue(e.target.value)}
+                            onChange={handleChange}
                             helperText="Please select an answer"
                         >
                             {options.map((option, number) => {

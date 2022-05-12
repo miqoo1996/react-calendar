@@ -7,14 +7,13 @@ import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Typography from "@mui/material/Typography";
 import DoneIcon from '@mui/icons-material/Done';
 import Button from "@mui/material/Button";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {DateTimePicker} from "@mui/x-date-pickers/DateTimePicker";
 import TextField from "@mui/material/TextField";
 import {toast} from "react-toastify";
 import moment from "moment/moment";
 import GlobalHelper from "../../../Helpers/GlobalHelper";
 import {useSelector} from "react-redux";
-import useDocumentOnEnter from "../../../hooks/useDocumentOnEnter";
 
 const StyledDateTimePicker = styled.div`
     width: 100%;
@@ -42,20 +41,6 @@ const DateAndTime = ({handelAnswerSelection}) => {
     const num = subQuestionnaire1.answers.length ? subQuestionnaire1.answers.length + 1 : 1;
 
     const answer = {number: "3." + num, key: 'DateAndTime', value};
-
-    const entersCount = useDocumentOnEnter();
-
-    const {activeStep} = useSelector(state => {
-        return {
-            activeStep: state.questionnaire.active,
-        };
-    });
-
-    useEffect(() => {
-        if (entersCount && activeStep === answer.key) {
-            handleClick();
-        }
-    }, [entersCount]);
 
     const handleChange = (value) => {
         setValue(GlobalHelper.getUTCDateTimeWithoutMinsSecsString(value));

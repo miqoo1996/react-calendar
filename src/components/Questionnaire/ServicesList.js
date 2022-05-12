@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -10,25 +10,9 @@ import {toast} from "react-toastify";
 import {Checkbox, ListItemButton} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import {useSelector} from "react-redux";
-import useDocumentOnEnter from "../../hooks/useDocumentOnEnter";
 
 const ServicesList = ({handelAnswerSelection, questions}) => {
     const [value, setValue] = useState([]);
-
-    const entersCount = useDocumentOnEnter();
-
-    const {activeStep} = useSelector(state => {
-        return {
-            activeStep: state.questionnaire.active,
-        };
-    });
-
-    useEffect(() => {
-        if (entersCount && activeStep === answer.key) {
-            handleClick();
-        }
-    }, [entersCount]);
 
     const answer = {number: 1, key: 'ServicesList', value};
 

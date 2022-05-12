@@ -18,7 +18,7 @@ const GetStarted = ({handelAnswerSelection, title, description}) => {
             </div>
 
             <div>
-                <Button onClick={e => handelAnswerSelection({active: 'ServicesList', next: 'AmountOfPeople'})} variant="contained" disableElevation>
+                <Button className='add-box-icon-btn' onClick={e => handelAnswerSelection({active: 'ServicesList', next: 'AmountOfPeople'})} variant="contained" disableElevation>
                     Get Started
                 </Button>
             </div>
