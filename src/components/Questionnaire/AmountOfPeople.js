@@ -1,17 +1,38 @@
+import styled from "styled-components";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 import Typography from "@mui/material/Typography";
 import DoneIcon from "@mui/icons-material/Done";
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {toast} from "react-toastify";
 import TextField from "@mui/material/TextField";
 import {MenuItem} from "@mui/material";
 import {AMOUNT_OF_PEOPLE_NUMBER} from "../../Helpers/ConstsHelper";
+import useDocumentOnEnter from "../../hooks/useDocumentOnEnter";
+import {useSelector} from "react-redux";
+
+const QuestionWrapper = styled.div`
+
+`;
 
 const AmountOfPeople = ({handelAnswerSelection}) => {
     const [value, setValue] = useState(1);
+
+    const entersCount = useDocumentOnEnter();
+
+    const {activeStep} = useSelector(state => {
+        return {
+            activeStep: state.questionnaire.active,
+        };
+    });
+
+    useEffect(() => {
+        if (entersCount && activeStep === answer.key) {
+            handleClick();
+        }
+    }, [entersCount]);
 
     const answer = {number: AMOUNT_OF_PEOPLE_NUMBER, key: 'AmountOfPeople', value};
 
@@ -30,11 +51,11 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    How many people do you want to chat with?
+                    How different experts do you want to chat with?
                 </Typography>
             </div>
 
-            <div>
+            <QuestionWrapper>
                 <List>
                     <ListItem button>
                         <TextField
@@ -49,7 +70,7 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
                             {options.map((option, number) => {
                                 return (
                                     <MenuItem key={number} value={option}>
-                                        {option} people
+                                        {option} {option > 1 ? 'people' : 'person'}
                                     </MenuItem>
                                 );
                             })}
@@ -62,7 +83,7 @@ const AmountOfPeople = ({handelAnswerSelection}) => {
                         OK <span className="add-box-icon-btn" style={{marginLeft: "5px"}}><DoneIcon /></span>
                     </Button>
                 </div>
-            </div>
+            </QuestionWrapper>
         </>
     );
 }

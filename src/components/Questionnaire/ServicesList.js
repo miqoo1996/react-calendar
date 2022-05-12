@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
@@ -10,9 +10,25 @@ import {toast} from "react-toastify";
 import {Checkbox, ListItemButton} from "@mui/material";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
+import {useSelector} from "react-redux";
+import useDocumentOnEnter from "../../hooks/useDocumentOnEnter";
 
 const ServicesList = ({handelAnswerSelection, questions}) => {
     const [value, setValue] = useState([]);
+
+    const entersCount = useDocumentOnEnter();
+
+    const {activeStep} = useSelector(state => {
+        return {
+            activeStep: state.questionnaire.active,
+        };
+    });
+
+    useEffect(() => {
+        if (entersCount && activeStep === answer.key) {
+            handleClick();
+        }
+    }, [entersCount]);
 
     const answer = {number: 1, key: 'ServicesList', value};
 
@@ -54,7 +70,7 @@ const ServicesList = ({handelAnswerSelection, questions}) => {
                     Let's start here. Select the services you are most interested in.
                 </Typography>
 
-                <p className="info-text">We'll pick the right marketer(s) and ensure they are prepared for the call.</p>
+                <p className="info-text">We'll put together the right experts to ensure they are prepared for the call.</p>
             </div>
 
             <div>
