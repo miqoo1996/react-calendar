@@ -69,7 +69,7 @@ const DateAndTime = ({handelAnswerSelection}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    {num <=1 ? 'Choose the Date & Time you want to chat for the first meeting.' : 'Choose the next Date & Time you want to chat, and then person.'}
+                    {num <=1 ? 'Choose the Date & Time you want to chat for the first meeting.' : 'Ok great, now lets choose the date/time for the next meeting.'}
                 </Typography>
             </div>
 

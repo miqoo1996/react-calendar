@@ -55,7 +55,7 @@ const BudgetConfirmation = ({handelAnswerSelection}) => {
                     For the right strategy, do you have a budget of $1,000+?
                 </Typography>
 
-                <p className="info-text">Our marketers are incredibly talented, but not magicians.</p>
+                <p className="info-text">Our experts are incredibly talented, but not magicians.</p>
             </div>
 
             <div>

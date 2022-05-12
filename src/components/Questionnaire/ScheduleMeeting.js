@@ -39,7 +39,7 @@ const ScheduleMeeting = (props) => {
                 <div className="question-title">
                     <Typography variant="h5" component="h6">
                         <span className="question-number">&nbsp; <DoneIcon /></span>
-                        Thank you! You're all set.
+                        Great stuff. Lets get this party started.
                     </Typography>
                 </div>
 

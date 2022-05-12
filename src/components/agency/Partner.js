@@ -25,7 +25,7 @@ const Partner = (user) => {
     const onAgencyClickHandle = () => {
         if (!userStored) {
             if (selectedUsers.findIndex(u => u.currentFilterDate === currentFilterDate) !== -1) {
-                toast("You have already chosen the date.");
+                toast("You can only select one person at a time.");
             } else if (selectedUsers.filter(u => u.currentFilterDate === currentFilterDate).length <= (maxLimit - 1)) {
                 dispatch({type: 'add-selected-user', payload: {
                         ...user,

@@ -7,9 +7,18 @@ import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
 import validator from 'validator'
 import {toast} from "react-toastify";
+import {useSelector} from "react-redux";
 
 const Email = ({handelAnswerSelection}) => {
     const [value, setValue] = useState();
+
+    const {questionnaire} = useSelector(state => {
+        return {
+            questionnaire: state.questionnaire,
+        };
+    });
+
+    const stepFirstName = questionnaire.answers.find(a => a.key === 'FirstName');
 
     const handleClick = () => {
         if (!value || !validator.isEmail(value)) {
@@ -26,7 +35,7 @@ const Email = ({handelAnswerSelection}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    Great, thanks, sad! Where should we send the calendar invite?
+                    Great, thanks, {stepFirstName.value}! Where should we send the calendar invite?
                 </Typography>
 
                 <p className="info-text">We'll use this email address to send calendar invites and introductions to your marketing expert. Your work email is recommended.</p>

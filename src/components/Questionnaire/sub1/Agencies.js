@@ -76,7 +76,9 @@ const Agencies = ({handelAnswerSelection, data}) => {
             <div className="question-title">
                 <Typography variant="h5" component="h6">
                     <span className="question-number">{answer.number} <ArrowRightAltIcon /></span>
-                    {usersAmountNeeded ? 'Select people you want to chat with.' : 'Please wait...'}
+                    {usersAmountNeeded ? (
+                        num <= 2 ? 'Select one of the experts below you want to chat with.' : 'Select the next expert below you want to chat with'
+                    ) : 'Please wait...'}
                 </Typography>
             </div>
 
