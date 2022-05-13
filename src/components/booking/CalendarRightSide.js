@@ -62,9 +62,15 @@ const CalendarRightSide = () => {
         questionnaire.users.map(u => {
             const now = moment(new Date(), 'YYYY-MM-DD HH');
             const date = moment(u.filterDate, 'YYYY-MM-DD HH');
+            const fullDate = moment(u.filterDate, 'YYYY-MM-DD HH:mm:ss');
 
             if (moment(now).diff(date) <= 0) {
-                selectedSlotsData.push({userId: u.id, date: date.format("YYYY-MM-DD"), slot: date.format('hh:mma')});
+                selectedSlotsData.push({
+                    userId: u.id,
+                    date: date.format("YYYY-MM-DD"),
+                    slot: date.format('hh:mma'),
+                    fullDate,
+                });
             }
         });
     }
